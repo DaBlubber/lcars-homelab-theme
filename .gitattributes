@@ -1,0 +1,6 @@
+# Zeilenenden immer LF - die Dateien landen auf Linux-Servern
+* text=auto eol=lf
+*.woff2 binary
+*.png binary
+*.ico binary
+*.jpg binary

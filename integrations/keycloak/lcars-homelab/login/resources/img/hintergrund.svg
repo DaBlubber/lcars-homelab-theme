@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 900"
+     width="1440" height="900" preserveAspectRatio="none">
+  <title>Ruhiger LCARS-Hintergrund</title>
+  <desc>Dunkle freie Mitte mit segmentierten LCARS-Leisten an den Raendern und einem langsamen Abtastlicht.</desc>
+  <style>
+    .rl-scan {
+      opacity: 0;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .rl-scan {
+        display: none;
+      }
+    }
+  </style>
+
+  <!-- preserveAspectRatio="none" haelt alle Randmotive auch auf sehr breiten
+       und hochkantigen Flaechen sichtbar; die Geometrie ist prozentual angelegt. -->
+  <rect width="1440" height="900" fill="#070a12"/>
+
+  <!-- Flaechige, verlaufsfreie Beruhigung hinter der mittigen Login-Konsole. -->
+  <rect x="246" y="132" width="948" height="636" rx="32" ry="32"
+        fill="#03050a" opacity=".72"/>
+
+  <!-- Sparsame Sterne, bewusst ausserhalb der Formularmitte. -->
+  <g fill="#dfe4f2" opacity=".46">
+    <circle cx="163" cy="154" r="1.4"/>
+    <circle cx="232" cy="726" r="1"/>
+    <circle cx="1238" cy="188" r="1.2"/>
+    <circle cx="1304" cy="694" r="1.5"/>
+    <circle cx="1096" cy="102" r=".9"/>
+    <circle cx="344" cy="808" r="1.1"/>
+  </g>
+  <g fill="#5a7fe0" opacity=".52">
+    <circle cx="104" cy="224" r="1.5"/>
+    <circle cx="1330" cy="286" r="1.2"/>
+    <circle cx="1184" cy="812" r="1.3"/>
+  </g>
+
+  <!-- Linke Elbow-Schiene wie im Rahmen-Wallpaper, aber schmaler und ruhiger. -->
+  <path d="M42 112a38 38 0 0 1 38-38h250a34 34 0 0 1 0 68H96v546a27 27 0 0 1-54 0z"
+        fill="#eaa549"/>
+  <rect x="42" y="710" width="54" height="20" fill="#1740bc"/>
+  <rect x="42" y="738" width="54" height="42" fill="#9a8ec9"/>
+
+  <!-- Obere Blockleiste; der breite Mittelteil bleibt oberhalb der Karte. -->
+  <rect x="374" y="74" width="170" height="68" rx="34" ry="34" fill="#9a8ec9"/>
+  <rect x="556" y="74" width="116" height="68" rx="34" ry="34" fill="#1740bc"/>
+  <rect x="684" y="74" width="278" height="68" rx="34" ry="34" fill="#5a7fe0"/>
+  <rect x="974" y="74" width="132" height="68" rx="34" ry="34" fill="#eaa549"/>
+  <rect x="1118" y="74" width="160" height="68" rx="34" ry="34" fill="#1740bc"/>
+
+  <!-- Rechte Signal-Schiene setzt das Gegenueber, ohne die Mitte einzurahmen. -->
+  <rect x="1344" y="174" width="54" height="502" rx="27" ry="27" fill="#1740bc"/>
+  <rect x="1344" y="136" width="54" height="26" fill="#eaa549"/>
+  <rect x="1344" y="688" width="54" height="42" fill="#9a8ec9"/>
+
+  <!-- Untere Blockleiste laesst Abstand zur mittigen Login-Konsole. -->
+  <rect x="142" y="790" width="192" height="34" rx="17" ry="17" fill="#1740bc"/>
+  <rect x="346" y="790" width="126" height="34" rx="17" ry="17" fill="#5a7fe0"/>
+  <rect x="484" y="790" width="318" height="34" rx="17" ry="17" fill="#9a8ec9"/>
+  <rect x="814" y="790" width="178" height="34" rx="17" ry="17" fill="#eaa549"/>
+  <rect x="1004" y="790" width="274" height="34" rx="17" ry="17" fill="#1740bc"/>
+
+  <!-- Ein einzelnes Abtastlicht: 27,31 s pro ruhigem Durchlauf, ohne JavaScript. -->
+  <g class="rl-scan">
+    <rect x="250" y="151" width="86" height="4" rx="2" ry="2" fill="#eaa549"/>
+    <animateTransform attributeName="transform" type="translate"
+                      values="0 0;0 0;854 0;854 0"
+                      keyTimes="0;.09;.91;1" dur="27.31s"
+                      begin="1.73s" repeatCount="indefinite"/>
+    <animate attributeName="opacity" values="0;.42;.42;0"
+             keyTimes="0;.09;.91;1" dur="27.31s"
+             begin="1.73s" repeatCount="indefinite"/>
+  </g>
+</svg>

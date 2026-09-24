@@ -1,0 +1,130 @@
+/* LCARS-Homelab design tokens — v1.7.0 */
+
+@font-face {
+  font-family: "Exo 2";
+  src: url("../fonts/Exo2-Variable.woff2") format("woff2-variations"),
+       url("../fonts/Exo2-Variable.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 400 800;
+  font-display: swap;
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
+                 U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122,
+                 U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: "JetBrains Mono";
+  src: url("../fonts/JetBrainsMono-Variable.woff2") format("woff2-variations"),
+       url("../fonts/JetBrainsMono-Variable.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 400 700;
+  font-display: swap;
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
+                 U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122,
+                 U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+:root {
+  color-scheme: dark;
+
+  /* Emblem und LCARS */
+  --rl-gold: #eaa549;
+  --rl-koenigsblau: #1740bc;
+  --rl-lavendel: #9a8ec9;
+  --rl-blau: #5a7fe0;
+  --rl-grau: #3c4257;
+
+  /* Dunkle Flächen */
+  --rl-grund: #000000;
+  --rl-flaeche-1: #0b0d14;
+  --rl-flaeche-2: #10131a;
+  --rl-flaeche-3: #1b1f2b;
+  --rl-linie: #2a2e38;
+  --rl-text: #dfe4f2;
+  --rl-text-stark: #f3f5fa;
+  --rl-text-gedaempft: #8b90a0;
+
+  /* Status. Gold ist zugleich Warnfarbe. */
+  --rl-status-erfolg: #7fb069;
+  --rl-status-warnung: #eaa549;
+  --rl-status-fehler: #cc6666;
+  --rl-status-info: #5a7fe0;
+
+  /* Semantische Rollen */
+  --rl-akzent: var(--rl-gold);
+  --rl-akzent-zweit: var(--rl-lavendel);
+  --rl-handlung: var(--rl-gold);
+  --rl-handlung-text: #000000;
+  --rl-fokus: #f6c77f;
+  --rl-deaktiviert: #62687a;
+  --rl-overlay: rgba(0, 0, 0, 0.72);
+
+  /* Abstandsskala */
+  --rl-space-1: 4px;
+  --rl-space-2: 8px;
+  --rl-space-3: 12px;
+  --rl-space-4: 16px;
+  --rl-space-5: 20px;
+  --rl-space-6: 24px;
+  --rl-space-7: 32px;
+  --rl-space-8: 40px;
+
+  /* LCARS-Geometrie aus Stilrichtung A */
+  --rl-rail: 74px;
+  --rl-block-gap: 4px;
+  --rl-block-height: 26px;
+  --rl-foot-height: 30px;
+  --rl-radius-elbow: 38px;
+  --rl-radius-end: 22px;
+  --rl-radius-action: 16px;
+  --rl-radius-control: 4px;
+  --rl-radius-panel: 6px;
+
+  /* Typografie */
+  --rl-font-sans: "Exo 2", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --rl-font-mono: "JetBrains Mono", "Cascadia Mono", "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+  --rl-font-size-xs: 0.6875rem;
+  --rl-font-size-sm: 0.8125rem;
+  --rl-font-size-base: 0.875rem;
+  --rl-font-size-md: 1rem;
+  --rl-font-size-lg: 1.25rem;
+  --rl-font-size-xl: 1.625rem;
+  --rl-line-compact: 1.25;
+  --rl-line-base: 1.55;
+  --rl-tracking-label: 2.5px;
+  --rl-tracking-heading: 3px;
+
+  /* Bewegung. Ruheflächen bleiben schattenlos; Glow gehört nur zu Aktivzuständen. */
+  --rl-motion-fast: 140ms;
+  --rl-motion-base: 180ms;
+  --rl-motion-slow: 320ms;
+  --rl-ease: ease-out;
+  --rl-shadow: none;
+}
+
+/* Dieselben Tokens, wärmer und luftiger für Familien-Anwendungen. */
+.lcars-family {
+  --rl-grund: #090705;
+  --rl-flaeche-1: #15110f;
+  --rl-flaeche-2: #1d1713;
+  --rl-flaeche-3: #292019;
+  --rl-linie: #4a3b2f;
+  --rl-text: #f0e5d6;
+  --rl-text-stark: #fff8ec;
+  --rl-text-gedaempft: #c3b39d;
+  --rl-akzent: #f0ad55;
+  --rl-handlung: #f0ad55;
+  --rl-akzent-zweit: #c0a9d5;
+  --rl-font-size-base: 0.9375rem;
+  --rl-font-size-sm: 0.875rem;
+  --rl-line-base: 1.7;
+  --rl-panel-padding: 24px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --rl-motion-fast: 0ms;
+    --rl-motion-base: 0ms;
+    --rl-motion-slow: 0ms;
+  }
+}

@@ -1,0 +1,801 @@
+/**
+ * Homelab LCARS 1.9.0 fuer Apache Guacamole 1.6.8.
+ * Stufe B im Arbeitsbereich, Stufe-A-nahe Anmeldung.
+ * Geprueft gegen die lokal bereitgestellten Guacamole-CSS-Dateien und 426
+ * gemessene Klassennamen. Keine Google Fonts und keine CSS-Fremdeinbindung.
+ */
+
+@font-face {
+  font-family: "Exo 2";
+  src: url("https://brand.example.com/v1.9.0/fonts/Exo2-Variable.woff2") format("woff2-variations"),
+       url("https://brand.example.com/v1.9.0/fonts/Exo2-Variable.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 400 800;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "JetBrains Mono";
+  src: url("https://brand.example.com/v1.9.0/fonts/JetBrainsMono-Variable.woff2") format("woff2-variations"),
+       url("https://brand.example.com/v1.9.0/fonts/JetBrainsMono-Variable.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 400 700;
+  font-display: swap;
+}
+
+:root {
+  color-scheme: dark;
+  --rl-gold: #eaa549;
+  --rl-koenigsblau: #1740bc;
+  --rl-lavendel: #9a8ec9;
+  --rl-blau: #5a7fe0;
+  --rl-grau: #3c4257;
+  --rl-grund: #000000;
+  --rl-flaeche-1: #0b0d14;
+  --rl-flaeche-2: #10131a;
+  --rl-flaeche-3: #1b1f2b;
+  --rl-linie: #3c4257;
+  --rl-text: #dfe4f2;
+  --rl-text-stark: #f3f5fa;
+  --rl-text-gedaempft: #aeb4c5;
+  --rl-erfolg: #7fb069;
+  --rl-warnung: #eaa549;
+  --rl-fehler: #cc6666;
+  --rl-info: #5a7fe0;
+  --rl-fokus: #f6c77f;
+  --rl-deaktiviert: #62687a;
+  --rl-font-sans: "Exo 2", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --rl-font-mono: "JetBrains Mono", "Cascadia Mono", Consolas, monospace;
+  --rl-motion-fast: 140ms;
+  --rl-motion-base: 180ms;
+  --rl-ease: ease-out;
+  --rl-background-image: radial-gradient(ellipse at 18% 12%, rgba(23, 64, 188, 0.35), transparent 55%), radial-gradient(ellipse at 85% 88%, rgba(234, 165, 73, 0.16), transparent 50%), linear-gradient(160deg, #05070d 0%, #0b1020 100%);
+  --rl-background-overlay: rgb(0 0 0 / 58%);
+  --rl-login-surface-fallback: rgb(11 13 20 / 96%);
+  --rl-login-surface-glass: rgb(11 13 20 / 84%);
+}
+
+html,
+body {
+  background: var(--rl-grund) !important;
+  color: var(--rl-text) !important;
+  font-family: var(--rl-font-sans) !important;
+  line-height: 1.55;
+}
+
+body,
+button,
+input,
+select,
+textarea {
+  font-family: var(--rl-font-sans) !important;
+}
+
+code,
+pre,
+kbd,
+samp,
+.protocol,
+.timestamp,
+.version-number,
+.client-tile-name {
+  font-family: var(--rl-font-mono) !important;
+  font-variant-numeric: tabular-nums;
+}
+
+h1,
+h2,
+h3,
+.title,
+.title-bar,
+.menu-title {
+  color: var(--rl-text-stark) !important;
+  font-weight: 700 !important;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+}
+
+a,
+a:visited {
+  color: var(--rl-gold);
+}
+
+/* Stufe B: flache dunkle Arbeitsflaechen und eine segmentierte Kopfkante. */
+.main-ui,
+.settings-ui,
+.recent-connections-ui {
+  background: var(--rl-grund) !important;
+  color: var(--rl-text) !important;
+}
+
+.main-ui > .header,
+.settings-ui > .header,
+.recent-connections-ui > .header,
+.main-ui .header {
+  background: var(--rl-flaeche-1) !important;
+  border: 0 !important;
+  border-bottom: 8px solid var(--rl-gold) !important;
+  box-shadow: none !important;
+  color: var(--rl-text) !important;
+  min-height: 58px;
+  position: relative;
+}
+
+/* Harte Stopps ergeben Farbbloecke, keinen sichtbaren Farbverlauf. */
+.main-ui > .header::after,
+.settings-ui > .header::after,
+.recent-connections-ui > .header::after {
+  background: linear-gradient(90deg,
+    var(--rl-gold) 0 48%,
+    transparent 48% 48.4%,
+    var(--rl-blau) 48.4% 58%,
+    transparent 58% 58.4%,
+    var(--rl-lavendel) 58.4% 66%,
+    transparent 66% 66.4%,
+    var(--rl-grau) 66.4% 100%);
+  bottom: -8px;
+  content: "";
+  height: 8px;
+  left: 0;
+  pointer-events: none;
+  position: absolute;
+  right: 0;
+}
+
+.header h2 {
+  color: var(--rl-text-stark) !important;
+  letter-spacing: 3px;
+  text-transform: uppercase !important;
+}
+
+.main-ui .sidebar,
+.main-ui .menu,
+.settings-ui .menu,
+.menu {
+  background: var(--rl-flaeche-1) !important;
+  border-color: var(--rl-linie) !important;
+  box-shadow: none !important;
+  color: var(--rl-text) !important;
+}
+
+.menu .header,
+.menu-section,
+.menu-body {
+  background: var(--rl-flaeche-1) !important;
+  color: var(--rl-text) !important;
+}
+
+.menu-item,
+.menu-item a {
+  color: var(--rl-text) !important;
+}
+
+.menu-item:hover,
+.menu-item.selected {
+  background: var(--rl-flaeche-3) !important;
+  border-left: 4px solid var(--rl-gold);
+  color: var(--rl-text-stark) !important;
+}
+
+/* Karten und Listen: einseitige LCARS-Kante mit Endkappe. */
+.all-connections .connection-group > .caption,
+.all-connections .connection,
+.recent-connections .connection,
+.connection-list .connection,
+.connection-list .connection-group {
+  background: var(--rl-flaeche-2) !important;
+  border: 1px solid var(--rl-linie) !important;
+  border-left: 7px solid var(--rl-gold) !important;
+  border-radius: 0 18px 18px 0 !important;
+  box-shadow: none !important;
+  color: var(--rl-text) !important;
+  transition: background-color var(--rl-motion-fast) var(--rl-ease),
+              border-color var(--rl-motion-fast) var(--rl-ease),
+              box-shadow var(--rl-motion-fast) var(--rl-ease);
+}
+
+.connection a,
+.connection a:hover,
+.connection a:visited,
+.connection-group a,
+.connection-group a:hover,
+.connection-group a:visited {
+  color: var(--rl-text-stark) !important;
+}
+
+.all-connections .connection:hover,
+.all-connections .connection-group > .caption:hover,
+.recent-connections .connection:hover,
+.connection-list .connection:hover,
+.connection-list .connection-group:hover {
+  background: var(--rl-flaeche-3) !important;
+  border-color: var(--rl-gold) !important;
+  box-shadow: 0 0 0 1px var(--rl-gold), 0 0 10px var(--rl-gold) !important;
+}
+
+.connection .name,
+.connection-group .name {
+  color: var(--rl-text-stark) !important;
+  font-weight: 600;
+}
+
+.connection .protocol {
+  color: var(--rl-lavendel) !important;
+  font-size: 0.78rem;
+}
+
+.client-panel-connection {
+  border: 3px solid var(--rl-grau) !important;
+  border-radius: 20px 3px 3px 3px !important;
+  box-shadow: none !important;
+}
+
+.client-panel-connection:hover,
+.client-panel-connection.needs-attention {
+  border-color: var(--rl-gold) !important;
+  box-shadow: 0 0 0 1px var(--rl-gold), 0 0 10px var(--rl-gold) !important;
+}
+
+/* Geteilte Remote-Ansichten: nur die Kopfzeile, niemals das Clientbild. */
+.tiled-client-grid .client-tile .client-tile-header {
+  background: var(--rl-flaeche-3) !important;
+  border-bottom: 4px solid var(--rl-grau);
+  color: var(--rl-text-stark) !important;
+  min-height: 2.2em;
+}
+
+.tiled-client-grid .client-tile.focused .client-tile-header {
+  background: var(--rl-flaeche-2) !important;
+  border-bottom-color: var(--rl-gold);
+  box-shadow: 0 3px 10px rgb(234 165 73 / 50%);
+}
+
+.client-tile-name {
+  letter-spacing: 1px;
+}
+
+/* Formulare und Dialoge. */
+input:not([type="submit"]):not([type="button"]),
+select,
+textarea {
+  background: var(--rl-flaeche-3) !important;
+  border: 1px solid var(--rl-grau) !important;
+  border-left: 4px solid var(--rl-blau) !important;
+  border-radius: 0 4px 4px 0 !important;
+  color: var(--rl-text-stark) !important;
+  min-height: 40px;
+}
+
+.dialog,
+.notification {
+  background: var(--rl-flaeche-2) !important;
+  border: 1px solid var(--rl-linie) !important;
+  border-left: 6px solid var(--rl-gold) !important;
+  box-shadow: none !important;
+  color: var(--rl-text) !important;
+}
+
+.notification.error,
+.login-ui.error p.login-error {
+  background: #2b1114 !important;
+  border-color: var(--rl-fehler) !important;
+  color: #ffdede !important;
+}
+
+/* Statusfarben bleiben vollflaechig und semantisch. */
+.status-indicator.connected,
+.connected .status-indicator {
+  background: var(--rl-erfolg) !important;
+  color: #071006 !important;
+}
+
+.status-indicator.disconnected,
+.disconnected .status-indicator {
+  background: var(--rl-deaktiviert) !important;
+  color: var(--rl-grund) !important;
+}
+
+.status-indicator.error,
+.error .status-indicator,
+.danger {
+  border-color: var(--rl-fehler) !important;
+}
+
+.notification .progress {
+  animation: none !important;
+  background: var(--rl-flaeche-3) !important;
+  border: 1px solid var(--rl-linie) !important;
+}
+
+.notification .progress .bar,
+.transfer .progress .bar {
+  background: var(--rl-erfolg) !important;
+  box-shadow: none !important;
+}
+
+/* Buttons: goldene Handlung, Fehlerrot fuer Gefahr, v1.3.0-Reaktionen. */
+a.button,
+button,
+input[type="submit"],
+.button,
+.login-ui .sso-provider a,
+.login-ui a.openid,
+.login-ui .openid-button,
+.login-ui .sso-provider-openid {
+  background: var(--rl-gold) !important;
+  border: 2px solid transparent !important;
+  border-radius: 0 16px 16px 0 !important;
+  box-shadow: none !important;
+  color: #000 !important;
+  font-weight: 700 !important;
+  letter-spacing: 1.5px;
+  min-height: 40px;
+  text-shadow: none !important;
+  text-transform: uppercase;
+  transition: box-shadow var(--rl-motion-fast) var(--rl-ease),
+              filter var(--rl-motion-fast) var(--rl-ease);
+}
+
+a.button.danger,
+button.danger,
+.danger.button {
+  background: var(--rl-fehler) !important;
+}
+
+a.button:hover:not(.disabled),
+button:hover:not(:disabled),
+input[type="submit"]:hover:not(:disabled),
+.button:hover:not(.disabled),
+.login-ui .sso-provider a:hover,
+.login-ui a.openid:hover,
+.login-ui .openid-button:hover,
+.login-ui .sso-provider-openid:hover {
+  box-shadow: 0 0 0 1px var(--rl-gold), 0 0 10px var(--rl-gold) !important;
+  filter: brightness(1.18);
+}
+
+a.button:active:not(.disabled),
+button:active:not(:disabled),
+input[type="submit"]:active:not(:disabled),
+.button:active:not(.disabled),
+.login-ui .sso-provider a:active,
+.login-ui a.openid:active,
+.login-ui .openid-button:active,
+.login-ui .sso-provider-openid:active {
+  animation: rl-guac-confirm var(--rl-motion-base) var(--rl-ease) 1;
+}
+
+:focus-visible {
+  outline: 3px double var(--rl-fokus) !important;
+  outline-offset: 3px;
+}
+
+.disabled,
+button:disabled,
+input:disabled {
+  box-shadow: none !important;
+  filter: none !important;
+  opacity: 0.62;
+}
+
+@keyframes rl-guac-confirm {
+  0% { box-shadow: 0 0 0 1px var(--rl-gold); filter: brightness(1.08); }
+  42% { box-shadow: 0 0 0 2px var(--rl-text-stark), 0 0 18px var(--rl-gold); filter: brightness(1.48); }
+  100% { box-shadow: 0 0 0 1px var(--rl-gold); filter: brightness(1.08); }
+}
+
+/* Anmeldung: dieselben Foto-, Bewegungs- und LCARS-Rhythmen wie Keycloak. */
+.login-ui {
+  align-content: center;
+  background: var(--rl-grund) !important;
+  box-sizing: border-box;
+  color: var(--rl-text) !important;
+  display: grid !important;
+  gap: 1rem;
+  grid-template-columns: minmax(0, 1fr);
+  isolation: isolate;
+  overflow: hidden;
+  padding: 1.5rem;
+}
+
+.login-ui::before,
+.login-ui::after {
+  content: "";
+  inset: 0;
+  pointer-events: none;
+  position: fixed;
+}
+
+.login-ui::before {
+  animation: rl-guac-background-approach 90s ease-in-out infinite alternate;
+  background-color: var(--rl-grund);
+  background-image: var(--rl-background-image);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  transform: scale(1);
+  transform-origin: center;
+  z-index: 0;
+}
+
+.login-ui::after {
+  background-color: var(--rl-background-overlay);
+  z-index: 1;
+}
+
+@keyframes rl-guac-background-approach {
+  from { transform: scale(1); }
+  to { transform: scale(1.025); }
+}
+
+.login-ui .login-dialog-middle {
+  display: block !important;
+  grid-row: 1;
+  position: relative;
+  z-index: 2;
+}
+
+.login-ui .login-container {
+  margin: 0 auto !important;
+  max-width: 500px !important;
+  position: relative;
+}
+
+.login-ui .login-dialog {
+  background: var(--rl-login-surface-fallback) !important;
+  border: 0 !important;
+  border-radius: 0 24px 24px 38px !important;
+  box-shadow: none !important;
+  color: var(--rl-text) !important;
+  max-width: 440px !important;
+  overflow: hidden;
+  padding: 2.5rem 2rem 2rem 5.75rem !important;
+  position: relative;
+}
+
+@supports ((-webkit-backdrop-filter: blur(1px)) or (backdrop-filter: blur(1px))) {
+  .login-ui .login-dialog,
+  .login-ui .sso-providers {
+    -webkit-backdrop-filter: blur(14px);
+    backdrop-filter: blur(14px);
+    background-color: var(--rl-login-surface-glass) !important;
+  }
+}
+
+.login-ui.continuation .login-dialog {
+  max-width: 6in !important;
+}
+
+.login-ui .login-dialog::before {
+  --rl-guac-rail-lavendel-glow: transparent;
+  --rl-guac-rail-blau-glow: transparent;
+  --rl-guac-rail-grau-glow: transparent;
+  animation: rl-guac-rail-lavendel 9.73s ease-in-out -2.11s infinite,
+             rl-guac-rail-blau 11.89s ease-in-out -6.37s infinite,
+             rl-guac-rail-grau 13.03s ease-in-out -9.17s infinite;
+  background-color: var(--rl-gold);
+  background-image:
+    linear-gradient(var(--rl-guac-rail-lavendel-glow), var(--rl-guac-rail-lavendel-glow)),
+    linear-gradient(var(--rl-guac-rail-blau-glow), var(--rl-guac-rail-blau-glow)),
+    linear-gradient(var(--rl-guac-rail-grau-glow), var(--rl-guac-rail-grau-glow)),
+    linear-gradient(var(--rl-lavendel), var(--rl-lavendel)),
+    linear-gradient(var(--rl-blau), var(--rl-blau)),
+    linear-gradient(var(--rl-grau), var(--rl-grau));
+  background-position: 0 30%, 0 49%, 0 68%, 0 30%, 0 49%, 0 68%;
+  background-repeat: no-repeat;
+  background-size: 100% 15%, 100% 15%, 100% 15%, 100% 15%, 100% 15%, 100% 15%;
+  border-radius: 0 0 38px 0;
+  bottom: 0;
+  content: "";
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 4.25rem;
+}
+
+.login-ui .login-dialog::after {
+  --rl-guac-sequence-primary-position: -22%;
+  --rl-guac-sequence-secondary-position: -22%;
+  --rl-guac-sequence-scan-position: -8%;
+  animation: rl-guac-sequence-primary 6.73s ease-in-out -1.31s infinite,
+             rl-guac-sequence-secondary 8.41s ease-in-out -5.27s infinite,
+             rl-guac-sequence-scan 11.17s cubic-bezier(.45, 0, .55, 1) -3.73s infinite;
+  background-color: var(--rl-gold);
+  background-image:
+    linear-gradient(90deg,
+      transparent 0,
+      rgb(90 127 224 / 18%) 28%,
+      rgb(243 245 250 / 58%) 50%,
+      rgb(90 127 224 / 18%) 72%,
+      transparent 100%),
+    linear-gradient(90deg,
+      transparent 0,
+      rgb(246 199 127 / 30%) 50%,
+      transparent 100%),
+    linear-gradient(90deg,
+      transparent 0,
+      rgb(154 142 201 / 22%) 50%,
+      transparent 100%),
+    repeating-linear-gradient(90deg,
+      var(--rl-gold) 0,
+      var(--rl-gold) calc(14.285714% - 4px),
+      rgb(0 0 0 / 32%) calc(14.285714% - 4px),
+      rgb(0 0 0 / 32%) 14.285714%);
+  background-position:
+    var(--rl-guac-sequence-scan-position) 0,
+    var(--rl-guac-sequence-primary-position) 0,
+    var(--rl-guac-sequence-secondary-position) 0,
+    0 0;
+  background-repeat: no-repeat, no-repeat, no-repeat, repeat;
+  background-size: .75rem 100%, 17% 100%, 19% 100%, 100% 100%;
+  content: "";
+  height: 12px;
+  left: calc(4.25rem + 4px);
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+@property --rl-guac-rail-lavendel-glow {
+  syntax: "<color>";
+  inherits: false;
+  initial-value: transparent;
+}
+
+@property --rl-guac-rail-blau-glow {
+  syntax: "<color>";
+  inherits: false;
+  initial-value: transparent;
+}
+
+@property --rl-guac-rail-grau-glow {
+  syntax: "<color>";
+  inherits: false;
+  initial-value: transparent;
+}
+
+@property --rl-guac-sequence-primary-position {
+  syntax: "<percentage>";
+  inherits: false;
+  initial-value: -22%;
+}
+
+@property --rl-guac-sequence-secondary-position {
+  syntax: "<percentage>";
+  inherits: false;
+  initial-value: -22%;
+}
+
+@property --rl-guac-sequence-scan-position {
+  syntax: "<percentage>";
+  inherits: false;
+  initial-value: -8%;
+}
+
+@keyframes rl-guac-rail-lavendel {
+  0%, 62%, 100% { --rl-guac-rail-lavendel-glow: transparent; }
+  76% { --rl-guac-rail-lavendel-glow: rgb(243 245 250 / 30%); }
+  88% { --rl-guac-rail-lavendel-glow: rgb(243 245 250 / 12%); }
+}
+
+@keyframes rl-guac-rail-blau {
+  0%, 62%, 100% { --rl-guac-rail-blau-glow: transparent; }
+  76% { --rl-guac-rail-blau-glow: rgb(243 245 250 / 30%); }
+  88% { --rl-guac-rail-blau-glow: rgb(243 245 250 / 12%); }
+}
+
+@keyframes rl-guac-rail-grau {
+  0%, 62%, 100% { --rl-guac-rail-grau-glow: transparent; }
+  76% { --rl-guac-rail-grau-glow: rgb(243 245 250 / 24%); }
+  88% { --rl-guac-rail-grau-glow: rgb(243 245 250 / 10%); }
+}
+
+@keyframes rl-guac-sequence-primary {
+  0%, 8% { --rl-guac-sequence-primary-position: -22%; }
+  88%, 100% { --rl-guac-sequence-primary-position: 122%; }
+}
+
+@keyframes rl-guac-sequence-secondary {
+  0%, 18% { --rl-guac-sequence-secondary-position: -22%; }
+  74%, 100% { --rl-guac-sequence-secondary-position: 122%; }
+}
+
+@keyframes rl-guac-sequence-scan {
+  0%, 9% { --rl-guac-sequence-scan-position: -8%; }
+  78%, 100% { --rl-guac-sequence-scan-position: 108%; }
+}
+
+.login-ui .login-dialog h1,
+.login-ui .login-dialog .app-name {
+  color: var(--rl-text-stark) !important;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+}
+
+.login-ui .logo {
+  background: url("https://brand.example.com/v1.9.0/assets/emblem--guacamole.svg") center / 64px 64px no-repeat !important;
+  height: 72px !important;
+  margin: 0 auto 0.75rem !important;
+  width: 100% !important;
+}
+
+/* Guacamoles Platzhaltertechnik legt den Header mit z-index:-1 hinter das
+   Eingabefeld. Homelab verwendet stattdessen eine zustandsfeste Beschriftung
+   oberhalb: .empty, gefuellt und fokussiert belegen immer denselben Raum. */
+.login-ui .login-fields .labeled-field {
+  display: flex;
+  flex-direction: column;
+  margin: 0 0 .8rem;
+  position: relative;
+  z-index: auto;
+}
+
+.login-ui .login-fields .labeled-field .field-header,
+.login-ui .login-fields .labeled-field.empty .field-header,
+.login-ui .login-fields .labeled-field:not(.empty) .field-header {
+  color: var(--rl-text) !important;
+  display: block;
+  font-size: .72rem;
+  font-weight: 700;
+  left: auto;
+  letter-spacing: .14em;
+  line-height: 1.35;
+  margin: 0 0 .35rem .25rem;
+  opacity: 1;
+  order: 0;
+  overflow: visible;
+  position: static;
+  right: auto;
+  text-transform: uppercase;
+  z-index: auto;
+}
+
+.login-ui .login-fields .labeled-field .form-field {
+  display: block;
+  order: 1;
+  width: 100%;
+}
+
+.login-ui .login-fields .labeled-field:focus-within .field-header {
+  color: var(--rl-fokus) !important;
+}
+
+.login-ui .login-dialog .login-fields input {
+  background: var(--rl-flaeche-3) !important;
+  border: 1px solid var(--rl-grau) !important;
+  border-left: 5px solid var(--rl-blau) !important;
+  border-radius: 0 4px 4px 0 !important;
+  color: var(--rl-text-stark) !important;
+  margin: 0 !important;
+  min-height: 46px;
+}
+
+.login-ui .login-dialog .login-fields .labeled-field.empty input,
+.login-ui .login-dialog .login-fields .labeled-field:not(.empty) input {
+  background: var(--rl-flaeche-3) !important;
+}
+
+.login-ui .login-dialog .login-fields input:focus {
+  background: var(--rl-flaeche-3) !important;
+  border-left-color: var(--rl-gold) !important;
+  box-shadow: 0 0 0 1px var(--rl-gold), 0 0 10px var(--rl-gold);
+}
+
+.login-ui .login-dialog .version .version-number {
+  background: var(--rl-blau) !important;
+  color: #fff !important;
+  font-style: normal;
+}
+
+/* Die SSO-Erweiterung haengt ihren Block als Geschwister der Dialogmitte an
+   .login-ui. Grid-Reihen ziehen ihn optisch direkt unter die Karte. */
+.login-ui .sso-providers {
+  align-items: center;
+  align-self: start;
+  background: var(--rl-login-surface-fallback) !important;
+  border: 1px solid var(--rl-linie);
+  border-left: 6px solid var(--rl-gold);
+  border-radius: 0 18px 18px 0;
+  color: var(--rl-text) !important;
+  display: flex;
+  flex-wrap: wrap;
+  font-size: .72rem;
+  font-weight: 700;
+  gap: .5rem;
+  grid-row: 2;
+  justify-self: center;
+  left: auto !important;
+  letter-spacing: .12em;
+  max-width: 440px;
+  padding: .65rem .75rem !important;
+  position: static !important;
+  text-transform: uppercase;
+  width: min(440px, calc(100vw - 3rem));
+  z-index: 2;
+}
+
+.login-ui .sso-providers ul,
+.login-ui .sso-providers li {
+  display: inline-flex;
+  margin: 0;
+  padding: 0;
+}
+
+.login-ui .sso-providers li::before {
+  display: none;
+}
+
+.login-ui .sso-providers .sso-provider a,
+.login-ui .sso-providers a.openid,
+.login-ui .sso-providers .openid-button,
+.login-ui .sso-providers .sso-provider-openid {
+  align-items: center;
+  display: inline-flex;
+  justify-content: center;
+  margin: 0;
+  min-height: 36px;
+  padding: .35rem 1rem;
+  text-decoration: none;
+}
+
+@media (min-aspect-ratio: 2/1) {
+  .login-ui::before {
+    background-position: center 58%;
+  }
+}
+
+@media (max-width: 560px) {
+  .login-ui {
+    gap: .75rem;
+    padding: .75rem;
+  }
+
+  .login-ui .login-dialog {
+    border-radius: 0 18px 18px 28px !important;
+    max-width: calc(100vw - 24px) !important;
+    padding: 2.25rem 1.25rem 1.5rem 4rem !important;
+  }
+
+  .login-ui .login-dialog::before { width: 3rem; }
+  .login-ui .login-dialog::after { left: calc(3rem + 4px); }
+
+  .login-ui .sso-providers {
+    max-width: calc(100vw - 24px);
+    width: calc(100vw - 24px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    scroll-behavior: auto !important;
+    transition: none !important;
+  }
+
+  .login-ui::before {
+    transform: none;
+  }
+
+  .login-ui .login-dialog::before {
+    --rl-guac-rail-lavendel-glow: transparent;
+    --rl-guac-rail-blau-glow: transparent;
+    --rl-guac-rail-grau-glow: transparent;
+  }
+
+  .login-ui .login-dialog::after {
+    background-color: var(--rl-gold);
+    background-image: repeating-linear-gradient(90deg,
+      var(--rl-gold) 0,
+      var(--rl-gold) calc(14.285714% - 4px),
+      rgb(0 0 0 / 32%) calc(14.285714% - 4px),
+      rgb(0 0 0 / 32%) 14.285714%);
+  }
+}
+
+@media (forced-colors: active) {
+  .login-ui .login-dialog,
+  .main-ui,
+  .settings-ui { forced-color-adjust: auto; }
+}

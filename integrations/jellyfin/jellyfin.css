@@ -1,0 +1,1363 @@
+/**
+ * Homelab LCARS Familie fuer den Jellyfin-Webclient.
+ * Paketversion 1.11.0; vorgesehene Stylesheet-Adresse:
+ * https://brand.example.com/v1.11.0/integrations/jellyfin/jellyfin.css
+ *
+ * Geprueft gegen die lokal bereitgestellten Jellyfin-Webclient-Stylesheets
+ * main.css und vendor.css vom 2026-09-05 sowie die am 2026-09-06 im laufenden
+ * Login gemessenen Klassen. Reines CSS: kein JavaScript, kein DOM-Umbau und
+ * kein echter Netflix-Heldbanner. Medienbilder werden weder gefiltert noch in
+ * ihrer Deckkraft oder Farbwiedergabe veraendert.
+ */
+
+@font-face {
+  font-family: "Exo 2";
+  src: url("https://brand.example.com/v1.11.0/fonts/Exo2-Variable.woff2") format("woff2-variations"),
+       url("https://brand.example.com/v1.11.0/fonts/Exo2-Variable.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 400 800;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "JetBrains Mono";
+  src: url("https://brand.example.com/v1.11.0/fonts/JetBrainsMono-Variable.woff2") format("woff2-variations"),
+       url("https://brand.example.com/v1.11.0/fonts/JetBrainsMono-Variable.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 400 700;
+  font-display: swap;
+}
+
+:root {
+  color-scheme: dark;
+  --rl-gold: #eaa549;
+  --rl-koenigsblau: #1740bc;
+  --rl-akzent: #f0ad55;
+  --rl-akzent-zweit: #e6bd82;
+  --rl-blau-familie: #69759a;
+  --rl-lavendel-familie: #9d8da8;
+  --rl-grau: #6d5948;
+  --rl-grund: #241c17;
+  --rl-flaeche-1: #30251e;
+  --rl-flaeche-2: #3a2d24;
+  --rl-flaeche-3: #49382c;
+  --rl-linie: #765c47;
+  --rl-linie-stark: #98765a;
+  --rl-text: #fff3df;
+  --rl-text-stark: #fffaf1;
+  --rl-text-gedaempft: #e0c8a8;
+  --rl-status-fehler: #cc6666;
+  --rl-status-erfolg: #7fb069;
+  --rl-status-warnung: #eaa549;
+  --rl-status-info: #5a7fe0;
+  --rl-handlung-text: #24160a;
+  --rl-fokus: #f6c77f;
+  --rl-deaktiviert: #a18e7a;
+  --rl-font-sans: "Exo 2", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --rl-font-mono: "JetBrains Mono", "Cascadia Mono", "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+  --rl-radius-control: 10px;
+  --rl-radius-panel: 14px;
+  --rl-motion-fast: 140ms;
+  --rl-motion-base: 180ms;
+  --rl-motion-card: 220ms;
+  --rl-ease: cubic-bezier(0.2, 0.75, 0.25, 1);
+  --rl-background-image: radial-gradient(ellipse at 18% 12%, rgba(23, 64, 188, 0.35), transparent 55%), radial-gradient(ellipse at 85% 88%, rgba(234, 165, 73, 0.16), transparent 50%), linear-gradient(160deg, #05070d 0%, #0b1020 100%);
+  --rl-background-overlay: rgb(0 0 0 / 58%);
+  --rl-login-surface-fallback: rgb(36 28 23 / 96%);
+  --rl-login-surface-glass: rgb(36 28 23 / 84%);
+}
+
+html {
+  background: var(--rl-grund);
+  font-size: clamp(16px, calc(15px + 0.18vw), 20px);
+}
+
+body {
+  background-color: var(--rl-grund);
+  color: var(--rl-text);
+  font-family: var(--rl-font-sans);
+  font-size: 1rem;
+  line-height: 1.65;
+}
+
+.mainAnimatedPage {
+  counter-reset: rl-media-section;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: var(--rl-text-stark);
+  font-family: var(--rl-font-sans);
+  font-weight: 700;
+  letter-spacing: 0.025em;
+  line-height: 1.35;
+  text-transform: none;
+}
+
+a { color: var(--rl-akzent); }
+a:hover { color: var(--rl-text-stark); }
+
+code,
+pre,
+kbd,
+samp,
+output,
+time,
+data {
+  font-family: var(--rl-font-mono);
+  font-variant-numeric: tabular-nums;
+}
+
+code,
+pre {
+  background-color: var(--rl-flaeche-1);
+  color: var(--rl-text-stark);
+}
+
+dialog,
+.dialog {
+  background-color: var(--rl-flaeche-1);
+  border: 2px solid var(--rl-linie-stark);
+  border-inline-start: 7px solid var(--rl-akzent);
+  border-radius: var(--rl-radius-panel);
+  color: var(--rl-text);
+}
+
+/* Die Referenz bestaetigt .emby-input als gemeinsames Eingabeelement. */
+input:not([type="button"]):not([type="submit"]):not([type="reset"]),
+select,
+textarea,
+.emby-input {
+  background-color: var(--rl-flaeche-2);
+  border: 2px solid var(--rl-linie-stark);
+  border-radius: var(--rl-radius-control);
+  color: var(--rl-text-stark);
+  font-family: var(--rl-font-sans);
+  font-size: 1rem;
+  min-height: 50px;
+  padding: 10px 12px;
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: var(--rl-text-gedaempft);
+  opacity: 1;
+}
+
+/* Homelab-Reaktionszustaende auf Jellyfins bestaetigten Schaltflaechen. */
+.emby-button,
+.paper-icon-button-light,
+form button,
+input[type="button"],
+input[type="submit"],
+input[type="reset"] {
+  border-radius: var(--rl-radius-control);
+  font-family: var(--rl-font-sans);
+  text-transform: none;
+  transition: background-color var(--rl-motion-fast) var(--rl-ease),
+              box-shadow var(--rl-motion-fast) var(--rl-ease),
+              color var(--rl-motion-fast) var(--rl-ease),
+              filter var(--rl-motion-fast) var(--rl-ease),
+              transform var(--rl-motion-fast) var(--rl-ease);
+}
+
+form .emby-button,
+form button,
+input[type="button"],
+input[type="submit"],
+input[type="reset"] {
+  min-height: 50px;
+}
+
+.layout-desktop .skinHeader .emby-button:hover:not(:disabled),
+.layout-desktop .skinHeader .paper-icon-button-light:hover:not(:disabled),
+.layout-desktop .mainDrawer .emby-button:hover:not(:disabled),
+.layout-desktop .mainDrawer .paper-icon-button-light:hover:not(:disabled),
+.layout-desktop .detailPageContent .emby-button:hover:not(:disabled),
+.layout-desktop .detailPageContent .paper-icon-button-light:hover:not(:disabled),
+.layout-desktop .dialog .emby-button:hover:not(:disabled),
+.layout-desktop .dialog .paper-icon-button-light:hover:not(:disabled),
+.layout-desktop form button:hover:not(:disabled),
+.layout-desktop input[type="button"]:hover:not(:disabled),
+.layout-desktop input[type="submit"]:hover:not(:disabled),
+.layout-desktop input[type="reset"]:hover:not(:disabled) {
+  box-shadow: 0 0 0 1px var(--rl-akzent), 0 0 12px rgb(240 173 85 / 55%);
+  color: var(--rl-text-stark);
+  filter: brightness(1.18);
+}
+
+:focus-visible,
+.emby-button:focus-visible,
+.paper-icon-button-light:focus-visible,
+.card:focus-visible > .cardBox {
+  outline: 3px double var(--rl-fokus) !important;
+  outline-offset: 3px;
+}
+
+.skinHeader .emby-button:active:not(:disabled),
+.skinHeader .paper-icon-button-light:active:not(:disabled),
+.mainDrawer .emby-button:active:not(:disabled),
+.mainDrawer .paper-icon-button-light:active:not(:disabled),
+.detailPageContent .emby-button:active:not(:disabled),
+.detailPageContent .paper-icon-button-light:active:not(:disabled),
+.dialog .emby-button:active:not(:disabled),
+.dialog .paper-icon-button-light:active:not(:disabled),
+form button:active:not(:disabled),
+input[type="button"]:active:not(:disabled),
+input[type="submit"]:active:not(:disabled),
+input[type="reset"]:active:not(:disabled) {
+  animation: rl-jellyfin-confirm var(--rl-motion-base) var(--rl-ease) 1;
+}
+
+.emby-button:disabled,
+.paper-icon-button-light:disabled,
+form button:disabled,
+input[type="button"]:disabled,
+input[type="submit"]:disabled,
+input[type="reset"]:disabled {
+  box-shadow: none;
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+
+progress,
+meter {
+  accent-color: var(--rl-akzent);
+  min-height: 12px;
+}
+
+@keyframes rl-jellyfin-confirm {
+  0% { box-shadow: 0 0 0 1px var(--rl-akzent); filter: brightness(1.1); }
+  42% { box-shadow: 0 0 0 2px var(--rl-text-stark), 0 0 18px var(--rl-akzent); filter: brightness(1.48); }
+  100% { box-shadow: 0 0 0 1px var(--rl-akzent); filter: brightness(1.1); }
+}
+
+/*
+ * Kinoartige Uebersicht auf den bestaetigten Jellyfin-Klassen.
+ * Die Typselektoren begrenzen die Regeln auf Medienkarten. Ein neutraler dunkler
+ * Verlauf liegt nur am unteren Bildrand hinter dem Text; Bildfarben, opacity,
+ * background-image und filter der eigentlichen Medienflaeche bleiben unberuehrt.
+ */
+.card:is(
+  .portraitCard,
+  .backdropCard,
+  .squareCard,
+  .smallBackdropCard,
+  .overflowPortraitCard,
+  .overflowBackdropCard,
+  .overflowSquareCard,
+  .overflowSmallBackdropCard
+) > .cardBox {
+  background: transparent;
+  border: 0;
+  border-radius: 28px 4px 4px 4px;
+  box-shadow: none;
+  margin: 0.3em;
+  overflow: visible;
+  position: relative;
+  transform-origin: center;
+  transition: box-shadow var(--rl-motion-card) var(--rl-ease),
+              transform var(--rl-motion-card) var(--rl-ease);
+}
+
+/* LCARS-Ecke und kurze Goldkante statt eines gleichmaessigen Kartenrahmens. */
+.card:is(
+  .portraitCard,
+  .backdropCard,
+  .squareCard,
+  .smallBackdropCard,
+  .overflowPortraitCard,
+  .overflowBackdropCard,
+  .overflowSquareCard,
+  .overflowSmallBackdropCard
+) > .cardBox::before {
+  background: var(--rl-akzent);
+  border-radius: 28px 0 12px 0;
+  content: "";
+  height: 4px;
+  inset: 0 auto auto 0;
+  pointer-events: none;
+  position: absolute;
+  width: 34%;
+  z-index: 4;
+}
+
+.cardImageContainer,
+.cardOverlayContainer,
+.visualCardBox,
+.cardBox:not(.visualCardBox) .cardPadder {
+  border-radius: 28px 4px 4px 4px;
+}
+
+[dir="rtl"] .card:is(
+  .portraitCard,
+  .backdropCard,
+  .squareCard,
+  .smallBackdropCard,
+  .overflowPortraitCard,
+  .overflowBackdropCard,
+  .overflowSquareCard,
+  .overflowSmallBackdropCard
+) > .cardBox,
+[dir="rtl"] .cardImageContainer,
+[dir="rtl"] .cardOverlayContainer,
+[dir="rtl"] .visualCardBox,
+[dir="rtl"] .cardBox:not(.visualCardBox) .cardPadder {
+  border-radius: 4px 28px 4px 4px;
+}
+
+[dir="rtl"] .card:is(
+  .portraitCard,
+  .backdropCard,
+  .squareCard,
+  .smallBackdropCard,
+  .overflowPortraitCard,
+  .overflowBackdropCard,
+  .overflowSquareCard,
+  .overflowSmallBackdropCard
+) > .cardBox::before {
+  border-radius: 0 28px 0 12px;
+  inset: 0 0 auto auto;
+}
+
+/* Jellyfins vollflaechiges 50-%-Schwarz wird zu einem unteren Lesbarkeitsverlauf. */
+.cardOverlayContainer {
+  background: linear-gradient(to top, rgb(12 8 6 / 88%) 0%, rgb(12 8 6 / 42%) 38%, transparent 72%);
+}
+
+/* Footer liegt ueber dem Bild, bleibt aber Teil des vorhandenen DOM. */
+.card:is(
+  .portraitCard,
+  .backdropCard,
+  .squareCard,
+  .smallBackdropCard,
+  .overflowPortraitCard,
+  .overflowBackdropCard,
+  .overflowSquareCard,
+  .overflowSmallBackdropCard
+) > .cardBox .cardFooter {
+  background: linear-gradient(to top, rgb(12 8 6 / 94%) 0%, rgb(12 8 6 / 70%) 52%, transparent 100%);
+  border-radius: 0 0 4px 4px;
+  bottom: 0;
+  color: #fffaf1;
+  inset-inline: 0;
+  opacity: 0;
+  padding: 2.7rem 0.65rem 0.55rem;
+  position: absolute;
+  text-shadow: 0 2px 5px #000;
+  transform: translateY(0.35rem);
+  transition: opacity var(--rl-motion-card) var(--rl-ease),
+              transform var(--rl-motion-card) var(--rl-ease);
+  z-index: 3;
+}
+
+.cardText {
+  color: inherit;
+  font-size: 0.92rem;
+  line-height: 1.3;
+  padding-inline: 0.25rem;
+}
+
+.cardText-secondary { color: var(--rl-text-gedaempft); }
+
+/* Desktop: vergroessern per Transform, niemals ueber Breite oder Hoehe. */
+.layout-desktop .card:not(.show-animation) {
+  contain: layout style;
+  overflow: visible;
+}
+
+.layout-desktop .card:is(
+  .portraitCard,
+  .backdropCard,
+  .squareCard,
+  .smallBackdropCard,
+  .overflowPortraitCard,
+  .overflowBackdropCard,
+  .overflowSquareCard,
+  .overflowSmallBackdropCard
+):hover,
+.layout-desktop .card:is(
+  .portraitCard,
+  .backdropCard,
+  .squareCard,
+  .smallBackdropCard,
+  .overflowPortraitCard,
+  .overflowBackdropCard,
+  .overflowSquareCard,
+  .overflowSmallBackdropCard
+):focus-within {
+  position: relative;
+  z-index: 20;
+}
+
+.layout-desktop .card:is(
+  .portraitCard,
+  .backdropCard,
+  .squareCard,
+  .smallBackdropCard,
+  .overflowPortraitCard,
+  .overflowBackdropCard,
+  .overflowSquareCard,
+  .overflowSmallBackdropCard
+):hover > .cardBox,
+.layout-desktop .card:is(
+  .portraitCard,
+  .backdropCard,
+  .squareCard,
+  .smallBackdropCard,
+  .overflowPortraitCard,
+  .overflowBackdropCard,
+  .overflowSquareCard,
+  .overflowSmallBackdropCard
+):focus > .cardBox,
+.layout-desktop .card:is(
+  .portraitCard,
+  .backdropCard,
+  .squareCard,
+  .smallBackdropCard,
+  .overflowPortraitCard,
+  .overflowBackdropCard,
+  .overflowSquareCard,
+  .overflowSmallBackdropCard
+):focus-within > .cardBox {
+  box-shadow: 0 0 0 2px var(--rl-akzent), 0 16px 34px rgb(0 0 0 / 68%);
+  transform: scale(1.075);
+}
+
+.layout-desktop .card:is(
+  .portraitCard,
+  .backdropCard,
+  .squareCard,
+  .smallBackdropCard,
+  .overflowPortraitCard,
+  .overflowBackdropCard,
+  .overflowSquareCard,
+  .overflowSmallBackdropCard
+):hover > .cardBox .cardFooter,
+.layout-desktop .card:is(
+  .portraitCard,
+  .backdropCard,
+  .squareCard,
+  .smallBackdropCard,
+  .overflowPortraitCard,
+  .overflowBackdropCard,
+  .overflowSquareCard,
+  .overflowSmallBackdropCard
+):focus > .cardBox .cardFooter,
+.layout-desktop .card:is(
+  .portraitCard,
+  .backdropCard,
+  .squareCard,
+  .smallBackdropCard,
+  .overflowPortraitCard,
+  .overflowBackdropCard,
+  .overflowSquareCard,
+  .overflowSmallBackdropCard
+):focus-within > .cardBox .cardFooter {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Groessere, dichte Ueberlaufkarten auf Desktop; Rasterkarten behalten Jellyfins Breakpoints. */
+.layout-desktop .overflowBackdropCard { width: clamp(20rem, 23vw, 38rem); }
+.layout-desktop .overflowSmallBackdropCard { width: clamp(16rem, 19vw, 31rem); }
+.layout-desktop .overflowPortraitCard,
+.layout-desktop .overflowSquareCard { width: clamp(11rem, 15vw, 22rem); }
+
+/* Die bestaetigten Padding-Klassen tragen Jellyfins seitlichen 3,3-%-Rand. */
+[dir="ltr"] .emby-scroller.padded-left,
+[dir="ltr"] .itemsContainer.padded-left {
+  padding-left: max(env(safe-area-inset-left), 0.75rem);
+}
+
+[dir="rtl"] .emby-scroller.padded-left,
+[dir="rtl"] .itemsContainer.padded-left {
+  padding-right: max(env(safe-area-inset-right), 0.75rem);
+}
+
+[dir="ltr"] .emby-scroller.padded-right,
+[dir="ltr"] .itemsContainer.padded-right {
+  padding-right: max(env(safe-area-inset-right), 0.75rem);
+}
+
+[dir="rtl"] .emby-scroller.padded-right,
+[dir="rtl"] .itemsContainer.padded-right {
+  padding-left: max(env(safe-area-inset-left), 0.75rem);
+}
+
+.itemsContainer {
+  margin-inline: 0;
+  overflow: visible;
+}
+
+.emby-scroller {
+  margin-inline: 0;
+  overflow-y: visible;
+}
+
+.emby-scrollbuttons { color: var(--rl-akzent); }
+
+/*
+ * LCARS-Register fuer anklickbare und statische Abschnittstitel. Der Mono-Zusatz
+ * bleibt der anklickbaren Container-Variante vorbehalten: Dort kennzeichnet er
+ * eine weiterfuehrende Aktion, waehrend ein statischer Titel nichts vortaeuscht.
+ */
+.sectionTitleContainer-cards,
+.sectionTitle.sectionTitle-cards.padded-left {
+  align-items: center;
+  border-bottom: 2px solid var(--rl-linie);
+  display: flex;
+  gap: 0.65rem;
+  margin-inline: 0.75rem;
+  padding: 0.8em 0 0.45em;
+}
+
+.sectionTitleContainer-cards {
+  counter-increment: rl-media-section;
+}
+
+.sectionTitle.sectionTitle-cards.padded-left {
+  box-sizing: border-box;
+  width: calc(100% - 1.5rem);
+}
+
+.sectionTitleContainer-cards::after {
+  color: var(--rl-akzent-zweit);
+  content: "REGISTER // " counter(rl-media-section, decimal-leading-zero);
+  font: 600 0.68rem/1.2 var(--rl-font-mono);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 1px;
+  margin-inline-start: auto;
+  white-space: nowrap;
+}
+
+.sectionTitleTextButton,
+.sectionTitleTextButton > .sectionTitle,
+.sectionTitle.sectionTitle-cards.padded-left {
+  align-items: center;
+  color: var(--rl-text-stark) !important;
+  font-size: clamp(0.86rem, 0.8rem + 0.2vw, 1.05rem);
+  font-weight: 700;
+  letter-spacing: 2.5px;
+  line-height: 1.3;
+  text-transform: uppercase;
+}
+
+.sectionTitleTextButton > .sectionTitle {
+  margin: 0;
+}
+
+.sectionTitleTextButton {
+  gap: 0.65rem;
+}
+
+.sectionTitleTextButton::before,
+.sectionTitle.sectionTitle-cards.padded-left::before {
+  background: var(--rl-akzent);
+  border-radius: 0 14px 14px 0;
+  content: "";
+  display: inline-block;
+  flex: 0 0 auto;
+  height: 1.45rem;
+  width: clamp(1.4rem, 2.4vw, 3rem);
+}
+
+[dir="rtl"] .sectionTitleTextButton::before,
+[dir="rtl"] .sectionTitle.sectionTitle-cards.padded-left::before {
+  border-radius: 14px 0 0 14px;
+}
+
+.sectionTitleContainer-cards > .sectionTitleButton:not(.sectionTitleTextButton) {
+  color: var(--rl-akzent-zweit) !important;
+  font-family: var(--rl-font-mono);
+  font-size: 0.72rem;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 1px;
+  margin-inline-start: 0 !important;
+  text-transform: uppercase;
+}
+
+.headerTabs {
+  color: var(--rl-text-gedaempft);
+  font-size: 0.94rem;
+}
+
+/*
+ * Kopfzeile: .skinHeader ist laut Referenz bereits fixed; Headroom liefert nur
+ * die Pin-/Unpin-Transformation. Transparent im Grundzustand, flach warm und fest
+ * beim gepinnten Zustand. Auf TV bleibt Jellyfins relative Kopfzeile unangetastet.
+ */
+.skinHeader.headroom {
+  background: transparent;
+  border-bottom: 8px solid transparent;
+  color: var(--rl-text);
+  min-height: 68px;
+  overflow: visible;
+}
+
+.skinHeader.headroom::before {
+  background: linear-gradient(90deg,
+    var(--rl-akzent) 0 48%,
+    transparent 48% 48.5%,
+    var(--rl-blau-familie) 48.5% 58%,
+    transparent 58% 58.5%,
+    var(--rl-lavendel-familie) 58.5% 67%,
+    transparent 67% 67.5%,
+    var(--rl-grau) 67.5% 100%);
+  bottom: -8px;
+  content: "";
+  height: 8px;
+  left: 0;
+  pointer-events: none;
+  position: absolute;
+  right: 0;
+}
+
+.skinHeader.headroom::after {
+  background: var(--rl-akzent);
+  border-radius: 0 0 28px 0;
+  bottom: -28px;
+  content: "";
+  height: 28px;
+  left: 0;
+  pointer-events: none;
+  position: absolute;
+  width: clamp(44px, 6vw, 84px);
+}
+
+.skinHeader.headroom--pinned {
+  background-color: rgb(36 28 23 / 94%);
+  border-bottom-color: var(--rl-akzent);
+  box-shadow: 0 8px 22px rgb(0 0 0 / 34%);
+}
+
+.skinHeader.headroom--unpinned {
+  border-bottom-color: transparent;
+  box-shadow: none;
+}
+
+.mainDrawer {
+  background-color: var(--rl-flaeche-1);
+  border-inline-end: 5px solid var(--rl-akzent);
+  color: var(--rl-text);
+}
+
+.mainDrawerButton { color: var(--rl-akzent); }
+
+/* Detailansicht bleibt kinohaft, ohne Backdrop oder Poster zu veraendern. */
+.detailRibbon {
+  background: rgb(48 37 30 / 96%);
+  border-top: 4px solid var(--rl-akzent);
+  color: var(--rl-text);
+}
+
+.detailPageContent { color: var(--rl-text); }
+
+.itemName {
+  color: var(--rl-text-stark);
+  font-weight: 700;
+  text-transform: none;
+}
+
+.itemMiscInfo {
+  color: var(--rl-text-gedaempft);
+  font-family: var(--rl-font-mono);
+  font-variant-numeric: tabular-nums;
+}
+
+/* Fortschritt und Zustand: semantische Vollfarben, keine dauernden Leuchteffekte. */
+progress,
+progress::-webkit-progress-bar {
+  background: var(--rl-flaeche-3) !important;
+  border: 0;
+  border-radius: 0 10px 10px 0;
+  box-shadow: none;
+}
+
+progress::-moz-progress-bar,
+progress::-webkit-progress-value,
+progress[aria-valuenow]::before {
+  background: var(--rl-akzent) !important;
+  border-radius: 0 10px 10px 0;
+  box-shadow: none;
+}
+
+.listItemProgressBar,
+.itemBackdropProgressBar,
+.detailImageProgressContainer {
+  min-height: 6px;
+}
+
+/* Kartenfortschritt: Spur dunkel, Wiedergabestand als flache Erfolgsfarbe. */
+.itemProgressBar {
+  background-color: var(--rl-flaeche-3) !important;
+  background-image: none !important;
+  border-radius: 0;
+  box-shadow: none !important;
+  min-height: 6px;
+  overflow: hidden;
+}
+
+.itemProgressBar .itemProgressBarForeground {
+  background-color: var(--rl-status-erfolg) !important;
+  background-image: none !important;
+  border-radius: 0;
+  box-shadow: none !important;
+  height: 100%;
+  opacity: 1;
+}
+
+.backgroundProgress > div {
+  background: var(--rl-flaeche-3) !important;
+}
+
+.playbackProgress > div {
+  background: var(--rl-status-erfolg) !important;
+}
+
+.transcodingProgress > div {
+  background: var(--rl-status-warnung) !important;
+}
+
+.recordingProgressBar::-moz-progress-bar,
+.recordingProgressBar::-webkit-progress-value,
+.recordingProgressBar[aria-valuenow]::before {
+  background: var(--rl-status-fehler) !important;
+}
+
+.mediaSourceIndicator,
+.programAttributeIndicator {
+  background: var(--rl-status-info) !important;
+  border-radius: 0 10px 10px 0;
+  box-shadow: none;
+  color: #fff !important;
+  font-family: var(--rl-font-mono);
+}
+
+.timerIndicator {
+  background: var(--rl-status-warnung) !important;
+  border-radius: 0 10px 10px 0;
+  color: var(--rl-handlung-text) !important;
+}
+
+/*
+ * Der Abspieler bleibt absichtlich ruhig: Glow und Druckblitz sind oben auf
+ * Kopfzeile, Drawer, Dialoge, Details und Formulare begrenzt. Ohne bestaetigten
+ * Player-Wrapper gibt es keine geratenen Playerselektoren und keine LCARS-Deko
+ * an Wiedergabeschaltflaechen.
+ */
+
+/* Mobil: kein Hover; Titel bleiben sichtbar und Karten skalieren nicht. */
+.layout-mobile .sectionTitleContainer-cards::after {
+  content: "// " counter(rl-media-section, decimal-leading-zero);
+}
+
+.layout-mobile .card:is(
+  .portraitCard,
+  .backdropCard,
+  .squareCard,
+  .smallBackdropCard,
+  .overflowPortraitCard,
+  .overflowBackdropCard,
+  .overflowSquareCard,
+  .overflowSmallBackdropCard
+) > .cardBox .cardFooter {
+  opacity: 1;
+  transform: none;
+}
+
+.layout-mobile .card > .cardBox { transform: none !important; }
+
+/* TV: Fernbedienungsfokus ersetzt Hover; Ziele und Fokusrahmen bleiben gross. */
+.layout-tv .skinHeader.headroom {
+  background-color: var(--rl-flaeche-1);
+  border-bottom-color: var(--rl-akzent);
+  position: relative;
+  transform: none;
+}
+
+.layout-tv .card:not(.show-animation) {
+  contain: layout style;
+  overflow: visible;
+}
+
+.layout-tv .card:is(
+  .portraitCard,
+  .backdropCard,
+  .squareCard,
+  .smallBackdropCard,
+  .overflowPortraitCard,
+  .overflowBackdropCard,
+  .overflowSquareCard,
+  .overflowSmallBackdropCard
+) > .cardBox .cardFooter {
+  opacity: 0.88;
+  transform: none;
+}
+
+.layout-tv .card.show-focus:focus {
+  position: relative !important;
+  z-index: 20 !important;
+}
+
+.layout-tv .card.show-focus:focus > .cardBox {
+  box-shadow: 0 0 0 4px var(--rl-fokus), 0 18px 38px rgb(0 0 0 / 72%);
+  transform: scale(1.075);
+}
+
+.layout-tv .card.show-focus:focus > .cardBox .cardFooter { opacity: 1; }
+
+.layout-tv .emby-button {
+  min-height: 58px;
+  min-width: 58px;
+}
+
+.layout-tv .paper-icon-button-light {
+  height: 58px;
+  min-height: 58px;
+  min-width: 58px;
+  width: 58px;
+}
+
+/*
+ * Anmeldung auf Stufe A. Die aktive Standalone-Seite traegt Foto und
+ * Abdunklung als getrennte Ebenen. Ihre bisherigen Viewport-Leisten werden
+ * dort vollstaendig ersetzt; die LCARS-Schiene sitzt stattdessen innerhalb
+ * der Formularkarte und kann deshalb nicht am Bildrand abgeschnitten werden.
+ */
+.standalonePage:has(:is(.manualLoginForm, .visualLoginForm)) {
+  background: transparent !important;
+  box-sizing: border-box;
+  contain: style !important;
+  isolation: isolate;
+  min-height: 100vh;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.standalonePage:has(:is(.manualLoginForm, .visualLoginForm))::before,
+.standalonePage:has(:is(.manualLoginForm, .visualLoginForm))::after {
+  border-radius: 0;
+  bottom: 0;
+  content: "";
+  inset: 0;
+  left: 0;
+  pointer-events: none;
+  position: fixed;
+  right: 0;
+  top: 0;
+  width: auto;
+}
+
+.standalonePage:has(:is(.manualLoginForm, .visualLoginForm))::before {
+  animation: rl-jellyfin-background-approach 90s ease-in-out infinite alternate;
+  background-color: var(--rl-grund);
+  background-image: var(--rl-background-image);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  transform: scale(1);
+  transform-origin: center;
+  z-index: 0;
+}
+
+.standalonePage:has(:is(.manualLoginForm, .visualLoginForm))::after {
+  background: var(--rl-background-overlay);
+  z-index: 1;
+}
+
+.standalonePage:has(:is(.manualLoginForm, .visualLoginForm)) > * {
+  position: relative;
+  z-index: 2;
+}
+
+@keyframes rl-jellyfin-background-approach {
+  from { transform: scale(1); }
+  to { transform: scale(1.025); }
+}
+
+.standalonePage :is(.manualLoginForm, .visualLoginForm) {
+  background: var(--rl-login-surface-fallback) !important;
+  border: 0;
+  border-radius: 0 24px 24px 38px;
+  box-sizing: border-box;
+  color: var(--rl-text);
+  isolation: isolate;
+  margin: 2rem auto;
+  max-width: 30rem;
+  overflow: hidden;
+  padding: 2.5rem 2rem 3.25rem 5.75rem;
+  position: relative;
+  width: calc(100% - 2rem);
+}
+
+@supports ((-webkit-backdrop-filter: blur(1px)) or (backdrop-filter: blur(1px))) {
+  .standalonePage :is(.manualLoginForm, .visualLoginForm) {
+    -webkit-backdrop-filter: blur(14px);
+    backdrop-filter: blur(14px);
+    background-color: var(--rl-login-surface-glass) !important;
+  }
+}
+
+.standalonePage :is(.manualLoginForm, .visualLoginForm)::before {
+  --rl-jellyfin-rail-lavendel-glow: transparent;
+  --rl-jellyfin-rail-blau-glow: transparent;
+  --rl-jellyfin-rail-grau-glow: transparent;
+  animation: rl-jellyfin-rail-lavendel 9.73s ease-in-out -2.11s infinite,
+             rl-jellyfin-rail-blau 11.89s ease-in-out -6.37s infinite,
+             rl-jellyfin-rail-grau 13.03s ease-in-out -9.17s infinite;
+  background-color: var(--rl-akzent);
+  background-image:
+    linear-gradient(var(--rl-jellyfin-rail-lavendel-glow), var(--rl-jellyfin-rail-lavendel-glow)),
+    linear-gradient(var(--rl-jellyfin-rail-blau-glow), var(--rl-jellyfin-rail-blau-glow)),
+    linear-gradient(var(--rl-jellyfin-rail-grau-glow), var(--rl-jellyfin-rail-grau-glow)),
+    linear-gradient(var(--rl-lavendel-familie), var(--rl-lavendel-familie)),
+    linear-gradient(var(--rl-blau-familie), var(--rl-blau-familie)),
+    linear-gradient(var(--rl-grau), var(--rl-grau));
+  background-position: 0 30%, 0 49%, 0 68%, 0 30%, 0 49%, 0 68%;
+  background-repeat: no-repeat;
+  background-size: 100% 15%;
+  border-radius: 0 0 38px 0;
+  bottom: 0;
+  content: "";
+  left: 0;
+  pointer-events: none;
+  position: absolute;
+  top: 0;
+  width: 4.25rem;
+  z-index: 0;
+}
+
+.standalonePage :is(.manualLoginForm, .visualLoginForm)::after {
+  --rl-jellyfin-sequence-primary-position: -22%;
+  --rl-jellyfin-sequence-secondary-position: -22%;
+  --rl-jellyfin-sequence-scan-position: -8%;
+  animation: rl-jellyfin-sequence-primary 6.73s ease-in-out -1.31s infinite,
+             rl-jellyfin-sequence-secondary 8.41s ease-in-out -5.27s infinite,
+             rl-jellyfin-sequence-scan 11.17s cubic-bezier(.45, 0, .55, 1) -3.73s infinite;
+  background-color: var(--rl-akzent);
+  background-image:
+    linear-gradient(90deg,
+      transparent 0,
+      rgb(105 117 154 / 22%) 28%,
+      rgb(255 250 241 / 58%) 50%,
+      rgb(105 117 154 / 22%) 72%,
+      transparent 100%),
+    linear-gradient(90deg,
+      transparent 0,
+      rgb(246 199 127 / 30%) 50%,
+      transparent 100%),
+    linear-gradient(90deg,
+      transparent 0,
+      rgb(157 141 168 / 24%) 50%,
+      transparent 100%),
+    repeating-linear-gradient(90deg,
+      var(--rl-akzent) 0,
+      var(--rl-akzent) calc(14.285714% - 4px),
+      rgb(0 0 0 / 32%) calc(14.285714% - 4px),
+      rgb(0 0 0 / 32%) 14.285714%);
+  background-position:
+    var(--rl-jellyfin-sequence-scan-position) 0,
+    var(--rl-jellyfin-sequence-primary-position) 0,
+    var(--rl-jellyfin-sequence-secondary-position) 0,
+    0 0;
+  background-repeat: no-repeat, no-repeat, no-repeat, repeat;
+  background-size: .75rem 100%, 17% 100%, 19% 100%, 100% 100%;
+  bottom: 0;
+  content: "";
+  height: 12px;
+  left: calc(4.25rem + 4px);
+  pointer-events: none;
+  position: absolute;
+  right: 0;
+  z-index: 2;
+}
+
+.standalonePage :is(.manualLoginForm, .visualLoginForm) > * {
+  position: relative;
+  z-index: 1;
+}
+
+@property --rl-jellyfin-rail-lavendel-glow {
+  syntax: "<color>";
+  inherits: false;
+  initial-value: transparent;
+}
+
+@property --rl-jellyfin-rail-blau-glow {
+  syntax: "<color>";
+  inherits: false;
+  initial-value: transparent;
+}
+
+@property --rl-jellyfin-rail-grau-glow {
+  syntax: "<color>";
+  inherits: false;
+  initial-value: transparent;
+}
+
+@property --rl-jellyfin-sequence-primary-position {
+  syntax: "<percentage>";
+  inherits: false;
+  initial-value: -22%;
+}
+
+@property --rl-jellyfin-sequence-secondary-position {
+  syntax: "<percentage>";
+  inherits: false;
+  initial-value: -22%;
+}
+
+@property --rl-jellyfin-sequence-scan-position {
+  syntax: "<percentage>";
+  inherits: false;
+  initial-value: -8%;
+}
+
+@keyframes rl-jellyfin-rail-lavendel {
+  0%, 62%, 100% { --rl-jellyfin-rail-lavendel-glow: transparent; }
+  76% { --rl-jellyfin-rail-lavendel-glow: rgb(255 250 241 / 30%); }
+  88% { --rl-jellyfin-rail-lavendel-glow: rgb(255 250 241 / 12%); }
+}
+
+@keyframes rl-jellyfin-rail-blau {
+  0%, 62%, 100% { --rl-jellyfin-rail-blau-glow: transparent; }
+  76% { --rl-jellyfin-rail-blau-glow: rgb(255 250 241 / 30%); }
+  88% { --rl-jellyfin-rail-blau-glow: rgb(255 250 241 / 12%); }
+}
+
+@keyframes rl-jellyfin-rail-grau {
+  0%, 62%, 100% { --rl-jellyfin-rail-grau-glow: transparent; }
+  76% { --rl-jellyfin-rail-grau-glow: rgb(255 250 241 / 24%); }
+  88% { --rl-jellyfin-rail-grau-glow: rgb(255 250 241 / 10%); }
+}
+
+@keyframes rl-jellyfin-sequence-primary {
+  0%, 8% { --rl-jellyfin-sequence-primary-position: -22%; }
+  88%, 100% { --rl-jellyfin-sequence-primary-position: 122%; }
+}
+
+@keyframes rl-jellyfin-sequence-secondary {
+  0%, 18% { --rl-jellyfin-sequence-secondary-position: -22%; }
+  74%, 100% { --rl-jellyfin-sequence-secondary-position: 122%; }
+}
+
+@keyframes rl-jellyfin-sequence-scan {
+  0%, 9% { --rl-jellyfin-sequence-scan-position: -8%; }
+  78%, 100% { --rl-jellyfin-sequence-scan-position: 108%; }
+}
+
+/* Das wechselnde Jellyfin-Banner in der Kopfzeile wird unabhaengig vom Hash
+   eigenschaftsbasiert ueberschrieben. Die schmale Emblemform ersetzt dabei die
+   bisherige breite Bannerflaeche. */
+.pageTitleWithLogo.pageTitleWithDefaultLogo {
+  background-image: url("https://brand.example.com/v1.11.0/assets/emblem--jellyfin.svg") !important;
+  background-position: center !important;
+  background-repeat: no-repeat !important;
+  background-size: 48px auto !important;
+  display: block;
+  flex: 0 0 56px;
+  height: 60px;
+  margin: 0 .5rem;
+  width: 56px;
+}
+
+.standalonePage :is(.manualLoginForm, .visualLoginForm) :is(.inputLabel, .checkboxLabel, .emby-checkbox-label) {
+  color: var(--rl-text);
+}
+
+.standalonePage :is(.manualLoginForm, .visualLoginForm) :is(.inputLabel-float, .inputLabelFocused) {
+  color: var(--rl-akzent) !important;
+}
+
+.standalonePage :is(.manualLoginForm, .visualLoginForm) .emby-input {
+  background: var(--rl-flaeche-2) !important;
+  border: 1px solid var(--rl-linie-stark) !important;
+  border-left: 5px solid var(--rl-blau-familie) !important;
+  border-radius: 0 4px 4px 0 !important;
+  color: var(--rl-text-stark) !important;
+}
+
+.standalonePage :is(.manualLoginForm, .visualLoginForm) .emby-input:hover:not(:disabled) {
+  box-shadow: 0 0 0 1px var(--rl-blau-familie), 0 0 8px var(--rl-blau-familie);
+  filter: brightness(1.08);
+}
+
+.standalonePage :is(.manualLoginForm, .visualLoginForm) .emby-input:focus {
+  border-left-color: var(--rl-akzent) !important;
+  box-shadow: 0 0 0 1px var(--rl-akzent), 0 0 12px rgb(240 173 85 / 60%);
+  filter: brightness(1.1);
+}
+
+/* Sekundaeraktionen bleiben dunkel; die eine Primaeraktion ist eindeutig Gold. */
+.standalonePage :is(.manualLoginForm, .visualLoginForm) :is(
+  .emby-button,
+  .raised,
+  .btnQuick,
+  .btnForgotPassword,
+  .btnManual,
+  .btnCancel
+) {
+  background: var(--rl-flaeche-3) !important;
+  border: 2px solid var(--rl-akzent-zweit) !important;
+  border-radius: 0 16px 16px 0 !important;
+  box-shadow: none !important;
+  color: var(--rl-text-stark) !important;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.standalonePage :is(.manualLoginForm, .visualLoginForm) .emby-button.raised.button-submit,
+.standalonePage :is(.manualLoginForm, .visualLoginForm) .raised.button-submit,
+.standalonePage :is(.manualLoginForm, .visualLoginForm) .button-submit {
+  background: var(--rl-akzent) !important;
+  border-color: transparent !important;
+  color: var(--rl-handlung-text) !important;
+}
+
+/*
+ * Quick Connect und Kennwort-Hilfe liegen im Jellyfin-DOM ausserhalb der Karte.
+ * Als gleich breite, eigenstaendige Zeilen direkt darunter schliessen sie optisch
+ * an, ohne per JavaScript oder DOM-Umbau in das Formular verschoben zu werden.
+ */
+.standalonePage :is(.btnQuick, .btnForgotPassword) {
+  align-items: center;
+  background: var(--rl-flaeche-3) !important;
+  border: 2px solid var(--rl-akzent-zweit) !important;
+  border-radius: 0 16px 16px 0 !important;
+  box-shadow: none !important;
+  box-sizing: border-box;
+  color: var(--rl-text-stark) !important;
+  display: flex !important;
+  font-weight: 700;
+  justify-content: center;
+  letter-spacing: 1px;
+  margin: 0.65rem auto 0 !important;
+  max-width: 30rem !important;
+  min-height: 50px;
+  padding: 0.7rem 1rem;
+  text-transform: uppercase;
+  text-align: center;
+  width: calc(100% - 2rem) !important;
+}
+
+.layout-desktop .standalonePage :is(.btnQuick, .btnForgotPassword):hover:not(:disabled),
+.standalonePage :is(.btnQuick, .btnForgotPassword):focus-visible:not(:disabled) {
+  box-shadow: 0 0 0 1px var(--rl-akzent), 0 0 10px var(--rl-akzent) !important;
+  filter: brightness(1.18);
+}
+
+.standalonePage :is(.btnQuick, .btnForgotPassword):active:not(:disabled) {
+  animation: rl-jellyfin-confirm var(--rl-motion-base) var(--rl-ease) 1;
+}
+
+.standalonePage :is(.btnQuick, .btnForgotPassword):disabled {
+  background: var(--rl-deaktiviert) !important;
+  border-color: transparent !important;
+  color: var(--rl-grund) !important;
+  filter: none;
+  opacity: .65;
+}
+
+.layout-desktop .standalonePage :is(.manualLoginForm, .visualLoginForm) :is(
+  .emby-button,
+  .raised,
+  .btnQuick,
+  .btnForgotPassword,
+  .btnManual,
+  .btnCancel
+):hover:not(:disabled) {
+  box-shadow: 0 0 0 1px var(--rl-akzent), 0 0 10px var(--rl-akzent) !important;
+  filter: brightness(1.18);
+}
+
+.standalonePage :is(.manualLoginForm, .visualLoginForm) :is(
+  .emby-button,
+  .raised,
+  .btnQuick,
+  .btnForgotPassword,
+  .btnManual,
+  .btnCancel
+):focus-visible:not(:disabled) {
+  box-shadow: 0 0 0 1px var(--rl-akzent), 0 0 12px var(--rl-akzent) !important;
+  filter: brightness(1.18);
+}
+
+.standalonePage :is(.manualLoginForm, .visualLoginForm) :is(
+  .emby-button,
+  .raised,
+  .btnQuick,
+  .btnForgotPassword,
+  .btnManual,
+  .btnCancel
+):active:not(:disabled) {
+  animation: rl-jellyfin-confirm var(--rl-motion-base) var(--rl-ease) 1;
+}
+
+.standalonePage :is(.manualLoginForm, .visualLoginForm) :is(.emby-button, .raised):disabled {
+  background: var(--rl-deaktiviert) !important;
+  border-color: transparent !important;
+  color: var(--rl-grund) !important;
+  filter: none;
+  opacity: .65;
+}
+
+.standalonePage :is(.manualLoginForm, .visualLoginForm) :is(.emby-checkbox, .chkRememberLogin) {
+  accent-color: var(--rl-akzent);
+}
+
+.standalonePage :is(.manualLoginForm, .visualLoginForm) .checkboxOutline {
+  background: var(--rl-flaeche-3) !important;
+  border-color: var(--rl-akzent-zweit) !important;
+  color: var(--rl-text-stark) !important;
+}
+
+.standalonePage :is(.manualLoginForm, .visualLoginForm) .emby-checkbox.chkRememberLogin:checked + span + .checkboxOutline,
+.standalonePage :is(.manualLoginForm, .visualLoginForm) .emby-checkbox:checked + span + .checkboxOutline {
+  background: var(--rl-akzent) !important;
+  border-color: var(--rl-akzent) !important;
+  color: var(--rl-handlung-text) !important;
+}
+
+.standalonePage :is(.manualLoginForm, .visualLoginForm) :is(
+  .checkboxIcon,
+  .checkboxIcon-checked,
+  .checkboxIcon-unchecked
+) {
+  background-color: transparent !important;
+  color: inherit !important;
+}
+
+.standalonePage :is(.manualLoginForm, .visualLoginForm) .emby-checkbox-label:hover .checkboxOutline {
+  border-color: var(--rl-akzent) !important;
+  box-shadow: 0 0 8px rgb(240 173 85 / 55%);
+}
+
+.standalonePage :is(.manualLoginForm, .visualLoginForm) .emby-checkbox:focus-visible + span + .checkboxOutline {
+  outline: 3px double var(--rl-fokus) !important;
+  outline-offset: 3px;
+}
+
+.standalonePage :is(
+  .mdl-spinner__layer-1,
+  .mdl-spinner__layer-2,
+  .mdl-spinner__layer-3,
+  .mdl-spinner__layer-4
+) {
+  border-color: var(--rl-akzent) !important;
+}
+
+@media (min-aspect-ratio: 2/1) {
+  .standalonePage:has(:is(.manualLoginForm, .visualLoginForm))::before {
+    background-position: center 58%;
+  }
+}
+
+@media (max-width: 560px) {
+  .standalonePage :is(.manualLoginForm, .visualLoginForm) {
+    border-radius: 0 18px 18px 28px;
+    margin-block: 1rem;
+    padding: 2rem 1.25rem 2.75rem 4rem;
+    width: calc(100% - 1.5rem);
+  }
+
+  .standalonePage :is(.manualLoginForm, .visualLoginForm)::before {
+    width: 3rem;
+  }
+
+  .standalonePage :is(.manualLoginForm, .visualLoginForm)::after {
+    left: calc(3rem + 4px);
+  }
+
+  .standalonePage :is(.btnQuick, .btnForgotPassword) {
+    width: calc(100% - 1.5rem) !important;
+  }
+
+  .pageTitleWithLogo.pageTitleWithDefaultLogo {
+    background-size: 42px auto !important;
+    flex-basis: 48px;
+    height: 52px;
+    width: 48px;
+  }
+}
+
+@media (min-width: 1600px) {
+  .skinHeader.headroom {
+    border-bottom-width: 6px;
+    min-height: 76px;
+  }
+
+  input:not([type="button"]):not([type="submit"]):not([type="reset"]),
+  select,
+  textarea,
+  .emby-input,
+  form .emby-button,
+  form button,
+  input[type="button"],
+  input[type="submit"],
+  input[type="reset"] {
+    font-size: 1.0625rem;
+    min-height: 58px;
+  }
+
+  :focus-visible,
+  .emby-button:focus-visible,
+  .paper-icon-button-light:focus-visible,
+  .card:focus-visible > .cardBox {
+    outline-width: 4px !important;
+    outline-offset: 5px;
+  }
+}
+
+@media (pointer: coarse) {
+  form .emby-button,
+  form button,
+  input[type="button"],
+  input[type="submit"],
+  input[type="reset"] {
+    min-height: 56px;
+    padding-block: 14px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    scroll-behavior: auto !important;
+    transition: none !important;
+  }
+
+  .standalonePage:has(:is(.manualLoginForm, .visualLoginForm))::before {
+    transform: none;
+  }
+
+  .standalonePage :is(.manualLoginForm, .visualLoginForm)::before {
+    --rl-jellyfin-rail-lavendel-glow: transparent;
+    --rl-jellyfin-rail-blau-glow: transparent;
+    --rl-jellyfin-rail-grau-glow: transparent;
+  }
+
+  .standalonePage :is(.manualLoginForm, .visualLoginForm)::after {
+    background-color: var(--rl-akzent);
+    background-image: repeating-linear-gradient(90deg,
+      var(--rl-akzent) 0,
+      var(--rl-akzent) calc(14.285714% - 4px),
+      rgb(0 0 0 / 32%) calc(14.285714% - 4px),
+      rgb(0 0 0 / 32%) 14.285714%);
+  }
+
+  .layout-desktop .card > .cardBox,
+  .layout-desktop .card:hover > .cardBox,
+  .layout-desktop .card:focus > .cardBox,
+  .layout-desktop .card:focus-within > .cardBox,
+  .layout-tv .card.show-focus:focus > .cardBox {
+    transform: none !important;
+  }
+}

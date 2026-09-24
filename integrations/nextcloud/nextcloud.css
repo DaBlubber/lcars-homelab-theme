@@ -1,0 +1,358 @@
+/*
+ * LCARS-Homelab fuer Nextcloud 34.0.3
+ * Warme Familienvariante, Paketversion 1.14.0
+ *
+ * Variablen tragen den Arbeitsbereich. Selektoren bleiben auf die gemessenen
+ * Vue-Bedienelemente und die Gast-/Anmeldeseiten begrenzt. Nextclouds aktuelle
+ * Hell-/Dunkelwerte fuer Grundflaeche und Haupttext werden nicht ersetzt.
+ */
+
+@font-face {
+  font-family: "Exo 2";
+  src: url("https://brand.example.com/v1.14.0/fonts/Exo2-Variable.woff2") format("woff2-variations"),
+       url("https://brand.example.com/v1.14.0/fonts/Exo2-Variable.woff2") format("woff2");
+  font-display: swap;
+  font-style: normal;
+  font-weight: 400 800;
+}
+
+@font-face {
+  font-family: "JetBrains Mono";
+  src: url("https://brand.example.com/v1.14.0/fonts/JetBrainsMono-Variable.woff2") format("woff2-variations"),
+       url("https://brand.example.com/v1.14.0/fonts/JetBrainsMono-Variable.woff2") format("woff2");
+  font-display: swap;
+  font-style: normal;
+  font-weight: 400 700;
+}
+
+:root,
+body,
+body[data-themes] {
+  --rl-nextcloud-gold: #f0ad55;
+  --rl-nextcloud-gold-hover: #f5c477;
+  --rl-nextcloud-gold-text: #241c17;
+  --rl-nextcloud-blue: #3f65bd;
+  --rl-nextcloud-lavender: #9d8da8;
+  --rl-nextcloud-error: #c23844;
+  --rl-nextcloud-warning: #965f00;
+  --rl-nextcloud-success: #2f7747;
+  --rl-nextcloud-info: #356ab7;
+  --rl-nextcloud-motion: cubic-bezier(.2, .75, .25, 1);
+  /* Marke und Handlung: Gold bleibt in beiden Modi dieselbe klare Aktion. */
+  --color-primary: var(--rl-nextcloud-gold);
+  --color-primary-rgb: 240, 173, 85;
+  --color-primary-hover: var(--rl-nextcloud-gold-hover);
+  --color-primary-light: color-mix(in srgb, var(--color-main-background) 82%, var(--rl-nextcloud-gold) 18%);
+  --color-primary-element: color-mix(in srgb, var(--rl-nextcloud-gold) 66%, var(--color-main-text) 34%);
+  --color-primary-element-hover: color-mix(in srgb, var(--rl-nextcloud-gold) 72%, var(--color-main-text) 28%);
+  --color-primary-element-text: var(--rl-nextcloud-gold-text);
+
+  /*
+   * Modusrelative Nebenflaechen: beide Mischungen beginnen bei Nextclouds
+   * derzeit aktiver Grundflaeche. So bleibt hell hell und dunkel dunkel.
+   */
+  --color-background-hover: color-mix(in srgb, var(--color-main-background) 94%, var(--rl-nextcloud-gold) 6%);
+  --color-border: color-mix(in srgb, var(--color-main-background) 86%, var(--color-main-text) 14%);
+  --color-border-dark: color-mix(in srgb, var(--color-main-background) 45%, var(--color-main-text) 55%);
+  --color-border-maxcontrast: color-mix(in srgb, var(--color-main-background) 35%, var(--color-main-text) 65%);
+  --color-text-selection: color-mix(in srgb, var(--color-main-background) 55%, var(--rl-nextcloud-gold) 45%);
+
+  /*
+   * Vier getrennte Statushues. Die Vollfarben tragen weissen Text mit
+   * mindestens 5,33:1; die Textrollen mischen sich modusrelativ zu 7,97:1
+   * oder besser auf Hell und 5,97:1 oder besser auf Dunkel.
+   */
+  --color-error: var(--rl-nextcloud-error);
+  --color-error-rgb: 194, 56, 68;
+  --color-error-hover: #a52c37;
+  --color-error-light: color-mix(in srgb, var(--color-main-background) 88%, var(--rl-nextcloud-error) 12%);
+  --color-error-text: color-mix(in srgb, var(--color-main-text) 35%, var(--rl-nextcloud-error) 65%);
+  --color-warning: var(--rl-nextcloud-warning);
+  --color-warning-rgb: 150, 95, 0;
+  --color-warning-hover: #7f4f00;
+  --color-warning-light: color-mix(in srgb, var(--color-main-background) 88%, var(--rl-nextcloud-warning) 12%);
+  --color-warning-text: color-mix(in srgb, var(--color-main-text) 35%, var(--rl-nextcloud-warning) 65%);
+  --color-success: var(--rl-nextcloud-success);
+  --color-success-rgb: 47, 119, 71;
+  --color-success-hover: #256039;
+  --color-success-light: color-mix(in srgb, var(--color-main-background) 88%, var(--rl-nextcloud-success) 12%);
+  --color-success-text: color-mix(in srgb, var(--color-main-text) 35%, var(--rl-nextcloud-success) 65%);
+  --color-info: var(--rl-nextcloud-info);
+  --color-info-rgb: 53, 106, 183;
+  --color-info-hover: #2b5798;
+  --color-info-light: color-mix(in srgb, var(--color-main-background) 88%, var(--rl-nextcloud-info) 12%);
+  --color-info-text: color-mix(in srgb, var(--color-main-text) 35%, var(--rl-nextcloud-info) 65%);
+
+  /* Warme Familienmasse: groesser, luftiger, aber vertraute Nextcloud-Struktur. */
+  --font-face: "Exo 2", "Segoe UI", system-ui, sans-serif;
+  --font-face-monospace: "JetBrains Mono", "Cascadia Mono", Consolas, monospace;
+  --default-font-size: 16px;
+  --font-size-small: 13px;
+  --font-weight-default: 450;
+  --font-weight-element: 650;
+  --font-weight-heading: 700;
+  --default-line-height: 1.55;
+  --border-radius: 10px;
+  --border-radius-element: 10px;
+  --border-radius-container: 18px;
+  --border-radius-large: 22px;
+  --border-radius-pill: 999px;
+  --border-radius-rounded: 50%;
+  --border-width-input: 1px;
+  --border-width-input-focused: 2px;
+  --header-height: 56px;
+  --navigation-width: 320px;
+  --default-clickable-area: 40px;
+  --clickable-area-large: 48px;
+  --clickable-area-small: 34px;
+  --body-container-radius: 18px;
+  --animation-quick: 140ms;
+  --animation-slow: 320ms;
+}
+
+body,
+button,
+input,
+select,
+textarea {
+  font-family: var(--font-face);
+}
+
+code,
+pre,
+kbd,
+samp {
+  font-family: var(--font-face-monospace);
+  font-variant-numeric: tabular-nums;
+}
+
+/* Gemessene Vue-Schaltflaechen: Reaktionssprache aus LCARS-Homelab 1.3.0. */
+.button-vue {
+  --rl-nextcloud-control: var(--color-primary-element);
+  border-radius: var(--border-radius-element);
+  font-family: var(--font-face);
+  font-weight: var(--font-weight-element);
+  min-height: var(--default-clickable-area);
+  text-transform: none;
+  transition: background-color var(--animation-quick) var(--rl-nextcloud-motion),
+              border-color var(--animation-quick) var(--rl-nextcloud-motion),
+              box-shadow var(--animation-quick) var(--rl-nextcloud-motion),
+              color var(--animation-quick) var(--rl-nextcloud-motion),
+              filter var(--animation-quick) var(--rl-nextcloud-motion);
+}
+
+.button-vue--vue-primary {
+  background-color: var(--color-primary-element);
+  border: 2px solid var(--color-primary-element);
+  color: var(--rl-nextcloud-gold-text);
+}
+
+.button-vue--icon-only {
+  border-radius: var(--border-radius-rounded);
+}
+
+.button-vue:hover:not(:disabled):not([aria-disabled="true"]) {
+  box-shadow: 0 0 0 1px var(--rl-nextcloud-control),
+              0 0 12px rgb(240 173 85 / 48%);
+  filter: brightness(1.12);
+}
+
+.button-vue:focus-visible:not(:disabled):not([aria-disabled="true"]) {
+  box-shadow: 0 0 0 1px var(--rl-nextcloud-control),
+              0 0 14px rgb(240 173 85 / 58%);
+  filter: brightness(1.12);
+  outline: 3px double var(--color-main-text);
+  outline-offset: 3px;
+}
+
+.button-vue:active:not(:disabled):not([aria-disabled="true"]) {
+  animation: rl-nextcloud-confirm var(--animation-slow) var(--rl-nextcloud-motion) 1;
+}
+
+.button-vue:disabled,
+.button-vue[aria-disabled="true"] {
+  box-shadow: none;
+  cursor: not-allowed;
+  filter: none;
+  opacity: .55;
+}
+
+@keyframes rl-nextcloud-confirm {
+  0%, 100% {
+    box-shadow: 0 0 0 1px var(--rl-nextcloud-control);
+    filter: brightness(1.06);
+  }
+  42% {
+    box-shadow: 0 0 0 2px var(--color-main-text),
+                0 0 18px var(--rl-nextcloud-control);
+    filter: brightness(1.34);
+  }
+}
+
+/* Checkboxen behalten Form und Beschriftung; nur Zielgroesse und Fokus wachsen. */
+.checkbox-radio-switch,
+.checkbox-content {
+  font-family: var(--font-face);
+  text-transform: none;
+}
+
+.checkbox-radio-switch__input {
+  accent-color: var(--color-primary-element);
+  min-height: 22px;
+  min-width: 22px;
+}
+
+.checkbox-radio-switch__content:focus-within,
+.checkbox-content__wrapper:focus-within {
+  border-radius: var(--border-radius-element);
+  outline: 3px double var(--color-main-text);
+  outline-offset: 3px;
+}
+
+/*
+ * Gast- und Anmeldeseiten duerfen Stufe A naeher kommen. Foto und Logo werden
+ * ausschliesslich von der Theming-App geliefert. Das CSS verwendet deren
+ * --image-background einmal; Dateiansichten und eingeloggte Apps bleiben frei
+ * von Bild, Elbows und Bewegung.
+ */
+.guest-content {
+  background-color: #241c17 !important;
+  background-image: var(--image-background) !important;
+  background-position: center !important;
+  background-repeat: no-repeat !important;
+  background-size: cover !important;
+  isolation: isolate;
+}
+
+.guest-content::after {
+  content: "";
+  inset: 0;
+  pointer-events: none;
+  position: fixed;
+  background: rgb(0 0 0 / 58%);
+  z-index: -1;
+}
+
+.header-guest {
+  background-color: var(--rl-nextcloud-gold);
+  border-radius: 32px 32px 0 32px;
+  color: var(--rl-nextcloud-gold-text);
+  min-height: 64px;
+  position: relative;
+}
+
+.header-guest .entity-name,
+.header-guest a {
+  color: var(--rl-nextcloud-gold-text);
+  text-transform: none;
+}
+
+.guest-box {
+  background-color: var(--color-main-background) !important;
+  border: 1px solid var(--color-border-dark);
+  border-inline-start: 12px solid var(--rl-nextcloud-gold);
+  border-radius: 0 24px 24px 34px;
+  box-shadow: 0 18px 44px rgb(0 0 0 / 32%);
+  color: var(--color-main-text);
+  line-height: var(--default-line-height);
+  position: relative;
+}
+
+@supports (background: color-mix(in srgb, white, transparent)) {
+  .guest-box {
+    -webkit-backdrop-filter: blur(14px);
+    backdrop-filter: blur(14px);
+    background-color: color-mix(in srgb, var(--color-main-background) 90%, transparent) !important;
+  }
+}
+
+.guest-box:has(form) {
+  overflow: hidden;
+  padding-bottom: calc(var(--clickable-area-small) + 10px);
+}
+
+.guest-box:has(form)::after {
+  background-color: var(--rl-nextcloud-gold);
+  background-image: linear-gradient(90deg,
+    var(--rl-nextcloud-gold) 0 42%,
+    #241c17 42% 43%,
+    var(--rl-nextcloud-blue) 43% 52%,
+    #241c17 52% 53%,
+    var(--rl-nextcloud-gold) 53% 69%,
+    #241c17 69% 70%,
+    var(--rl-nextcloud-lavender) 70% 78%,
+    #241c17 78% 79%,
+    var(--rl-nextcloud-gold) 79% 100%);
+  bottom: 0;
+  content: "";
+  height: 10px;
+  inset-inline: 0;
+  pointer-events: none;
+  position: absolute;
+}
+
+.guest-box :is(input[type="email"], input[type="password"], input[type="text"]) {
+  background-color: var(--color-main-background);
+  border: var(--border-width-input) solid var(--color-border-dark);
+  border-radius: var(--border-radius-element);
+  color: var(--color-main-text);
+  font-family: var(--font-face);
+  font-size: 1rem;
+  min-height: 48px;
+}
+
+.guest-box :is(input[type="email"], input[type="password"], input[type="text"]):focus-visible {
+  border-color: var(--rl-nextcloud-gold);
+  box-shadow: 0 0 0 1px var(--rl-nextcloud-gold),
+              0 0 12px rgb(240 173 85 / 42%);
+  outline: 3px double var(--color-main-text);
+  outline-offset: 3px;
+}
+
+.float-spinner {
+  color: var(--rl-nextcloud-gold);
+}
+
+@media (max-width: 600px) {
+  :root,
+  body,
+  body[data-themes] {
+    --navigation-width: min(88vw, 320px);
+    --body-container-radius: 14px;
+  }
+
+  .header-guest {
+    border-radius: 24px 24px 0 24px;
+    min-height: 58px;
+  }
+
+  .guest-box {
+    border-inline-start-width: 8px;
+    border-radius: 0 18px 18px 24px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root,
+  body,
+  body[data-themes] {
+    --animation-quick: 0ms;
+    --animation-slow: 0ms;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    scroll-behavior: auto !important;
+    transition: none !important;
+  }
+}
+
+@media (forced-colors: active) {
+  .header-guest,
+  .guest-box,
+  .button-vue {
+    forced-color-adjust: auto;
+  }
+}

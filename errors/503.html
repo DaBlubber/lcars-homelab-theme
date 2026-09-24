@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>503 — Dienst nicht verfügbar</title>
+  <style>
+    :root { color-scheme:dark; --gold:#eaa549; --lav:#9a8ec9; --blue:#5a7fe0; --gray:#3c4257; --text:#dfe4f2; --muted:#a0a6b5; --focus:#f6c77f; --motion-fast:140ms; --motion-base:180ms; --ease:ease-out; }
+    * { box-sizing:border-box; }
+    html,body { min-height:100%; }
+    body { background:#000; color:var(--text); font-family:"Segoe UI",system-ui,-apple-system,BlinkMacSystemFont,Roboto,Helvetica,Arial,sans-serif; margin:0; }
+    .error-shell { display:grid; grid-template-columns:74px minmax(0,1fr); min-height:100vh; }
+    .rail { display:flex; flex-direction:column; gap:4px; }
+    .corner { background:var(--gold); border-radius:0 0 0 38px; height:90px; }
+    .block { background:var(--gray); border-radius:0 22px 22px 0; height:26px; }
+    .block.gold { background:var(--gold); }
+    .block.lav { background:var(--lav); }
+    .block.blue { background:var(--blue); }
+    .fill { flex:1; }
+    .foot { background:var(--gold); border-radius:0 0 0 22px; height:30px; }
+    .content { display:flex; flex-direction:column; min-width:0; padding:24px 32px 32px; }
+    .top { align-items:center; border-bottom:2px solid var(--gold); display:flex; gap:16px; justify-content:space-between; padding-bottom:10px; }
+    /* Exakte Gross-Ausgabe von .rl-marke aus css/components.css v1.7.0. */
+    .rl-marke { --rl-marke-symbol:48px; --rl-marke-gap:16px; align-items:center; color:#f3f5fa; display:inline-flex; flex:0 0 auto; gap:var(--rl-marke-gap); line-height:1; min-width:0; text-align:left; }
+    .rl-marke__symbol { display:block; flex:0 0 var(--rl-marke-symbol); height:var(--rl-marke-symbol); width:var(--rl-marke-symbol); }
+    .rl-marke__text { display:flex; flex-direction:column; gap:3px; min-width:0; }
+    .rl-marke__name { color:#f3f5fa; font-size:1.125rem; font-weight:800; letter-spacing:4px; line-height:1; text-transform:uppercase; white-space:nowrap; }
+    .rl-marke__kontext { color:#8b90a0; font-size:.75rem; font-weight:600; letter-spacing:2.5px; line-height:1.2; text-transform:uppercase; white-space:nowrap; }
+    .register { color:var(--lav); font-family:"Cascadia Mono","Segoe UI Mono",Consolas,"Liberation Mono",monospace; font-size:.6875rem; letter-spacing:1px; }
+    .main { align-items:flex-start; display:flex; flex:1; flex-direction:column; justify-content:center; max-width:760px; padding:48px 0; }
+    .code { color:var(--gold); font-family:"Cascadia Mono","Segoe UI Mono",Consolas,"Liberation Mono",monospace; font-size:clamp(4rem,16vw,10rem); font-weight:500; letter-spacing:-.06em; line-height:.8; margin:0 0 24px; }
+    h1 { font-size:clamp(1.5rem,4vw,2.5rem); letter-spacing:3px; line-height:1.15; margin:0 0 16px; text-transform:uppercase; }
+    p { color:var(--muted); font-size:1rem; line-height:1.65; margin:0 0 28px; max-width:60ch; }
+    .action { background:var(--gold); border:2px solid transparent; border-radius:0 16px 16px 0; color:#000; display:inline-block; font-size:.8125rem; font-weight:700; letter-spacing:3px; min-height:42px; padding:11px 26px; text-decoration:none; text-transform:uppercase; transition:box-shadow var(--motion-fast) var(--ease),filter var(--motion-fast) var(--ease); }
+    .action:hover { box-shadow:0 0 0 1px var(--gold),0 0 10px var(--gold); filter:brightness(1.18); }
+    .action:focus-visible { box-shadow:0 0 0 1px var(--gold),0 0 12px var(--gold); filter:brightness(1.18); outline:3px double var(--focus); outline-offset:4px; }
+    .action:active { animation:confirm var(--motion-base) var(--ease) 1; box-shadow:0 0 0 1px var(--gold); filter:brightness(1.1); }
+    @keyframes confirm {
+      0% { box-shadow:0 0 0 1px var(--gold); filter:brightness(1.1); }
+      42% { box-shadow:0 0 0 2px var(--text),0 0 18px var(--gold); filter:brightness(1.48); }
+      100% { box-shadow:0 0 0 1px var(--gold); filter:brightness(1.1); }
+    }
+    .footer { color:#8b90a0; font-family:"Cascadia Mono","Segoe UI Mono",Consolas,"Liberation Mono",monospace; font-size:.6875rem; letter-spacing:1px; }
+    @media (max-width:560px) {
+      .error-shell { grid-template-columns:44px minmax(0,1fr); }
+      .content { padding:16px 18px 24px; }
+      .top { align-items:flex-start; flex-direction:column; }
+      .corner { height:70px; }
+    }
+    @media (prefers-reduced-motion:reduce) {
+      .action { animation:none; transition:none; }
+    }
+  </style>
+</head>
+<body>
+  <main class="error-shell">
+    <div class="rail" aria-hidden="true">
+      <div class="corner"></div><div class="block gold"></div><div class="block lav"></div>
+      <div class="block blue"></div><div class="block"></div><div class="fill"></div><div class="foot"></div>
+    </div>
+    <div class="content">
+      <header class="top">
+    <!-- Inline-Abbild von .rl-marke--gross aus css/components.css v1.7.0; wegen der autarken Traefik-Auslieferung absichtlich ohne externe Ressource. -->
+        <div class="rl-marke rl-marke--gross">
+          <svg class="rl-marke__symbol" viewBox="0 0 100 116" preserveAspectRatio="xMidYMid meet" aria-hidden="true" focusable="false">
+  <defs><clipPath id="em-clip-503"><rect x="15" y="23" width="70" height="70" rx="10"/></clipPath></defs>
+  <rect x="10" y="18" width="80" height="80" rx="14" fill="#eaa549"/>
+  <rect x="15" y="23" width="70" height="70" rx="10" fill="#1740bc"/>
+  <g clip-path="url(#em-clip-503)">
+    <rect x="22" y="36" width="56" height="10" rx="5" fill="#eaa549"/>
+      <rect x="22" y="52" width="42" height="10" rx="5" fill="#eaa549"/>
+      <rect x="22" y="68" width="28" height="10" rx="5" fill="#eaa549"/>
+  </g>
+</svg>
+          <span class="rl-marke__text"><span class="rl-marke__name">Homelab</span><span class="rl-marke__kontext">Fehlerseite</span></span>
+        </div>
+        <span class="register">HTTP / 503</span>
+      </header>
+      <section class="main">
+        <div class="code" aria-hidden="true">503</div>
+        <h1>Dienst nicht verfügbar</h1>
+        <p>Der Dienst ist derzeit nicht erreichbar oder wird gewartet. Versuchen Sie es später erneut.</p>
+        <!-- href="/" ist absichtlich hostrelativ: Traefik liefert die Seite unter dem ausgefallenen Host aus; der Link versucht genau dessen Startseite erneut. -->
+        <a class="action" href="/">Zur Startseite</a>
+      </section>
+      <footer class="footer">Fehlercode 503 · Dienst vorübergehend nicht verfügbar</footer>
+    </div>
+  </main>
+</body>
+</html>

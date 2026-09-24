@@ -1,0 +1,12 @@
+# Betriebssystem- und Editor-Metadaten
+.DS_Store
+Thumbs.db
+Desktop.ini
+.idea/
+.vscode/
+
+# Lokale Abhaengigkeiten, Ausgaben und Protokolle
+node_modules/
+*.log
+*.tmp
+*.swp

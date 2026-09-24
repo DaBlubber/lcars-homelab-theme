@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 116" width="100%" height="100%">
+  <!-- Neutrales LCARS-Emblem, Fassung nextcloud: Goldrand, blaues Feld, LCARS-Balken bzw.
+       App-Symbol. Flach, keine Verlaeufe. Gleiches Koordinatensystem wie alle
+       Integrationen (100 x 116). -->
+  <defs><clipPath id="em-clip-nextcloud"><rect x="15" y="23" width="70" height="70" rx="10"/></clipPath></defs>
+  <rect x="10" y="18" width="80" height="80" rx="14" fill="#eaa549"/>
+  <rect x="15" y="23" width="70" height="70" rx="10" fill="#1740bc"/>
+  <g clip-path="url(#em-clip-nextcloud)">
+    <g transform="translate(0,-12)">
+      <path d="M31,85 C24,85 20,81 20,75 C20,68 25,63 32,63 C35,55 42,51 50,51 C59,51 66,57 68,65 C75,65 80,70 80,76 C80,82 75,85 69,85 Z" fill="#eaa549"/>
+    </g>
+  </g>
+</svg>

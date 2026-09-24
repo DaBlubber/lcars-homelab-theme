@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 116" width="100%" height="100%">
+  <!-- Neutrales LCARS-Emblem, Fassung paperless: Goldrand, blaues Feld, LCARS-Balken bzw.
+       App-Symbol. Flach, keine Verlaeufe. Gleiches Koordinatensystem wie alle
+       Integrationen (100 x 116). -->
+  <defs><clipPath id="em-clip-paperless"><rect x="15" y="23" width="70" height="70" rx="10"/></clipPath></defs>
+  <rect x="10" y="18" width="80" height="80" rx="14" fill="#eaa549"/>
+  <rect x="15" y="23" width="70" height="70" rx="10" fill="#1740bc"/>
+  <g clip-path="url(#em-clip-paperless)">
+    <g transform="translate(0,-12)">
+      <path d="M31,48 H57 L70,61 V93 H31 Z" fill="#eaa549"/>
+      <path d="M57,48 V61 H70 Z" fill="#1740bc"/>
+      <rect x="38" y="68" width="25" height="4" fill="#1740bc"/>
+      <rect x="38" y="77" width="25" height="4" fill="#1740bc"/>
+      <rect x="38" y="86" width="17" height="4" fill="#1740bc"/>
+    </g>
+  </g>
+</svg>

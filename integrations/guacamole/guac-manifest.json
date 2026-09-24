@@ -1,0 +1,11 @@
+{
+  "guacamoleVersion": "1.6.0",
+  "name": "lcars-branding",
+  "namespace": "lcars-branding-ns",
+  "css": [
+    "skins/lcars/css/lcars.css"
+  ],
+  "translations": [
+    "en"
+  ]
+}

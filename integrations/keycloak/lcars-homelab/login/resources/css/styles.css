@@ -1,0 +1,763 @@
+/*
+ * LCARS-Homelab fuer Keycloak 26.7.3 / keycloak.v2 (PatternFly v5)
+ * Version 1.8.2
+ *
+ * Gemessene Grundlage:
+ *   keycloak-referenz\patternfly.min.css
+ *   keycloak-referenz\login-seite.html
+ *
+ * PatternFly-Farben und -Zustaende werden zuerst ueber seine globalen und
+ * komponentenspezifischen Custom Properties umgebogen. Eigene Regeln bleiben
+ * auf Typografie, LCARS-Geometrie, Hintergrundebenen und die von PatternFly
+ * nicht angebotene ruhige Bewegung begrenzt. Es gibt keine PatternFly-v4-
+ * Selektoren.
+ */
+
+@font-face {
+  font-family: "Exo 2";
+  src: url("https://brand.example.com/v1.9.0/fonts/Exo2-Variable.woff2") format("woff2-variations"),
+       url("https://brand.example.com/v1.9.0/fonts/Exo2-Variable.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 400 800;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "JetBrains Mono";
+  src: url("https://brand.example.com/v1.9.0/fonts/JetBrainsMono-Variable.woff2") format("woff2-variations"),
+       url("https://brand.example.com/v1.9.0/fonts/JetBrainsMono-Variable.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 400 700;
+  font-display: swap;
+}
+
+:root {
+  color-scheme: dark;
+
+  /* Homelab-Rollen */
+  --rl-gold: #eaa549;
+  --rl-koenigsblau: #1740bc;
+  --rl-lavendel: #9a8ec9;
+  --rl-blau: #5a7fe0;
+  --rl-grau: #3c4257;
+  --rl-grund: #000000;
+  --rl-flaeche-1: #0b0d14;
+  --rl-flaeche-2: #10131a;
+  --rl-flaeche-3: #1b1f2b;
+  --rl-linie: #53596b;
+  --rl-text: #dfe4f2;
+  --rl-text-stark: #f3f5fa;
+  --rl-text-gedaempft: #aeb4c3;
+  --rl-fokus: #f6c77f;
+  --rl-erfolg: #9bd087;
+  --rl-warnung: #eaa549;
+  --rl-fehler: #e28282;
+  --rl-info: #8da8f1;
+  --rl-rail: 4.625rem;
+  --rl-block-gap: 0.25rem;
+  --rl-block-height: 1.625rem;
+  --rl-radius-elbow: 2.375rem;
+  --rl-radius-end: 1.375rem;
+  --rl-motion-fast: 140ms;
+  --rl-motion-base: 180ms;
+  --rl-ease: ease-out;
+
+  /*
+   * Austauschbarer Hintergrund-Slot. Das Foto ist die aktive Fassung;
+   * hintergrund.svg liegt als gezeichnete LCARS-Alternative daneben.
+   * Fehlt das aktive Bild, traegt weiterhin --rl-grund die Seite.
+   */
+  --rl-background-image: url("../img/hintergrund.svg");
+  --rl-background-overlay: rgba(0, 0, 0, 0.58);
+  --rl-login-surface-fallback: rgba(16, 19, 26, 0.96);
+  --rl-login-surface-glass: rgba(16, 19, 26, 0.72);
+
+  /* PatternFly v5: globale Flaechen. */
+  --pf-v5-global--BackgroundColor--100: var(--rl-flaeche-1);
+  --pf-v5-global--BackgroundColor--150: var(--rl-flaeche-2);
+  --pf-v5-global--BackgroundColor--200: var(--rl-flaeche-3);
+  --pf-v5-global--BackgroundColor--300: var(--rl-flaeche-2);
+  --pf-v5-global--BackgroundColor--400: var(--rl-flaeche-3);
+  --pf-v5-global--BackgroundColor--light-100: var(--rl-flaeche-2);
+  --pf-v5-global--BackgroundColor--light-200: var(--rl-flaeche-1);
+  --pf-v5-global--BackgroundColor--light-300: var(--rl-grund);
+  --pf-v5-global--BackgroundColor--dark-100: var(--rl-grund);
+  --pf-v5-global--BackgroundColor--dark-200: var(--rl-flaeche-3);
+  --pf-v5-global--BackgroundColor--dark-300: var(--rl-flaeche-2);
+  --pf-v5-global--BackgroundColor--dark-400: var(--rl-grau);
+  --pf-v5-global--BackgroundColor--dark-transparent-100: rgba(0, 0, 0, 0.78);
+  --pf-v5-global--BackgroundColor--dark-transparent-200: rgba(0, 0, 0, 0.58);
+
+  /* PatternFly v5: globale Text-, Link- und Iconrollen. */
+  --pf-v5-global--Color--100: var(--rl-text);
+  --pf-v5-global--Color--200: var(--rl-text-gedaempft);
+  --pf-v5-global--Color--300: #c3c8d6;
+  --pf-v5-global--Color--400: #8b90a0;
+  --pf-v5-global--Color--light-100: var(--rl-text-stark);
+  --pf-v5-global--Color--light-200: var(--rl-text);
+  --pf-v5-global--Color--light-300: #c3c8d6;
+  --pf-v5-global--Color--dark-100: #000000;
+  --pf-v5-global--Color--dark-200: #8b90a0;
+  --pf-v5-global--link--Color: var(--rl-gold);
+  --pf-v5-global--link--Color--hover: var(--rl-fokus);
+  --pf-v5-global--link--Color--light: var(--rl-gold);
+  --pf-v5-global--link--Color--light--hover: var(--rl-fokus);
+  --pf-v5-global--link--Color--dark: var(--rl-gold);
+  --pf-v5-global--link--Color--dark--hover: var(--rl-fokus);
+  --pf-v5-global--link--Color--visited: #c6a4df;
+  --pf-v5-global--icon--Color--light: var(--rl-text-gedaempft);
+  --pf-v5-global--icon--Color--dark: var(--rl-text-stark);
+  --pf-v5-global--icon--Color--light--light: var(--rl-text);
+  --pf-v5-global--icon--Color--dark--light: var(--rl-text-stark);
+  --pf-v5-global--icon--Color--light--dark: var(--rl-text-gedaempft);
+  --pf-v5-global--icon--Color--dark--dark: var(--rl-text-stark);
+
+  /* PatternFly v5: Marken-, Status-, Fokus- und Deaktivierungsrollen. */
+  --pf-v5-global--primary-color--100: var(--rl-gold);
+  --pf-v5-global--primary-color--200: var(--rl-fokus);
+  --pf-v5-global--primary-color--300: var(--rl-gold);
+  --pf-v5-global--primary-color--400: #d79843;
+  --pf-v5-global--primary-color--light-100: var(--rl-fokus);
+  --pf-v5-global--primary-color--dark-100: var(--rl-gold);
+  --pf-v5-global--secondary-color--100: var(--rl-lavendel);
+  --pf-v5-global--active-color--100: var(--rl-gold);
+  --pf-v5-global--active-color--200: #3a2c18;
+  --pf-v5-global--active-color--300: var(--rl-fokus);
+  --pf-v5-global--active-color--400: var(--rl-blau);
+  --pf-v5-global--success-color--100: var(--rl-erfolg);
+  --pf-v5-global--success-color--200: #b3df9f;
+  --pf-v5-global--warning-color--100: var(--rl-warnung);
+  --pf-v5-global--warning-color--200: var(--rl-fokus);
+  --pf-v5-global--danger-color--100: var(--rl-fehler);
+  --pf-v5-global--danger-color--200: #f0a0a0;
+  --pf-v5-global--danger-color--300: #4d1e24;
+  --pf-v5-global--info-color--100: var(--rl-info);
+  --pf-v5-global--info-color--200: #aec0f5;
+  --pf-v5-global--disabled-color--100: #8b90a0;
+  --pf-v5-global--disabled-color--200: #62687a;
+  --pf-v5-global--disabled-color--300: #282c38;
+
+  /* PatternFly v5: Linien, Ruhe-Schatten, Typografie und Bewegung. */
+  --pf-v5-global--BorderColor--100: var(--rl-linie);
+  --pf-v5-global--BorderColor--200: #6d7385;
+  --pf-v5-global--BorderColor--300: var(--rl-grau);
+  --pf-v5-global--BorderColor--400: #8b90a0;
+  --pf-v5-global--BorderColor--dark-100: var(--rl-text-gedaempft);
+  --pf-v5-global--BorderColor--light-100: var(--rl-linie);
+  --pf-v5-global--BorderRadius--sm: 0.25rem;
+  --pf-v5-global--BorderRadius--lg: 999px;
+  --pf-v5-global--BoxShadow--sm: none;
+  --pf-v5-global--BoxShadow--sm-top: none;
+  --pf-v5-global--BoxShadow--sm-right: none;
+  --pf-v5-global--BoxShadow--sm-bottom: none;
+  --pf-v5-global--BoxShadow--sm-left: none;
+  --pf-v5-global--BoxShadow--md: none;
+  --pf-v5-global--BoxShadow--md-top: none;
+  --pf-v5-global--BoxShadow--md-right: none;
+  --pf-v5-global--BoxShadow--md-bottom: none;
+  --pf-v5-global--BoxShadow--md-left: none;
+  --pf-v5-global--BoxShadow--lg: none;
+  --pf-v5-global--BoxShadow--lg-top: none;
+  --pf-v5-global--BoxShadow--lg-right: none;
+  --pf-v5-global--BoxShadow--lg-bottom: none;
+  --pf-v5-global--BoxShadow--lg-left: none;
+  --pf-v5-global--BoxShadow--xl: none;
+  --pf-v5-global--BoxShadow--xl-top: none;
+  --pf-v5-global--BoxShadow--xl-right: none;
+  --pf-v5-global--BoxShadow--xl-bottom: none;
+  --pf-v5-global--BoxShadow--xl-left: none;
+  --pf-v5-global--BoxShadow--inset: none;
+  --pf-v5-global--FontFamily--text: "Exo 2", "Segoe UI", Arial, sans-serif;
+  --pf-v5-global--FontFamily--heading: "Exo 2", "Segoe UI", Arial, sans-serif;
+  --pf-v5-global--FontFamily--monospace: "JetBrains Mono", "Cascadia Mono", Consolas, monospace;
+  --pf-v5-global--FontFamily--text--vf: "Exo 2", "Segoe UI", Arial, sans-serif;
+  --pf-v5-global--FontFamily--heading--vf: "Exo 2", "Segoe UI", Arial, sans-serif;
+  --pf-v5-global--FontFamily--monospace--vf: "JetBrains Mono", "Cascadia Mono", Consolas, monospace;
+  --pf-v5-global--TransitionDuration: var(--rl-motion-fast);
+  --pf-v5-global--Transition: all var(--rl-motion-fast) var(--rl-ease);
+  --pf-v5-global--TimingFunction: var(--rl-ease);
+}
+
+html,
+body {
+  min-height: 100%;
+}
+
+body {
+  background-color: var(--rl-grund);
+  background-image: none;
+  color: var(--rl-text);
+  font-family: var(--pf-v5-global--FontFamily--text);
+  isolation: isolate;
+  overflow-x: hidden;
+}
+
+/* Das Foto und seine flaechige Abdunklung liegen getrennt unter dem Inhalt.
+   So bleibt die Konsole auf allen geerbten Authentifizierungsseiten ruhig und
+   deckend, waehrend nur das Motiv sehr langsam naeher rueckt. */
+body::before,
+body::after {
+  content: "";
+  inset: 0;
+  pointer-events: none;
+  position: fixed;
+}
+
+body::before {
+  animation: rl-keycloak-background-approach 90s ease-in-out infinite alternate;
+  background-color: var(--rl-grund);
+  background-image: var(--rl-background-image);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  transform: scale(1);
+  transform-origin: center;
+  z-index: 0;
+}
+
+body::after {
+  background-color: var(--rl-background-overlay);
+  z-index: 1;
+}
+
+@keyframes rl-keycloak-background-approach {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.025);
+  }
+}
+
+/*
+ * Der globale Token-Hebel gestaltet alle geerbten Keycloak-Seiten. Nur die
+ * Login-Geometrie braucht zusaetzliche Komponentenwerte und echte Layoutregeln.
+ */
+.pf-v5-c-login {
+  --pf-v5-c-login--PaddingTop: 1.5rem;
+  --pf-v5-c-login--PaddingBottom: 1.5rem;
+  --pf-v5-c-login__container--MaxWidth: 46rem;
+  --pf-v5-c-login__container--xl--MaxWidth: 46rem;
+  --pf-v5-c-login__container--PaddingLeft: 1rem;
+  --pf-v5-c-login__container--PaddingRight: 1rem;
+  --pf-v5-c-login__header--MarginBottom: var(--rl-block-gap);
+  --pf-v5-c-login__header--xl--MarginBottom: var(--rl-block-gap);
+  --pf-v5-c-login__header--xl--MarginTop: 0;
+  --pf-v5-c-login__header--PaddingLeft: 0;
+  --pf-v5-c-login__header--PaddingRight: 0;
+  --pf-v5-c-login__header--c-brand--MarginBottom: 0;
+  --pf-v5-c-login__header--c-brand--xl--MarginBottom: 0;
+  --pf-v5-c-login__main--BackgroundColor: var(--rl-flaeche-2);
+  --pf-v5-c-login__main--BoxShadow: none;
+  --pf-v5-c-login__main--MarginBottom: 0;
+  --pf-v5-c-login__main-header--PaddingTop: 2rem;
+  --pf-v5-c-login__main-header--PaddingRight: 2rem;
+  --pf-v5-c-login__main-header--PaddingBottom: 1.25rem;
+  --pf-v5-c-login__main-header--PaddingLeft: calc(var(--rl-rail) + 2rem);
+  --pf-v5-c-login__main-header--md--PaddingRight: 2rem;
+  --pf-v5-c-login__main-header--md--PaddingLeft: calc(var(--rl-rail) + 2rem);
+  --pf-v5-c-login__main-body--PaddingRight: 2rem;
+  --pf-v5-c-login__main-body--PaddingBottom: 4.5rem;
+  --pf-v5-c-login__main-body--PaddingLeft: calc(var(--rl-rail) + 2rem);
+  --pf-v5-c-login__main-body--md--PaddingRight: 2rem;
+  --pf-v5-c-login__main-body--md--PaddingLeft: calc(var(--rl-rail) + 2rem);
+  align-items: center;
+  position: relative;
+  z-index: 2;
+}
+
+/* PatternFly legt ab 1200 px Hauptflaeche und Kopf nebeneinander. Fuer die
+   zusammenhaengende LCARS-Konsole muessen die gemessenen Bereiche gestapelt sein. */
+.pf-v5-c-login__container {
+  max-width: var(--pf-v5-c-login__container--MaxWidth);
+  padding-inline: var(--pf-v5-c-login__container--PaddingLeft)
+                  var(--pf-v5-c-login__container--PaddingRight);
+}
+
+@media (min-width: 1200px) {
+  .pf-v5-c-login__container {
+    display: block;
+    padding-inline: var(--pf-v5-c-login__container--PaddingLeft)
+                    var(--pf-v5-c-login__container--PaddingRight);
+  }
+}
+
+/* Goldene Kopf-Endkappe mit Emblem. Der vorhandene Realmname bleibt sichtbarer
+   Text; das CSS fuegt keine anwendungsspezifische Wortwahl hinzu. */
+.pf-v5-c-login__header {
+  margin-block-end: var(--pf-v5-c-login__header--MarginBottom);
+}
+
+.pf-v5-c-login__header .pf-v5-c-brand {
+  --pf-v5-c-brand--Height: auto;
+  --pf-v5-c-brand--Width: 100%;
+  align-items: center;
+  background-color: var(--rl-gold);
+  background-image: url("../img/emblem.svg");
+  background-position: 0.875rem center;
+  background-repeat: no-repeat;
+  background-size: 2.6rem 3rem;
+  border-radius: var(--rl-radius-end) var(--rl-radius-end) 0 var(--rl-radius-end);
+  color: #000000;
+  display: flex;
+  font-family: var(--pf-v5-global--FontFamily--heading);
+  font-size: 0.8125rem;
+  font-weight: 800;
+  letter-spacing: 0.15625rem;
+  min-height: 4.625rem;
+  padding: 0.75rem 1.5rem 0.75rem var(--rl-rail);
+  text-transform: uppercase;
+  width: 100%;
+}
+
+/* Echte Stufe-A-Elbow-Struktur: Grundrail und Fussleiste sind Pseudoelemente
+   der gemessenen Hauptflaeche; die drei Farbbloecke sitzen an deren realen
+   Header-/Body-/Footer-Abschnitten. PatternFly bietet dafuer keine Variablen. */
+.pf-v5-c-login__main {
+  background-color: var(--rl-login-surface-fallback);
+  border-radius: 0 var(--rl-radius-end) var(--rl-radius-end) var(--rl-radius-elbow);
+  isolation: isolate;
+  overflow: hidden;
+  position: relative;
+}
+
+@supports ((-webkit-backdrop-filter: blur(1px)) or (backdrop-filter: blur(1px))) {
+  .pf-v5-c-login__main {
+    -webkit-backdrop-filter: blur(14px);
+    backdrop-filter: blur(14px);
+    background-color: var(--rl-login-surface-glass);
+  }
+}
+
+.pf-v5-c-login__main::before {
+  background-color: var(--rl-gold);
+  border-radius: 0 0 0 var(--rl-radius-elbow);
+  content: "";
+  inset: 0 auto 0 0;
+  position: absolute;
+  width: var(--rl-rail);
+  z-index: 0;
+}
+
+.pf-v5-c-login__main::after {
+  --rl-sequence-primary-position: -22%;
+  --rl-sequence-secondary-position: -22%;
+  --rl-sequence-scan-position: -8%;
+  animation: rl-keycloak-sequence-primary 6.73s ease-in-out -1.31s infinite,
+             rl-keycloak-sequence-secondary 8.41s ease-in-out -5.27s infinite,
+             rl-keycloak-sequence-scan 11.17s cubic-bezier(.45, 0, .55, 1) -3.73s infinite;
+  background-color: var(--rl-gold);
+  background-image:
+    linear-gradient(90deg,
+      transparent 0,
+      rgba(90, 127, 224, 0.18) 28%,
+      rgba(243, 245, 250, 0.58) 50%,
+      rgba(90, 127, 224, 0.18) 72%,
+      transparent 100%),
+    linear-gradient(90deg,
+      transparent 0,
+      rgba(246, 199, 127, 0.30) 50%,
+      transparent 100%),
+    linear-gradient(90deg,
+      transparent 0,
+      rgba(154, 142, 201, 0.22) 50%,
+      transparent 100%),
+    repeating-linear-gradient(90deg,
+      var(--rl-gold) 0,
+      var(--rl-gold) calc(14.285714% - var(--rl-block-gap)),
+      rgba(0, 0, 0, 0.28) calc(14.285714% - var(--rl-block-gap)),
+      rgba(0, 0, 0, 0.28) 14.285714%);
+  background-position:
+    var(--rl-sequence-scan-position) 0,
+    var(--rl-sequence-primary-position) 0,
+    var(--rl-sequence-secondary-position) 0,
+    0 0;
+  background-repeat: no-repeat, no-repeat, no-repeat, repeat;
+  background-size: 0.75rem 100%, 17% 100%, 19% 100%, 100% 100%;
+  border-radius: 0 var(--rl-radius-end) var(--rl-radius-end) 0;
+  bottom: 1.25rem;
+  content: "";
+  height: var(--rl-block-height);
+  left: calc(var(--rl-rail) + var(--rl-block-gap));
+  position: absolute;
+  right: 0;
+  z-index: 2;
+}
+
+@property --rl-sequence-primary-position {
+  syntax: "<percentage>";
+  inherits: false;
+  initial-value: -22%;
+}
+
+@property --rl-sequence-secondary-position {
+  syntax: "<percentage>";
+  inherits: false;
+  initial-value: -22%;
+}
+
+@property --rl-sequence-scan-position {
+  syntax: "<percentage>";
+  inherits: false;
+  initial-value: -8%;
+}
+
+@keyframes rl-keycloak-sequence-primary {
+  0%,
+  8% {
+    --rl-sequence-primary-position: -22%;
+  }
+  88%,
+  100% {
+    --rl-sequence-primary-position: 122%;
+  }
+}
+
+@keyframes rl-keycloak-sequence-secondary {
+  0%,
+  18% {
+    --rl-sequence-secondary-position: -22%;
+  }
+  74%,
+  100% {
+    --rl-sequence-secondary-position: 122%;
+  }
+}
+
+@keyframes rl-keycloak-sequence-scan {
+  0%,
+  9% {
+    --rl-sequence-scan-position: -8%;
+  }
+  78%,
+  100% {
+    --rl-sequence-scan-position: 108%;
+  }
+}
+
+.pf-v5-c-login__main > .pf-v5-c-login__main-header,
+.pf-v5-c-login__main > .pf-v5-c-login__main-body,
+.pf-v5-c-login__main > .pf-v5-c-login__main-footer {
+  position: relative;
+  z-index: 1;
+}
+
+.pf-v5-c-login__main > .pf-v5-c-login__main-header::before,
+.pf-v5-c-login__main > .pf-v5-c-login__main-body::before,
+.pf-v5-c-login__main > .pf-v5-c-login__main-body::after {
+  border-block: calc(var(--rl-block-gap) / 2) solid var(--rl-grund);
+  border-radius: 0 var(--rl-radius-end) var(--rl-radius-end) 0;
+  content: "";
+  height: var(--rl-block-height);
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: var(--rl-rail);
+}
+
+.pf-v5-c-login__main > .pf-v5-c-login__main-header::before {
+  --rl-rail-glow: rgba(154, 142, 201, 0.42);
+  animation: rl-keycloak-rail-activity 9.73s ease-in-out -2.11s infinite;
+  background-color: var(--rl-lavendel);
+  top: 1rem;
+}
+
+.pf-v5-c-login__main > .pf-v5-c-login__main-body::before {
+  --rl-rail-glow: rgba(90, 127, 224, 0.42);
+  animation: rl-keycloak-rail-activity 11.89s ease-in-out -6.37s infinite;
+  background-color: var(--rl-blau);
+}
+
+.pf-v5-c-login__main > .pf-v5-c-login__main-body::after {
+  --rl-rail-glow: rgba(174, 180, 195, 0.32);
+  animation: rl-keycloak-rail-activity 13.03s ease-in-out -9.17s infinite;
+  background-color: var(--rl-grau);
+  top: calc(var(--rl-block-height) + var(--rl-block-gap));
+}
+
+@keyframes rl-keycloak-rail-activity {
+  0%,
+  62%,
+  100% {
+    box-shadow: none;
+    filter: brightness(1);
+  }
+  76% {
+    box-shadow: 0 0 0.5rem var(--rl-rail-glow);
+    filter: brightness(1.12);
+  }
+  88% {
+    box-shadow: 0 0 0.2rem var(--rl-rail-glow);
+    filter: brightness(1.04);
+  }
+}
+
+/* PatternFly besitzt keine Tokens fuer Versalien oder Sperrung. */
+.pf-v5-c-title,
+.pf-v5-c-form__label-text {
+  font-family: var(--pf-v5-global--FontFamily--heading);
+  font-weight: 700;
+  letter-spacing: 0.15625rem;
+  text-transform: uppercase;
+}
+
+.pf-v5-c-title.pf-m-3xl {
+  --pf-v5-c-title--m-3xl--FontSize: 1.625rem;
+  --pf-v5-c-title--m-3xl--FontWeight: 700;
+  color: var(--rl-text-stark);
+}
+
+.pf-v5-c-form__label-text {
+  color: var(--rl-lavendel);
+  font-size: 0.75rem;
+}
+
+/* Eingaben: Farben, Linien und Fokus stammen aus belegten Komponentenvariablen.
+   Mono ist eine Homelab-Rolle fuer Kennungen und Zugangsdaten. */
+.pf-v5-c-form-control {
+  --pf-v5-c-form-control--BackgroundColor: var(--rl-flaeche-1);
+  --pf-v5-c-form-control--Color: var(--rl-text-stark);
+  --pf-v5-c-form-control--before--BorderTopColor: var(--rl-grau);
+  --pf-v5-c-form-control--before--BorderRightColor: var(--rl-grau);
+  --pf-v5-c-form-control--before--BorderLeftColor: var(--rl-blau);
+  --pf-v5-c-form-control--before--BorderLeftWidth: 0.25rem;
+  --pf-v5-c-form-control--after--BorderBottomColor: var(--rl-linie);
+  --pf-v5-c-form-control--hover--after--BorderBottomColor: var(--rl-gold);
+  --pf-v5-c-form-control--focus--after--BorderBottomColor: var(--rl-fokus);
+  --pf-v5-c-form-control--focus--after--BorderBottomWidth: 0.1875rem;
+  --pf-v5-c-form-control--m-error--after--BorderBottomColor: var(--rl-fehler);
+  --pf-v5-c-form-control--m-error--after--BorderBottomWidth: 0.1875rem;
+  --pf-v5-c-form-control--m-disabled--BackgroundColor: #282c38;
+  --pf-v5-c-form-control--m-disabled--Color: #8b90a0;
+  border-radius: 0 0.25rem 0.25rem 0;
+  overflow: hidden;
+  transition: box-shadow var(--rl-motion-fast) var(--rl-ease),
+              filter var(--rl-motion-fast) var(--rl-ease);
+}
+
+.pf-v5-c-form-control > :is(input, select, textarea) {
+  font-family: var(--pf-v5-global--FontFamily--monospace);
+}
+
+.pf-v5-c-form-control > :is(input, select, textarea)::placeholder {
+  color: #8b90a0;
+  opacity: 1;
+}
+
+.pf-v5-c-form-control:hover {
+  box-shadow: 0 0 0 1px var(--rl-blau), 0 0 8px var(--rl-blau);
+  filter: brightness(1.08);
+}
+
+.pf-v5-c-form-control:focus-within {
+  box-shadow: 0 0 0 1px var(--rl-fokus), 0 0 12px var(--rl-gold);
+  filter: brightness(1.1);
+}
+
+.pf-v5-c-form-control:has(> :is(input, select, textarea)[aria-invalid="true"]) {
+  --pf-v5-c-form-control--before--BorderLeftColor: var(--rl-fehler);
+  --pf-v5-c-form-control--after--BorderBottomColor: var(--rl-fehler);
+}
+
+/* Primaeraktion: alle PatternFly-Zustaende werden ueber die nachgewiesenen
+   m-primary-Variablen gespeist. Selektoren darunter ergaenzen ausschliesslich
+   den im Komponentensystem nicht vorhandenen Glow und Druckblitz aus v1.3.0. */
+.pf-v5-c-button {
+  --pf-v5-c-button--BorderRadius: 0 var(--rl-radius-end) var(--rl-radius-end) 0;
+  --pf-v5-c-button--after--BorderRadius: 0 var(--rl-radius-end) var(--rl-radius-end) 0;
+  --pf-v5-c-button--disabled--BackgroundColor: #62687a;
+  --pf-v5-c-button--disabled--Color: #181a20;
+  font-family: var(--pf-v5-global--FontFamily--heading);
+  font-weight: 700;
+  letter-spacing: 0.15625rem;
+  min-height: 2.75rem;
+  text-transform: uppercase;
+  transition: box-shadow var(--rl-motion-fast) var(--rl-ease),
+              filter var(--rl-motion-fast) var(--rl-ease);
+}
+
+.pf-v5-c-button.pf-m-primary {
+  --pf-v5-c-button--m-primary--BackgroundColor: var(--rl-gold);
+  --pf-v5-c-button--m-primary--Color: #000000;
+  --pf-v5-c-button--m-primary--hover--BackgroundColor: var(--rl-fokus);
+  --pf-v5-c-button--m-primary--hover--Color: #000000;
+  --pf-v5-c-button--m-primary--focus--BackgroundColor: var(--rl-fokus);
+  --pf-v5-c-button--m-primary--focus--Color: #000000;
+  --pf-v5-c-button--m-primary--active--BackgroundColor: #d79843;
+  --pf-v5-c-button--m-primary--active--Color: #000000;
+}
+
+.pf-v5-c-button.pf-m-primary:hover:not(:disabled) {
+  box-shadow: 0 0 0 1px var(--rl-gold), 0 0 10px var(--rl-gold);
+  filter: brightness(1.18);
+}
+
+/* PatternFly v5 hat fuer den Primaerbutton zwar Fokus-Farbvariablen, aber keine
+   eigene Fokus-Ringfarbe. Darum bleibt der doppelte Ring eine gezielte Ergaenzung. */
+.pf-v5-c-button.pf-m-primary:focus-visible:not(:disabled),
+a:focus-visible {
+  outline: 3px double var(--rl-fokus);
+  outline-offset: 3px;
+}
+
+.pf-v5-c-button.pf-m-primary:focus-visible:not(:disabled) {
+  box-shadow: 0 0 0 1px var(--rl-gold), 0 0 12px var(--rl-gold);
+  filter: brightness(1.18);
+}
+
+.pf-v5-c-button.pf-m-primary:active:not(:disabled) {
+  animation: rl-keycloak-confirm var(--rl-motion-base) var(--rl-ease) 1;
+}
+
+.pf-v5-c-button:disabled,
+.pf-v5-c-button.pf-m-disabled {
+  box-shadow: none;
+  filter: none;
+}
+
+@keyframes rl-keycloak-confirm {
+  0% {
+    box-shadow: 0 0 0 1px var(--rl-gold);
+    filter: brightness(1.08);
+  }
+  42% {
+    box-shadow: 0 0 0 2px var(--rl-text-stark), 0 0 18px var(--rl-gold);
+    filter: brightness(1.48);
+  }
+  100% {
+    box-shadow: 0 0 0 1px var(--rl-gold);
+    filter: brightness(1.08);
+  }
+}
+
+/* Alerts der geerbten Fehler-, Sperr-, Ablauf- und Reset-Seiten. Alle Namen
+   stammen aus patternfly.min.css; die Varianten bleiben auch im Dark-Mode lesbar. */
+.pf-v5-c-alert {
+  --pf-v5-c-alert--BackgroundColor: #171a23;
+  --pf-v5-c-alert--BoxShadow: none;
+  --pf-v5-c-alert--BorderTopWidth: 0.25rem;
+  --pf-v5-c-alert__title--Color: var(--rl-text-stark);
+  --pf-v5-c-alert--m-inline--m-custom--BackgroundColor: #171a23;
+  --pf-v5-c-alert--m-inline--m-success--BackgroundColor: #142117;
+  --pf-v5-c-alert--m-inline--m-danger--BackgroundColor: #201519;
+  --pf-v5-c-alert--m-inline--m-warning--BackgroundColor: #241d12;
+  --pf-v5-c-alert--m-inline--m-info--BackgroundColor: #131a2a;
+  color: var(--rl-text);
+}
+
+.pf-v5-c-alert.pf-m-danger {
+  --pf-v5-c-alert--BorderTopColor: var(--rl-fehler);
+  --pf-v5-c-alert__icon--Color: var(--rl-fehler);
+  --pf-v5-c-alert__title--Color: var(--rl-fehler);
+}
+
+.pf-v5-c-alert.pf-m-warning {
+  --pf-v5-c-alert--BorderTopColor: var(--rl-warnung);
+  --pf-v5-c-alert__icon--Color: var(--rl-warnung);
+  --pf-v5-c-alert__title--Color: var(--rl-fokus);
+}
+
+.pf-v5-c-alert.pf-m-success {
+  --pf-v5-c-alert--BorderTopColor: var(--rl-erfolg);
+  --pf-v5-c-alert__icon--Color: var(--rl-erfolg);
+  --pf-v5-c-alert__title--Color: var(--rl-erfolg);
+}
+
+.pf-v5-c-alert.pf-m-info {
+  --pf-v5-c-alert--BorderTopColor: var(--rl-info);
+  --pf-v5-c-alert__icon--Color: var(--rl-info);
+  --pf-v5-c-alert__title--Color: var(--rl-info);
+}
+
+/* AA-Nachweis fuer die tragenden Kombinationen (WCAG 2.x, sRGB): Selbst
+   ueber einem weissen Fotopixel ergeben Seitenoverlay und Glasflaeche fuer
+   Label 4.74:1, Text 11.04:1, gedaempften Text 6.76:1 und Link 6.67:1.
+   Der deckendere Fallback erreicht mindestens 6.08:1. Eingabe
+   #f3f5fa/#0b0d14 bleibt bei 17.79:1, Button #000/#eaa549 bei 9.98:1 und
+   Fehler #e28282/#201519 bei 6.55:1. */
+
+/* Beim breiten Kinoformat rettet die tiefere Verankerung mehr vom warmen
+   Nebel. Hochformate bleiben mittig: Die 3:2-Quelle kann dort linken Planeten
+   und rechte Schiffe nicht gleichzeitig zeigen. */
+@media (min-aspect-ratio: 2/1) {
+  body::before {
+    background-position: center 58%;
+  }
+}
+
+@media (max-width: 36rem) {
+  :root {
+    --rl-rail: 3rem;
+    --rl-radius-elbow: 1.75rem;
+    --rl-radius-end: 1.125rem;
+  }
+
+  .pf-v5-c-login {
+    --pf-v5-c-login--PaddingTop: 0.75rem;
+    --pf-v5-c-login--PaddingBottom: 0.75rem;
+    --pf-v5-c-login__main-header--PaddingTop: 1.5rem;
+    --pf-v5-c-login__main-header--PaddingRight: 1.25rem;
+    --pf-v5-c-login__main-header--PaddingLeft: calc(var(--rl-rail) + 1.25rem);
+    --pf-v5-c-login__main-header--md--PaddingRight: 1.25rem;
+    --pf-v5-c-login__main-header--md--PaddingLeft: calc(var(--rl-rail) + 1.25rem);
+    --pf-v5-c-login__main-body--PaddingRight: 1.25rem;
+    --pf-v5-c-login__main-body--PaddingLeft: calc(var(--rl-rail) + 1.25rem);
+    --pf-v5-c-login__main-body--md--PaddingRight: 1.25rem;
+    --pf-v5-c-login__main-body--md--PaddingLeft: calc(var(--rl-rail) + 1.25rem);
+  }
+
+  .pf-v5-c-login__header .pf-v5-c-brand {
+    background-position: 0.5rem center;
+    background-size: 1.72rem 2rem;
+    font-size: 0.75rem;
+    letter-spacing: 0.125rem;
+    min-height: 3.5rem;
+    padding-left: var(--rl-rail);
+  }
+
+  .pf-v5-c-title.pf-m-3xl {
+    --pf-v5-c-title--m-3xl--FontSize: 1.375rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --rl-motion-fast: 0ms;
+    --rl-motion-base: 0ms;
+  }
+
+  .pf-v5-c-button,
+  .pf-v5-c-form-control {
+    animation: none;
+    transition: none;
+  }
+
+  body::before,
+  .pf-v5-c-login__main::after,
+  .pf-v5-c-login__main > .pf-v5-c-login__main-header::before,
+  .pf-v5-c-login__main > .pf-v5-c-login__main-body::before,
+  .pf-v5-c-login__main > .pf-v5-c-login__main-body::after {
+    animation: none;
+    box-shadow: none;
+    filter: none;
+  }
+
+  .pf-v5-c-login__main::after {
+    background-color: var(--rl-gold);
+    background-image: none;
+  }
+
+  body::before {
+    transform: none;
+  }
+}
+
+@media (forced-colors: active) {
+  .pf-v5-c-login__header,
+  .pf-v5-c-login__main,
+  .pf-v5-c-button,
+  .pf-v5-c-form-control,
+  .pf-v5-c-alert {
+    forced-color-adjust: auto;
+  }
+}
