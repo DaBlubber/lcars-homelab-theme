@@ -170,7 +170,7 @@ function contentColor(x, y, variant) {
     if (inRect(x, y, 46, 54.5, 32, 7) || inRect(x, y, 63, 61.5, 6, 9) || inRect(x, y, 72, 61.5, 6, 12)) color = COLORS.gold;
     return color;
   }
-  /* Basisfassung: drei LCARS-Balken (y ist hier um 12 verschoben). */
+  /* Base version: three LCARS bars (y is shifted by 12 here). */
   for (const [top, width] of [[48, 56], [64, 42], [80, 28]]) {
     if (inRoundedRect(x, y, 22, top, width, 10, 5)) return COLORS.gold;
   }
@@ -187,8 +187,8 @@ function sample(x, y, variant) {
 }
 
 export function renderEmblemPng(size, variant = "base") {
-  if (!Number.isInteger(size) || size < 1) throw new Error("Die Zielgroesse muss eine positive ganze Zahl sein.");
-  if (!new Set(["base", "gitea", "guacamole", "keycloak"]).has(variant)) throw new Error(`Unbekannte Emblemfassung: ${variant}`);
+  if (!Number.isInteger(size) || size < 1) throw new Error("The target size must be a positive integer.");
+  if (!new Set(["base", "gitea", "guacamole", "keycloak"]).has(variant)) throw new Error(`Unknown emblem version: ${variant}`);
   const supersampling = size <= 48 ? 8 : 4;
   const pixels = Buffer.alloc(size * size * 4);
   const samples = supersampling ** 2;
@@ -197,7 +197,7 @@ export function renderEmblemPng(size, variant = "base") {
       const total = [0, 0, 0, 0];
       for (let sy = 0; sy < supersampling; sy += 1) {
         for (let sx = 0; sx < supersampling; sx += 1) {
-          /* SVG-Standard: 100:116 wird in der quadratischen Ausgabe zentriert eingepasst. */
+          /* SVG default: 100:116 is fitted centred into the square output. */
           const x = ((px + (sx + 0.5) / supersampling) / size) * 116 - 8;
           const y = ((py + (sy + 0.5) / supersampling) / size) * 116;
           const value = sample(x, y, variant);
@@ -244,10 +244,10 @@ export async function buildFaviconAssets(outputDirectory = here) {
   await mkdir(outputDir, { recursive: true });
   const svg = await readFile(sourcePath, "utf8");
   if (!svg.includes('viewBox="0 0 100 116"') || !svg.includes("#1740bc") || !svg.includes("#eaa549")) {
-    throw new Error("emblem.svg besitzt nicht die erwartete Emblemfassung.");
+    throw new Error("emblem.svg is not the expected emblem version.");
   }
   const outputs = new Map([
-    [16, "favicon-16x16.png"], [24, "marke-check-24x24.png"], [32, "favicon-32x32.png"], [48, "favicon-48x48.png"],
+    [16, "favicon-16x16.png"], [24, "brand-check-24x24.png"], [32, "favicon-32x32.png"], [48, "favicon-48x48.png"],
     [180, "apple-touch-icon.png"], [192, "android-chrome-192x192.png"], [512, "android-chrome-512x512.png"],
   ]);
   const pngs = new Map();

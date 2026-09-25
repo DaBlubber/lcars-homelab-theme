@@ -9,7 +9,7 @@ const outputDir = process.argv[2] ? resolve(process.argv[2]) : join(here, "asset
 
 const sourceSvg = await readFile(sourcePath, "utf8");
 if (!sourceSvg.includes('viewBox="0 0 100 116"') || !sourceSvg.includes("em-clip-gitea")) {
-  throw new Error("emblem--gitea.svg besitzt nicht die erwartete Gitea-Fassung.");
+  throw new Error("emblem--gitea.svg is not the expected Gitea version.");
 }
 
 await mkdir(outputDir, { recursive: true });

@@ -1,139 +1,96 @@
-# LCARS-Homelab fuer Windows 11
+# LCARS-Homelab for Windows 11
 
-Das Paket installiert ein Windows-Theme ausschliesslich im aktuellen
-Benutzerprofil. Es verwendet keine gepatchten Systemdateien, keinen
-Hintergrunddienst und keine Administratorrechte. Es setzt lokale Hintergruende,
-Windows-Dunkelmodus, Koenigsblau als Akzent, Windows-Standardzeiger und nach
-Moeglichkeit fuenf kurze eigene Systemklaenge.
+A Windows theme installed **only in the current user profile**: no patched system
+files, no background service, no administrator rights. It sets two wallpapers, dark
+mode, royal blue as the accent colour, the standard Windows pointers and - where
+Windows accepts it - five short system sounds of its own.
 
-## Dateien erzeugen
+| `frame` | `signal` |
+|---|---|
+| ![frame wallpaper](wallpapers/frame-1920x1080.png) | ![signal wallpaper](wallpapers/signal-1920x1080.png) |
+
+## Build the files
 
 ```powershell
-cd lcars-homelab-theme\integrations\windows
+cd integrations\windows
 node .\build-wallpapers.mjs
 node .\build-sounds.mjs
 ```
 
-Die Skripte schreiben sechs PNGs nach `wallpapers\` und fuenf WAVs nach
-`sounds\`. Die beiden 1920x1080-Motive werden im Theme verwendet; 2560x1440 und
-3840x2160 liegen fuer eine spaetere Monitorumstellung bereit. Die Mitte bleibt
-frei, die untere Leiste endet oberhalb des typischen Taskleistenbereichs.
+This writes six PNGs to `wallpapers\` (`frame` and `signal` in 1920x1080,
+2560x1440 and 3840x2160) and five WAVs to `sounds\`. The theme uses the 1920x1080
+pair; the others are there for other monitors. The centre stays free, and the bottom
+bar ends above the usual taskbar area.
 
-## Installieren und aktualisieren
-
-Nach dem Erzeugen der Dateien:
+## Install and update
 
 ```powershell
-.\installieren.ps1
+.\install.ps1
 ```
 
-Falls die lokale Ausfuehrungsrichtlinie Skripte sperrt, kann genau dieser eine
-Prozess ohne Aenderung der systemweiten Richtlinie gestartet werden:
+If the execution policy blocks scripts, run just this one process without changing
+the policy:
 
 ```powershell
-powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\installieren.ps1
+powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\install.ps1
 ```
 
-Das Skript:
+The script
 
-1. prueft, ob alle sechs Hintergruende und fuenf Klaenge vorhanden sind;
-2. kopiert sie nach
-   `%LocalAppData%\Microsoft\Windows\Themes\LCARS-Homelab\`;
-3. ersetzt in der Vorlage `__ZIELVERZEICHNIS__` durch diesen absoluten Pfad;
-4. schreibt dort eine fertige `LCARS-Homelab.theme` als UTF-16-LE-Datei;
-5. oeffnet die fertige Datei ueber die Windows-Dateizuordnung.
+1. checks that all six wallpapers and five sounds exist;
+2. copies them to `%LocalAppData%\Microsoft\Windows\Themes\LCARS-Homelab\`;
+3. replaces `__TARGET_DIR__` in the template with that absolute path;
+4. writes the finished `LCARS-Homelab.theme` there as UTF-16 LE;
+5. opens it through the Windows file association.
 
-Ein erneuter Lauf ueberschreibt dieselben Zieldateien und aktualisiert dieselbe
-Installation. Er erzeugt weder ein zweites Zielverzeichnis noch einen zweiten
-Theme-Dateinamen.
+Running it again overwrites the same files and updates the same installation.
 
-Die neben dem Skript liegende `LCARS-Homelab.theme` ist **nur eine Vorlage**.
-Ihr Platzhalter ist absichtlich kein gueltiger Windows-Pfad. Diese Datei nicht
-doppelklicken; nur die vom Installationsskript erzeugte Fassung ist benutzbar.
+The `LCARS-Homelab.theme` next to the script is **only a template** - its
+placeholder is not a valid path, so do not double-click it.
 
-Unter **Einstellungen > Personalisierung > Farben** kann optional
-"Akzentfarbe auf Start und Taskleiste anzeigen" beziehungsweise "Akzentfarbe auf
-Titelleisten und Fensterrahmen anzeigen" aktiviert werden. Das Theme schaltet
-diese beiden separaten Benutzeroptionen nicht zwangsweise ein.
+Optionally turn on **Settings → Personalization → Colors → Show accent color on
+Start and taskbar / on title bars and window borders**; the theme does not force
+these.
 
-## Gepruefte Farbwerte
+## Colours
 
-Koenigsblau (`#1740bc`) ist absichtlich der Systemakzent statt Gold. Gold bleibt
-im Wallpaper der klare Markenakzent; Koenigsblau ist auf grossen Titelleisten,
-Auswahlflaechen und Start-Oberflaechen ruhiger.
+Royal blue (`#1740bc`) is the system accent on purpose - on large title bars and
+selections it is calmer than gold, which stays the brand accent in the wallpapers.
+The theme uses `AutoColorization=0`, a fixed `ColorizationColor=0XC41740BC`
+(AARRGGBB: alpha `C4`, RGB `17 40 BC`) and `SystemMode=Dark`/`AppMode=Dark`, the same
+combination as Microsoft's own `dark.theme`.
 
-Das auf diesem Rechner vorhandene Microsoft-Theme `dark.theme` verwendet dieselbe
-Kombination aus `AutoColorization=0`, einem festen `ColorizationColor` sowie
-`SystemMode=Dark` und `AppMode=Dark`. Microsofts Wert `0XC40078D4` ist im Format
-AARRGGBB: Alpha `C4` und RGB `00 78 D4`. Entsprechend ist
-`0XC41740BC` Alpha `C4` plus Homelab-Koenigsblau `17 40 BC`.
-`AutoColorization=0` verhindert dabei die automatische Ableitung aus dem
-Hintergrundbild. Nicht geprueft wurde die sichtbare Wirkung jeder moeglichen
-Windows-Richtlinie oder der beiden oben genannten Akzent-Anzeigeschalter.
+## Sounds
 
-## Klangschema: belegte und ungepruefte Teile
+The WAV files are self-generated sine tones: mono, 16-bit PCM, 44.1 kHz, 100 to
+200 ms, 6 to 12 % peak level. Whether Windows registers the scheme name
+`LCARS-Homelab` and the per-event assignments from a theme file is not guaranteed
+on every Windows 11 version, and the installer does not write the registry. If you
+hear no Homelab sounds:
 
-Belegt und binaer geprueft sind die WAV-Dateien: Mono, 16 Bit PCM, 44,1 kHz,
-100 bis 200 ms und etwa 6 bis 12 Prozent Spitzenpegel. Es sind selbst erzeugte
-Sinustoene ohne uebernommenes Tonmaterial.
+1. Open **Settings → System → Sound → More sound settings → Sounds**.
+2. Assign the files from `%LocalAppData%\Microsoft\Windows\Themes\LCARS-Homelab\sounds\`
+   to **Default Beep**, **Critical Stop**, **Notification**, **Device Connect** and
+   **Device Disconnect**.
+3. **Save As…** `LCARS-Homelab`.
 
-Nicht belegt ist, dass `SchemeName=LCARS-Homelab` einen zuvor nicht registrierten
-Schemanamen selbst in jeder Windows-11-Version anlegt. Die Microsoft-Themes auf
-diesem Rechner verweisen dort nur auf das bereits registrierte Windows-Schema.
-`installieren.ps1` nimmt bewusst keine direkten Registry-Aenderungen vor. Die
-Vorlage enthaelt zusaetzlich einzelne
-`[AppEvents\Schemes\Apps\.Default\...\.Current]`-Zuordnungen. Ob Windows diese
-beim Oeffnen vollstaendig uebernimmt, konnte ohne Anwenden des Themes nicht
-geprueft werden. Deshalb wird ein automatisch sichtbares Klangschema nicht
-versprochen.
-
-Falls keine Homelab-Toene zu hoeren sind:
-
-1. **Einstellungen > System > Sound > Weitere Soundeinstellungen > Sounds**
-   oeffnen.
-2. Den Ereignissen **Standardton/Default Beep**, **Kritischer Abbruch/Critical
-   Stop**, **Benachrichtigung/Notification**, **Geraet verbunden/Device Connect**
-   und **Geraet getrennt/Device Disconnect** die entsprechenden Dateien aus
-   `%LocalAppData%\Microsoft\Windows\Themes\LCARS-Homelab\sounds\` zuweisen.
-3. Mit **Speichern unter...** den Namen `LCARS-Homelab` vergeben.
-
-Zum Abschalten im selben Dialog **Keine Sounds** oder **Windows-Standard**
-waehlen. Ein manuell gespeichertes Schema bleibt bestehen, bis es dort separat
-geloescht wird.
-
-## Deinstallieren und Grenzen des Rueckwegs
+## Uninstall
 
 ```powershell
-.\deinstallieren.ps1
+.\uninstall.ps1
 ```
 
-Bei derselben Ausfuehrungssperre gilt entsprechend:
+(or with `-ExecutionPolicy Bypass` as above). The script asks Windows to open the
+built-in `aero.theme`, waits a moment and then removes only
+`%LocalAppData%\Microsoft\Windows\Themes\LCARS-Homelab\`. If a policy or a slow
+settings dialog keeps the theme, pick a Windows theme under **Personalization →
+Themes** by hand.
 
-```powershell
-powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\deinstallieren.ps1
-```
+Not removed automatically: a sound scheme you saved by hand, cached theme
+previews, the accent colour switches, settings Windows synced to other devices.
 
-Das Skript fordert Windows zuerst auf, das eingebaute
-`%SystemRoot%\Resources\Themes\aero.theme` zu oeffnen, wartet kurz und entfernt
-danach nur
-`%LocalAppData%\Microsoft\Windows\Themes\LCARS-Homelab\`. Falls Windows den
-Wechsel wegen einer Richtlinie oder eines asynchronen Einstellungsdialogs nicht
-uebernimmt, unter **Einstellungen > Personalisierung > Designs** ein Windows-Design
-manuell waehlen.
+## Pointers
 
-Nicht automatisch entfernt oder zurueckgestellt werden:
-
-- ein ueber den Sounddialog manuell gespeichertes Klangschema;
-- zwischengespeicherte Theme-Vorschaubilder oder ein von Windows zusaetzlich
-  gespeichertes benutzerdefiniertes Design;
-- separat geaenderte Schalter fuer Akzentfarbe auf Taskleiste oder Titelleisten;
-- Einstellungen, die Windows ueber die Kontosynchronisierung auf andere Geraete
-  uebertragen hat;
-- die Quelldateien in diesem Repository.
-
-## Mauszeiger
-
-Ein eigenes Zeigerschema ist nicht enthalten. Zeiger muessen in jeder Groesse,
-bei Skalierung und in ihren Hotspots praezise sein; eine dekorative, aber
-alltaeglich schlechtere Variante waere kein Gewinn. Die Vorlage verwendet exakt
-die Zeigerpfade des lokalen Windows-Standardthemes.
+No custom pointer scheme is included: pointers have to be precise at every size and
+scaling, and a decorative but worse pointer is no gain. The template uses exactly
+the standard Windows pointer paths.

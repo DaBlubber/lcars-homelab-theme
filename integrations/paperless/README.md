@@ -1,46 +1,35 @@
-# Paperless: nur Marke
+# Paperless-ngx: brand only
 
-Paketversion **1.12.0**. Gemessener Stand ist **Paperless-ngx 3.0.4** im Nomad-Job
-`Nomad-Services/standard/paperless.nomad`.
+Paperless-ngx (tested with 3.0.4) offers exactly two branding settings and **no way
+to add custom CSS**:
 
-## Branding und Grenze
+- `PAPERLESS_APP_TITLE` - the visible application title;
+- `PAPERLESS_APP_LOGO` - the logo.
 
-Paperless bietet fuer das Branding ausschliesslich diese beiden
-Umgebungsvariablen:
+This integration therefore only sets title and logo.
 
-- `PAPERLESS_APP_TITLE` setzt den sichtbaren Anwendungstitel;
-- `PAPERLESS_APP_LOGO` setzt das Logo.
+## Install
 
-Beide Variablen sind derzeit **nicht gesetzt**. Im Job steht nur `PAPERLESS_URL`.
+`PAPERLESS_APP_LOGO` must be a **path on the Paperless site**. Measured on 3.0.4:
 
-**Eigenes CSS ist nicht moeglich.** Paperless bietet dafuer keinen
-Erweiterungspunkt. Diese Integration bleibt deshalb ausdruecklich bei "nur
-Marke": Titel und Logo. Es gibt kein zusaetzliches Stylesheet, nach dem bei einer
-spaeteren Anpassung gesucht werden muesste.
+- `/logo/...` inside the media directory (as documented) returns 404 - the media
+  directory is not served over HTTP;
+- an absolute URL does not work - Paperless strips the colon and prepends its own
+  address;
+- `/static/...` is served cleanly.
 
-## Logo bereitstellen
+So mount the emblem into the static directory of the container:
 
-`PAPERLESS_APP_LOGO` erwartet einen Pfad relativ zum Medienverzeichnis. Der
-gemessene Mount verbindet `/srv/paperlessmedia` auf dem Host mit
-`/usr/src/paperless/media` im Container.
-
-Die Datei `assets/emblem--paperless.svg` gehoert daher nach:
-
-```text
-/srv/paperlessmedia/logo/emblem--paperless.svg
+```yaml
+volumes:
+  - ./assets/emblem--paperless.svg:/usr/src/paperless/static/emblem--paperless.svg:ro
+environment:
+  PAPERLESS_APP_TITLE: "Homelab Documents"
+  PAPERLESS_APP_LOGO: "/static/emblem--paperless.svg"
 ```
 
-Im Nomad-Job wird sie so referenziert:
+(The nomad-jobs repository has a complete Nomad example of exactly this.)
 
-```hcl
-PAPERLESS_APP_LOGO = "/logo/emblem--paperless.svg"
-```
+## Uninstall
 
-`PAPERLESS_APP_TITLE` wird daneben auf den gewuenschten Anwendungstitel gesetzt.
-Diese README dokumentiert nur die gemessene Einbindung; sie veraendert den
-Nomad-Job nicht.
-
-## Rueckweg
-
-`PAPERLESS_APP_TITLE` und `PAPERLESS_APP_LOGO` wieder aus dem Job entfernen und
-die Logodatei aus `/srv/paperlessmedia/logo/` loeschen.
+Remove both variables and the mount, then restart Paperless.

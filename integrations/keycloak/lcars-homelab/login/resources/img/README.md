@@ -1,20 +1,15 @@
-# Hintergrund-Slot
+# Background slot
 
-`hintergrund.jpg` ist die aktive Fassung: das vorbereitete Weltraumfoto mit
-1536 × 1024 Pixeln und rund 246 KB. Die Datei ist bereits für die Auslieferung
-kodiert und darf nicht erneut bearbeitet oder komprimiert werden.
+`background.svg` is the default: a drawn LCARS background with a dark, empty centre,
+segmented bars at the edges and a slow scanning light.
 
-`hintergrund.svg` bleibt als gezeichnete LCARS-Alternative im selben Verzeichnis.
-Die aktive Datei wird ausschließlich über `--rl-background-image` am Anfang von
-`../css/styles.css` gewählt. Dort liegen auch die gleichmäßige Abdunklung, der
-90 Sekunden lange CSS-Zoom von 100 auf 102,5 Prozent und die vollständige
-Abschaltung bei `prefers-reduced-motion: reduce`; Templates und JavaScript sind
-dafür nicht nötig.
+The active image is chosen only through `--rl-background-image` at the top of
+`../css/styles.css`. To use a photo, put it into this folder and point the variable
+at it, e.g. `url("../img/background.jpg")`. The uniform dimming, the 90-second zoom
+(100 → 102.5 %) and switching it all off for `prefers-reduced-motion: reduce` are in
+the same stylesheet; no templates or JavaScript are involved.
 
-Das 3:2-Foto füllt per `cover` jedes Seitenverhältnis. Bei sehr breiten Fenstern
-ist dafür ein starker Beschnitt oben und unten unvermeidlich; eine größere oder
-breitere Quelle würde dort mehr Motiv zeigen.
-
-Fehlt die gewählte Bilddatei, trägt der schwarze CSS-Grund die Seite. Die
-Login-Konsole ist deckend und behält deshalb unabhängig vom Motiv ihre geprüften
-Textkontraste.
+An image fills every aspect ratio with `cover`, so very wide windows cut off the top
+and bottom of a 3:2 photo - a wider source shows more. If the image is missing, the
+black ground carries the page, and the opaque login console keeps its checked text
+contrasts regardless of the background.

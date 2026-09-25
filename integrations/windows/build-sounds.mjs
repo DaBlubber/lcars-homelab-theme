@@ -48,24 +48,24 @@ function makeWav(duration, voices) {
 }
 
 const sounds = [
-  ["standard.wav", 0.10, [
+  ["default.wav", 0.10, [
     { start: 0, duration: 0.10, frequency: 392, level: 0.09 },
     { start: 0, duration: 0.10, frequency: 588, level: 0.035 },
   ]],
-  ["fehler.wav", 0.18, [
+  ["critical-stop.wav", 0.18, [
     { start: 0, duration: 0.085, frequency: 220, level: 0.08, release: 0.025 },
     { start: 0.095, duration: 0.085, frequency: 185, level: 0.075, release: 0.025 },
   ]],
-  ["benachrichtigung.wav", 0.16, [
+  ["notification.wav", 0.16, [
     { start: 0, duration: 0.075, frequency: 523.25, level: 0.075 },
     { start: 0.075, duration: 0.085, frequency: 659.25, level: 0.07 },
   ]],
-  ["geraet-verbunden.wav", 0.20, [
+  ["device-connect.wav", 0.20, [
     { start: 0, duration: 0.08, frequency: 329.63, level: 0.065 },
     { start: 0.06, duration: 0.08, frequency: 440, level: 0.065 },
     { start: 0.12, duration: 0.08, frequency: 554.37, level: 0.06 },
   ]],
-  ["geraet-getrennt.wav", 0.20, [
+  ["device-disconnect.wav", 0.20, [
     { start: 0, duration: 0.08, frequency: 554.37, level: 0.06 },
     { start: 0.06, duration: 0.08, frequency: 440, level: 0.065 },
     { start: 0.12, duration: 0.08, frequency: 329.63, level: 0.065 },
@@ -74,5 +74,5 @@ const sounds = [
 
 for (const [filename, duration, voices] of sounds) {
   await writeFile(join(outputDir, filename), makeWav(duration, voices));
-  console.log(`Erzeugt: ${filename} (${Math.round(duration * 1000)} ms)`);
+  console.log(`Written: ${filename} (${Math.round(duration * 1000)} ms)`);
 }

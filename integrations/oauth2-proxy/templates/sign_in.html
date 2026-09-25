@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="de">
+<html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="color-scheme" content="dark">
-  <title>Homelab-Infrastruktur – Anmeldung</title>
+  <title>Homelab infrastructure – sign in</title>
   <style>
     @property --rl-oauth2-sequence-primary-position {
       syntax: "<percentage>";
@@ -27,20 +27,20 @@
     :root {
       color-scheme: dark;
       --rl-gold: #eaa549;
-      --rl-koenigsblau: #1740bc;
-      --rl-lavendel: #9a8ec9;
-      --rl-blau: #5a7fe0;
-      --rl-grau: #3c4257;
-      --rl-grund: #000000;
-      --rl-flaeche-1: #0b0d14;
-      --rl-flaeche-2: #10131a;
-      --rl-flaeche-3: #1b1f2b;
-      --rl-linie: #53596b;
+      --rl-royal-blue: #1740bc;
+      --rl-lavender: #9a8ec9;
+      --rl-blue: #5a7fe0;
+      --rl-gray: #3c4257;
+      --rl-ground: #000000;
+      --rl-surface-1: #0b0d14;
+      --rl-surface-2: #10131a;
+      --rl-surface-3: #1b1f2b;
+      --rl-border: #53596b;
       --rl-text: #dfe4f2;
-      --rl-text-stark: #f3f5fa;
-      --rl-text-gedaempft: #aeb4c3;
-      --rl-fokus: #f6c77f;
-      --rl-fehler: #e28282;
+      --rl-text-strong: #f3f5fa;
+      --rl-text-muted: #aeb4c3;
+      --rl-focus: #f6c77f;
+      --rl-error: #e28282;
       --rl-rail: 4.625rem;
       --rl-block-gap: 0.25rem;
       --rl-block-height: 1.625rem;
@@ -65,7 +65,7 @@
     }
 
     body {
-      background-color: var(--rl-grund);
+      background-color: var(--rl-ground);
       color: var(--rl-text);
       display: grid;
       font-family: "Exo 2", "Segoe UI", system-ui, sans-serif;
@@ -76,7 +76,7 @@
       overflow-x: hidden;
     }
 
-    /* Foto und Abdunklung bleiben fest unter der frei schwebenden Konsole. */
+    /* Background and dimming stay fixed below the floating console. */
     body::before,
     body::after {
       content: "";
@@ -87,7 +87,7 @@
 
     body::before {
       animation: rl-oauth2-background-approach 90s ease-in-out infinite alternate;
-      background-color: var(--rl-grund);
+      background-color: var(--rl-ground);
       background-image: var(--rl-background-image);
       background-position: center;
       background-repeat: no-repeat;
@@ -215,7 +215,7 @@
     }
 
     .rail-block {
-      border-block: calc(var(--rl-block-gap) / 2) solid var(--rl-grund);
+      border-block: calc(var(--rl-block-gap) / 2) solid var(--rl-ground);
       border-radius: 0 var(--rl-radius-end) var(--rl-radius-end) 0;
       height: var(--rl-block-height);
       left: 0;
@@ -227,21 +227,21 @@
     .rail-block--lavender {
       --rl-rail-glow: rgba(154, 142, 201, 0.42);
       animation: rl-oauth2-rail-activity 9.73s ease-in-out -2.11s infinite;
-      background-color: var(--rl-lavendel);
+      background-color: var(--rl-lavender);
       top: 1rem;
     }
 
     .rail-block--blue {
       --rl-rail-glow: rgba(90, 127, 224, 0.42);
       animation: rl-oauth2-rail-activity 11.89s ease-in-out -6.37s infinite;
-      background-color: var(--rl-blau);
+      background-color: var(--rl-blue);
       top: calc(1rem + var(--rl-block-height) + var(--rl-block-gap));
     }
 
     .rail-block--gray {
       --rl-rail-glow: rgba(174, 180, 195, 0.32);
       animation: rl-oauth2-rail-activity 13.03s ease-in-out -9.17s infinite;
-      background-color: var(--rl-grau);
+      background-color: var(--rl-gray);
       top: calc(1rem + (var(--rl-block-height) + var(--rl-block-gap)) * 2);
     }
 
@@ -252,7 +252,7 @@
     }
 
     h1 {
-      color: var(--rl-text-stark);
+      color: var(--rl-text-strong);
       font-size: clamp(1.45rem, 4vw, 1.875rem);
       letter-spacing: 0.15625rem;
       line-height: 1.2;
@@ -261,7 +261,7 @@
     }
 
     .eyebrow {
-      color: var(--rl-lavendel);
+      color: var(--rl-lavender);
       font-size: 0.75rem;
       font-weight: 700;
       letter-spacing: 0.15625rem;
@@ -270,8 +270,8 @@
     }
 
     .message {
-      background: var(--rl-flaeche-3);
-      border-left: 0.25rem solid var(--rl-blau);
+      background: var(--rl-surface-3);
+      border-left: 0.25rem solid var(--rl-blue);
       color: var(--rl-text);
       margin: 0 0 1.25rem;
       padding: 0.8rem 1rem;
@@ -289,7 +289,7 @@
 
     .divider {
       align-items: center;
-      color: var(--rl-text-gedaempft);
+      color: var(--rl-text-muted);
       display: grid;
       font-size: 0.7rem;
       gap: 0.75rem;
@@ -301,13 +301,13 @@
 
     .divider::before,
     .divider::after {
-      background: var(--rl-linie);
+      background: var(--rl-border);
       content: "";
       height: 1px;
     }
 
     label {
-      color: var(--rl-lavendel);
+      color: var(--rl-lavender);
       font-size: 0.75rem;
       font-weight: 700;
       letter-spacing: 0.15625rem;
@@ -315,11 +315,11 @@
     }
 
     input {
-      background: var(--rl-flaeche-1);
-      border: 1px solid var(--rl-grau);
-      border-left: 0.25rem solid var(--rl-blau);
+      background: var(--rl-surface-1);
+      border: 1px solid var(--rl-gray);
+      border-left: 0.25rem solid var(--rl-blue);
       border-radius: 0 0.25rem 0.25rem 0;
-      color: var(--rl-text-stark);
+      color: var(--rl-text-strong);
       font: 1rem "JetBrains Mono", ui-monospace, "Cascadia Mono", Consolas, monospace;
       min-height: 2.75rem;
       padding: 0.7rem 0.85rem;
@@ -332,8 +332,8 @@
     }
 
     input:hover {
-      border-color: var(--rl-blau);
-      box-shadow: 0 0 8px var(--rl-blau);
+      border-color: var(--rl-blue);
+      box-shadow: 0 0 8px var(--rl-blue);
     }
 
     button {
@@ -362,29 +362,29 @@
 
     @keyframes rl-oauth2-confirm {
       0%, 100% { box-shadow: 0 0 0 1px var(--rl-gold); filter: brightness(1.08); }
-      42% { box-shadow: 0 0 0 2px var(--rl-text-stark), 0 0 18px var(--rl-gold); filter: brightness(1.48); }
+      42% { box-shadow: 0 0 0 2px var(--rl-text-strong), 0 0 18px var(--rl-gold); filter: brightness(1.48); }
     }
 
     .alert {
       background: #201519;
-      border-top: 0.25rem solid var(--rl-fehler);
-      color: var(--rl-text-stark);
+      border-top: 0.25rem solid var(--rl-error);
+      color: var(--rl-text-strong);
       margin-top: 1.25rem;
       padding: 0.9rem 1rem;
     }
 
     .alert strong {
-      color: var(--rl-fehler);
+      color: var(--rl-error);
       font-family: "JetBrains Mono", ui-monospace, "Cascadia Mono", Consolas, monospace;
     }
 
     :focus-visible {
-      outline: 3px double var(--rl-fokus);
+      outline: 3px double var(--rl-focus);
       outline-offset: 3px;
     }
 
     .page-footer {
-      color: var(--rl-text-gedaempft);
+      color: var(--rl-text-muted);
       font-size: 0.75rem;
       padding: 0.75rem 1rem 1.25rem;
       position: relative;
@@ -448,25 +448,16 @@
     <div class="console-wrap">
       <header class="brand-cap">
         <svg class="crest" viewBox="0 0 100 116" role="img" aria-label="Emblem">
-          <defs>
-            <clipPath id="em-clip-oauth2-sign-in">
-              <path d="M15,39 L85,39 L85,75 C85,92 69,102 50,107 C31,102 15,92 15,75 Z"/>
-            </clipPath>
-          </defs>
-          <g fill="#6b7280" stroke="#2b2f38" stroke-width="1">
-            <rect x="6" y="16" width="20" height="18"/><rect x="6" y="6" width="7" height="10"/><rect x="19" y="6" width="7" height="10"/>
-            <rect x="74" y="16" width="20" height="18"/><rect x="74" y="6" width="7" height="10"/><rect x="87" y="6" width="7" height="10"/>
-            <rect x="26" y="22" width="48" height="12"/><rect x="30" y="14" width="6" height="8"/><rect x="44" y="14" width="6" height="8"/><rect x="58" y="14" width="6" height="8"/>
-          </g>
-          <g fill="#10131a"><rect x="13" y="22" width="6" height="10" rx="3"/><rect x="81" y="22" width="6" height="10" rx="3"/></g>
-          <path d="M10,34 L90,34 L90,76 C90,96 72,108 50,114 C28,108 10,96 10,76 Z" fill="#eaa549"/>
-          <path d="M15,39 L85,39 L85,75 C85,92 69,102 50,107 C31,102 15,92 15,75 Z" fill="#1740bc"/>
+          <defs><clipPath id="em-clip-oauth2-sign-in"><rect x="15" y="23" width="70" height="70" rx="10"/></clipPath></defs>
+          <rect x="10" y="18" width="80" height="80" rx="14" fill="#eaa549"/>
+          <rect x="15" y="23" width="70" height="70" rx="10" fill="#1740bc"/>
           <g clip-path="url(#em-clip-oauth2-sign-in)">
-            <circle cx="38" cy="58" r="11" fill="#eaa549"/><circle cx="38" cy="58" r="5" fill="#1740bc"/>
-            <rect x="46" y="54.5" width="32" height="7" fill="#eaa549"/><rect x="63" y="61.5" width="6" height="9" fill="#eaa549"/><rect x="72" y="61.5" width="6" height="12" fill="#eaa549"/>
+            <rect x="22" y="36" width="56" height="10" rx="5" fill="#eaa549"/>
+            <rect x="22" y="52" width="42" height="10" rx="5" fill="#eaa549"/>
+            <rect x="22" y="68" width="28" height="10" rx="5" fill="#eaa549"/>
           </g>
         </svg>
-        <span>Homelab · Zugriffskontrolle</span>
+        <span>Homelab · Access control</span>
       </header>
 
       <section class="console" aria-labelledby="page-title">
@@ -474,39 +465,39 @@
         <span class="rail-block rail-block--blue" aria-hidden="true"></span>
         <span class="rail-block rail-block--gray" aria-hidden="true"></span>
 
-        <h1 id="page-title">Homelab-Infrastruktur</h1>
-        <p class="eyebrow">Zugang nur nach Anmeldung</p>
+        <h1 id="page-title">Homelab infrastructure</h1>
+        <p class="eyebrow">Sign in to continue</p>
 
         <form method="GET" action="{{.ProxyPrefix}}/start">
           <input type="hidden" name="rd" value="{{.Redirect}}">
           {{if .SignInMessage}}
           <p class="message">{{.SignInMessage}}</p>
           {{end}}
-          <button type="submit">Anmelden mit {{.ProviderName}}</button>
+          <button type="submit">Sign in with {{.ProviderName}}</button>
         </form>
 
         {{if .CustomLogin}}
-        <div class="divider" aria-hidden="true"><span>Direktzugang</span></div>
+        <div class="divider" aria-hidden="true"><span>Direct access</span></div>
         <form class="custom-login" method="POST" action="{{.ProxyPrefix}}/sign_in">
           <input type="hidden" name="rd" value="{{.Redirect}}">
           <div class="field">
-            <label for="username">Benutzername</label>
+            <label for="username">Username</label>
             <input type="text" name="username" id="username" autocomplete="username" placeholder="name@example.com">
           </div>
           <div class="field">
-            <label for="password">Passwort</label>
+            <label for="password">Password</label>
             <input type="password" name="password" id="password" autocomplete="current-password" placeholder="••••••••">
           </div>
-          <button type="submit">Anmelden</button>
+          <button type="submit">Sign in</button>
         </form>
         {{end}}
 
         {{if eq .StatusCode 400 401}}
         <div class="alert" role="alert">
           {{if eq .StatusCode 400}}
-          <strong>{{.StatusCode}}</strong>: Der Benutzername darf nicht leer sein.
+          <strong>{{.StatusCode}}</strong>: The username must not be empty.
           {{else}}
-          <strong>{{.StatusCode}}</strong>: Benutzername oder Passwort ist ungültig.
+          <strong>{{.StatusCode}}</strong>: Invalid username or password.
           {{end}}
         </div>
         {{end}}
@@ -519,7 +510,7 @@
       (function() {
         var inputs = document.getElementsByName('rd');
         for (var i = 0; i < inputs.length; i++) {
-          // Den Hash genau einmal an das Weiterleitungsziel anhaengen.
+          // Append the hash to the redirect target exactly once.
           var idx = inputs[i].value.indexOf('#');
           if (idx >= 0) {
             inputs[i].value = inputs[i].value.substr(0, idx);
@@ -533,7 +524,7 @@
   <footer class="page-footer">
     {{if eq .Footer "-"}}
     {{else if eq .Footer ""}}
-    <p>Abgesichert mit <a href="https://github.com/oauth2-proxy/oauth2-proxy#oauth2_proxy">OAuth2 Proxy</a>, Fassung {{.Version}}</p>
+    <p>Secured with <a href="https://github.com/oauth2-proxy/oauth2-proxy#oauth2_proxy">OAuth2 Proxy</a> version {{.Version}}</p>
     {{else}}
     <p>{{.Footer}}</p>
     {{end}}

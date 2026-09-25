@@ -27,39 +27,39 @@
 :root {
   color-scheme: dark;
 
-  /* Emblem und LCARS */
+  /* Emblem and LCARS */
   --rl-gold: #eaa549;
-  --rl-koenigsblau: #1740bc;
-  --rl-lavendel: #9a8ec9;
-  --rl-blau: #5a7fe0;
-  --rl-grau: #3c4257;
+  --rl-royal-blue: #1740bc;
+  --rl-lavender: #9a8ec9;
+  --rl-blue: #5a7fe0;
+  --rl-gray: #3c4257;
 
-  /* Dunkle Flächen */
-  --rl-grund: #000000;
-  --rl-flaeche-1: #0b0d14;
-  --rl-flaeche-2: #10131a;
-  --rl-flaeche-3: #1b1f2b;
-  --rl-linie: #2a2e38;
+  /* Dark surfaces */
+  --rl-ground: #000000;
+  --rl-surface-1: #0b0d14;
+  --rl-surface-2: #10131a;
+  --rl-surface-3: #1b1f2b;
+  --rl-border: #2a2e38;
   --rl-text: #dfe4f2;
-  --rl-text-stark: #f3f5fa;
-  --rl-text-gedaempft: #8b90a0;
+  --rl-text-strong: #f3f5fa;
+  --rl-text-muted: #8b90a0;
 
-  /* Status. Gold ist zugleich Warnfarbe. */
-  --rl-status-erfolg: #7fb069;
-  --rl-status-warnung: #eaa549;
-  --rl-status-fehler: #cc6666;
+  /* Status. Gold doubles as the warning colour. */
+  --rl-status-success: #7fb069;
+  --rl-status-warning: #eaa549;
+  --rl-status-error: #cc6666;
   --rl-status-info: #5a7fe0;
 
-  /* Semantische Rollen */
-  --rl-akzent: var(--rl-gold);
-  --rl-akzent-zweit: var(--rl-lavendel);
-  --rl-handlung: var(--rl-gold);
-  --rl-handlung-text: #000000;
-  --rl-fokus: #f6c77f;
-  --rl-deaktiviert: #62687a;
+  /* Semantic roles */
+  --rl-accent: var(--rl-gold);
+  --rl-accent-secondary: var(--rl-lavender);
+  --rl-action: var(--rl-gold);
+  --rl-action-text: #000000;
+  --rl-focus: #f6c77f;
+  --rl-disabled: #62687a;
   --rl-overlay: rgba(0, 0, 0, 0.72);
 
-  /* Abstandsskala */
+  /* Spacing scale */
   --rl-space-1: 4px;
   --rl-space-2: 8px;
   --rl-space-3: 12px;
@@ -69,7 +69,7 @@
   --rl-space-7: 32px;
   --rl-space-8: 40px;
 
-  /* LCARS-Geometrie aus Stilrichtung A */
+  /* LCARS geometry (level A) */
   --rl-rail: 74px;
   --rl-block-gap: 4px;
   --rl-block-height: 26px;
@@ -80,7 +80,7 @@
   --rl-radius-control: 4px;
   --rl-radius-panel: 6px;
 
-  /* Typografie */
+  /* Typography */
   --rl-font-sans: "Exo 2", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   --rl-font-mono: "JetBrains Mono", "Cascadia Mono", "SFMono-Regular", Consolas, "Liberation Mono", monospace;
   --rl-font-size-xs: 0.6875rem;
@@ -94,7 +94,7 @@
   --rl-tracking-label: 2.5px;
   --rl-tracking-heading: 3px;
 
-  /* Bewegung. Ruheflächen bleiben schattenlos; Glow gehört nur zu Aktivzuständen. */
+  /* Motion. Resting surfaces stay without shadows; glow belongs to active states only. */
   --rl-motion-fast: 140ms;
   --rl-motion-base: 180ms;
   --rl-motion-slow: 320ms;
@@ -102,19 +102,19 @@
   --rl-shadow: none;
 }
 
-/* Dieselben Tokens, wärmer und luftiger für Familien-Anwendungen. */
+/* The same tokens, warmer and airier for family applications. */
 .lcars-family {
-  --rl-grund: #090705;
-  --rl-flaeche-1: #15110f;
-  --rl-flaeche-2: #1d1713;
-  --rl-flaeche-3: #292019;
-  --rl-linie: #4a3b2f;
+  --rl-ground: #090705;
+  --rl-surface-1: #15110f;
+  --rl-surface-2: #1d1713;
+  --rl-surface-3: #292019;
+  --rl-border: #4a3b2f;
   --rl-text: #f0e5d6;
-  --rl-text-stark: #fff8ec;
-  --rl-text-gedaempft: #c3b39d;
-  --rl-akzent: #f0ad55;
-  --rl-handlung: #f0ad55;
-  --rl-akzent-zweit: #c0a9d5;
+  --rl-text-strong: #fff8ec;
+  --rl-text-muted: #c3b39d;
+  --rl-accent: #f0ad55;
+  --rl-action: #f0ad55;
+  --rl-accent-secondary: #c0a9d5;
   --rl-font-size-base: 0.9375rem;
   --rl-font-size-sm: 0.875rem;
   --rl-line-base: 1.7;

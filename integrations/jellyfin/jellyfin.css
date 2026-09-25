@@ -1,19 +1,18 @@
 /**
- * Homelab LCARS Familie fuer den Jellyfin-Webclient.
- * Paketversion 1.11.0; vorgesehene Stylesheet-Adresse:
- * https://brand.example.com/v1.11.0/integrations/jellyfin/jellyfin.css
+ * Homelab LCARS family variant for the Jellyfin web client.
+ * Include it from where you host this repository, e.g.
+ * https://brand.example.com/lcars-homelab/integrations/jellyfin/jellyfin.css
  *
- * Geprueft gegen die lokal bereitgestellten Jellyfin-Webclient-Stylesheets
- * main.css und vendor.css vom 2026-09-05 sowie die am 2026-09-06 im laufenden
- * Login gemessenen Klassen. Reines CSS: kein JavaScript, kein DOM-Umbau und
- * kein echter Netflix-Heldbanner. Medienbilder werden weder gefiltert noch in
- * ihrer Deckkraft oder Farbwiedergabe veraendert.
+ * Checked against the Jellyfin web client stylesheets main.css and vendor.css
+ * and the classes measured on the running login page. Pure CSS: no JavaScript,
+ * no DOM changes and no fake Netflix hero banner. Media images are neither
+ * filtered nor changed in opacity or colour.
  */
 
 @font-face {
   font-family: "Exo 2";
-  src: url("https://brand.example.com/v1.11.0/fonts/Exo2-Variable.woff2") format("woff2-variations"),
-       url("https://brand.example.com/v1.11.0/fonts/Exo2-Variable.woff2") format("woff2");
+  src: url("https://brand.example.com/lcars-homelab/fonts/Exo2-Variable.woff2") format("woff2-variations"),
+       url("https://brand.example.com/lcars-homelab/fonts/Exo2-Variable.woff2") format("woff2");
   font-style: normal;
   font-weight: 400 800;
   font-display: swap;
@@ -21,8 +20,8 @@
 
 @font-face {
   font-family: "JetBrains Mono";
-  src: url("https://brand.example.com/v1.11.0/fonts/JetBrainsMono-Variable.woff2") format("woff2-variations"),
-       url("https://brand.example.com/v1.11.0/fonts/JetBrainsMono-Variable.woff2") format("woff2");
+  src: url("https://brand.example.com/lcars-homelab/fonts/JetBrainsMono-Variable.woff2") format("woff2-variations"),
+       url("https://brand.example.com/lcars-homelab/fonts/JetBrainsMono-Variable.woff2") format("woff2");
   font-style: normal;
   font-weight: 400 700;
   font-display: swap;
@@ -31,28 +30,28 @@
 :root {
   color-scheme: dark;
   --rl-gold: #eaa549;
-  --rl-koenigsblau: #1740bc;
-  --rl-akzent: #f0ad55;
-  --rl-akzent-zweit: #e6bd82;
-  --rl-blau-familie: #69759a;
-  --rl-lavendel-familie: #9d8da8;
-  --rl-grau: #6d5948;
-  --rl-grund: #241c17;
-  --rl-flaeche-1: #30251e;
-  --rl-flaeche-2: #3a2d24;
-  --rl-flaeche-3: #49382c;
-  --rl-linie: #765c47;
-  --rl-linie-stark: #98765a;
+  --rl-royal-blue: #1740bc;
+  --rl-accent: #f0ad55;
+  --rl-accent-secondary: #e6bd82;
+  --rl-blue-family: #69759a;
+  --rl-lavender-family: #9d8da8;
+  --rl-gray: #6d5948;
+  --rl-ground: #241c17;
+  --rl-surface-1: #30251e;
+  --rl-surface-2: #3a2d24;
+  --rl-surface-3: #49382c;
+  --rl-border: #765c47;
+  --rl-border-strong: #98765a;
   --rl-text: #fff3df;
-  --rl-text-stark: #fffaf1;
-  --rl-text-gedaempft: #e0c8a8;
-  --rl-status-fehler: #cc6666;
-  --rl-status-erfolg: #7fb069;
-  --rl-status-warnung: #eaa549;
+  --rl-text-strong: #fffaf1;
+  --rl-text-muted: #e0c8a8;
+  --rl-status-error: #cc6666;
+  --rl-status-success: #7fb069;
+  --rl-status-warning: #eaa549;
   --rl-status-info: #5a7fe0;
-  --rl-handlung-text: #24160a;
-  --rl-fokus: #f6c77f;
-  --rl-deaktiviert: #a18e7a;
+  --rl-action-text: #24160a;
+  --rl-focus: #f6c77f;
+  --rl-disabled: #a18e7a;
   --rl-font-sans: "Exo 2", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   --rl-font-mono: "JetBrains Mono", "Cascadia Mono", "SFMono-Regular", Consolas, "Liberation Mono", monospace;
   --rl-radius-control: 10px;
@@ -68,12 +67,12 @@
 }
 
 html {
-  background: var(--rl-grund);
+  background: var(--rl-ground);
   font-size: clamp(16px, calc(15px + 0.18vw), 20px);
 }
 
 body {
-  background-color: var(--rl-grund);
+  background-color: var(--rl-ground);
   color: var(--rl-text);
   font-family: var(--rl-font-sans);
   font-size: 1rem;
@@ -90,7 +89,7 @@ h3,
 h4,
 h5,
 h6 {
-  color: var(--rl-text-stark);
+  color: var(--rl-text-strong);
   font-family: var(--rl-font-sans);
   font-weight: 700;
   letter-spacing: 0.025em;
@@ -98,8 +97,8 @@ h6 {
   text-transform: none;
 }
 
-a { color: var(--rl-akzent); }
-a:hover { color: var(--rl-text-stark); }
+a { color: var(--rl-accent); }
+a:hover { color: var(--rl-text-strong); }
 
 code,
 pre,
@@ -114,28 +113,28 @@ data {
 
 code,
 pre {
-  background-color: var(--rl-flaeche-1);
-  color: var(--rl-text-stark);
+  background-color: var(--rl-surface-1);
+  color: var(--rl-text-strong);
 }
 
 dialog,
 .dialog {
-  background-color: var(--rl-flaeche-1);
-  border: 2px solid var(--rl-linie-stark);
-  border-inline-start: 7px solid var(--rl-akzent);
+  background-color: var(--rl-surface-1);
+  border: 2px solid var(--rl-border-strong);
+  border-inline-start: 7px solid var(--rl-accent);
   border-radius: var(--rl-radius-panel);
   color: var(--rl-text);
 }
 
-/* Die Referenz bestaetigt .emby-input als gemeinsames Eingabeelement. */
+/* The reference confirms .emby-input as the shared input element. */
 input:not([type="button"]):not([type="submit"]):not([type="reset"]),
 select,
 textarea,
 .emby-input {
-  background-color: var(--rl-flaeche-2);
-  border: 2px solid var(--rl-linie-stark);
+  background-color: var(--rl-surface-2);
+  border: 2px solid var(--rl-border-strong);
   border-radius: var(--rl-radius-control);
-  color: var(--rl-text-stark);
+  color: var(--rl-text-strong);
   font-family: var(--rl-font-sans);
   font-size: 1rem;
   min-height: 50px;
@@ -144,11 +143,11 @@ textarea,
 
 input::placeholder,
 textarea::placeholder {
-  color: var(--rl-text-gedaempft);
+  color: var(--rl-text-muted);
   opacity: 1;
 }
 
-/* Homelab-Reaktionszustaende auf Jellyfins bestaetigten Schaltflaechen. */
+/* Homelab reaction states on Jellyfin's confirmed buttons. */
 .emby-button,
 .paper-icon-button-light,
 form button,
@@ -185,8 +184,8 @@ input[type="reset"] {
 .layout-desktop input[type="button"]:hover:not(:disabled),
 .layout-desktop input[type="submit"]:hover:not(:disabled),
 .layout-desktop input[type="reset"]:hover:not(:disabled) {
-  box-shadow: 0 0 0 1px var(--rl-akzent), 0 0 12px rgb(240 173 85 / 55%);
-  color: var(--rl-text-stark);
+  box-shadow: 0 0 0 1px var(--rl-accent), 0 0 12px rgb(240 173 85 / 55%);
+  color: var(--rl-text-strong);
   filter: brightness(1.18);
 }
 
@@ -194,7 +193,7 @@ input[type="reset"] {
 .emby-button:focus-visible,
 .paper-icon-button-light:focus-visible,
 .card:focus-visible > .cardBox {
-  outline: 3px double var(--rl-fokus) !important;
+  outline: 3px double var(--rl-focus) !important;
   outline-offset: 3px;
 }
 
@@ -226,21 +225,21 @@ input[type="reset"]:disabled {
 
 progress,
 meter {
-  accent-color: var(--rl-akzent);
+  accent-color: var(--rl-accent);
   min-height: 12px;
 }
 
 @keyframes rl-jellyfin-confirm {
-  0% { box-shadow: 0 0 0 1px var(--rl-akzent); filter: brightness(1.1); }
-  42% { box-shadow: 0 0 0 2px var(--rl-text-stark), 0 0 18px var(--rl-akzent); filter: brightness(1.48); }
-  100% { box-shadow: 0 0 0 1px var(--rl-akzent); filter: brightness(1.1); }
+  0% { box-shadow: 0 0 0 1px var(--rl-accent); filter: brightness(1.1); }
+  42% { box-shadow: 0 0 0 2px var(--rl-text-strong), 0 0 18px var(--rl-accent); filter: brightness(1.48); }
+  100% { box-shadow: 0 0 0 1px var(--rl-accent); filter: brightness(1.1); }
 }
 
 /*
- * Kinoartige Uebersicht auf den bestaetigten Jellyfin-Klassen.
- * Die Typselektoren begrenzen die Regeln auf Medienkarten. Ein neutraler dunkler
- * Verlauf liegt nur am unteren Bildrand hinter dem Text; Bildfarben, opacity,
- * background-image und filter der eigentlichen Medienflaeche bleiben unberuehrt.
+ * Cinema-like overview on the confirmed Jellyfin classes.
+ * The type selectors limit the rules to media cards. A neutral dark gradient
+ * only sits at the bottom edge behind the text; image colours, opacity,
+ * background-image and filter of the media surface itself stay untouched.
  */
 .card:is(
   .portraitCard,
@@ -264,7 +263,7 @@ meter {
               transform var(--rl-motion-card) var(--rl-ease);
 }
 
-/* LCARS-Ecke und kurze Goldkante statt eines gleichmaessigen Kartenrahmens. */
+/* An LCARS corner and a short gold edge instead of an even card frame. */
 .card:is(
   .portraitCard,
   .backdropCard,
@@ -275,7 +274,7 @@ meter {
   .overflowSquareCard,
   .overflowSmallBackdropCard
 ) > .cardBox::before {
-  background: var(--rl-akzent);
+  background: var(--rl-accent);
   border-radius: 28px 0 12px 0;
   content: "";
   height: 4px;
@@ -324,12 +323,12 @@ meter {
   inset: 0 0 auto auto;
 }
 
-/* Jellyfins vollflaechiges 50-%-Schwarz wird zu einem unteren Lesbarkeitsverlauf. */
+/* Jellyfin's full-surface 50 % black becomes a readability gradient at the bottom. */
 .cardOverlayContainer {
   background: linear-gradient(to top, rgb(12 8 6 / 88%) 0%, rgb(12 8 6 / 42%) 38%, transparent 72%);
 }
 
-/* Footer liegt ueber dem Bild, bleibt aber Teil des vorhandenen DOM. */
+/* The footer sits on top of the image but stays part of the existing DOM. */
 .card:is(
   .portraitCard,
   .backdropCard,
@@ -362,9 +361,9 @@ meter {
   padding-inline: 0.25rem;
 }
 
-.cardText-secondary { color: var(--rl-text-gedaempft); }
+.cardText-secondary { color: var(--rl-text-muted); }
 
-/* Desktop: vergroessern per Transform, niemals ueber Breite oder Hoehe. */
+/* Desktop: enlarge with transform, never through width or height. */
 .layout-desktop .card:not(.show-animation) {
   contain: layout style;
   overflow: visible;
@@ -424,7 +423,7 @@ meter {
   .overflowSquareCard,
   .overflowSmallBackdropCard
 ):focus-within > .cardBox {
-  box-shadow: 0 0 0 2px var(--rl-akzent), 0 16px 34px rgb(0 0 0 / 68%);
+  box-shadow: 0 0 0 2px var(--rl-accent), 0 16px 34px rgb(0 0 0 / 68%);
   transform: scale(1.075);
 }
 
@@ -462,13 +461,13 @@ meter {
   transform: translateY(0);
 }
 
-/* Groessere, dichte Ueberlaufkarten auf Desktop; Rasterkarten behalten Jellyfins Breakpoints. */
+/* Larger, denser overflow cards on desktop; grid cards keep Jellyfin's breakpoints. */
 .layout-desktop .overflowBackdropCard { width: clamp(20rem, 23vw, 38rem); }
 .layout-desktop .overflowSmallBackdropCard { width: clamp(16rem, 19vw, 31rem); }
 .layout-desktop .overflowPortraitCard,
 .layout-desktop .overflowSquareCard { width: clamp(11rem, 15vw, 22rem); }
 
-/* Die bestaetigten Padding-Klassen tragen Jellyfins seitlichen 3,3-%-Rand. */
+/* The confirmed padding classes carry Jellyfin's 3.3 % side margin. */
 [dir="ltr"] .emby-scroller.padded-left,
 [dir="ltr"] .itemsContainer.padded-left {
   padding-left: max(env(safe-area-inset-left), 0.75rem);
@@ -499,17 +498,17 @@ meter {
   overflow-y: visible;
 }
 
-.emby-scrollbuttons { color: var(--rl-akzent); }
+.emby-scrollbuttons { color: var(--rl-accent); }
 
 /*
- * LCARS-Register fuer anklickbare und statische Abschnittstitel. Der Mono-Zusatz
- * bleibt der anklickbaren Container-Variante vorbehalten: Dort kennzeichnet er
- * eine weiterfuehrende Aktion, waehrend ein statischer Titel nichts vortaeuscht.
+ * LCARS register for clickable and static section titles. The mono suffix is
+ * reserved for the clickable container variant: there it marks an action that
+ * leads on, while a static title pretends nothing.
  */
 .sectionTitleContainer-cards,
 .sectionTitle.sectionTitle-cards.padded-left {
   align-items: center;
-  border-bottom: 2px solid var(--rl-linie);
+  border-bottom: 2px solid var(--rl-border);
   display: flex;
   gap: 0.65rem;
   margin-inline: 0.75rem;
@@ -526,7 +525,7 @@ meter {
 }
 
 .sectionTitleContainer-cards::after {
-  color: var(--rl-akzent-zweit);
+  color: var(--rl-accent-secondary);
   content: "REGISTER // " counter(rl-media-section, decimal-leading-zero);
   font: 600 0.68rem/1.2 var(--rl-font-mono);
   font-variant-numeric: tabular-nums;
@@ -539,7 +538,7 @@ meter {
 .sectionTitleTextButton > .sectionTitle,
 .sectionTitle.sectionTitle-cards.padded-left {
   align-items: center;
-  color: var(--rl-text-stark) !important;
+  color: var(--rl-text-strong) !important;
   font-size: clamp(0.86rem, 0.8rem + 0.2vw, 1.05rem);
   font-weight: 700;
   letter-spacing: 2.5px;
@@ -557,7 +556,7 @@ meter {
 
 .sectionTitleTextButton::before,
 .sectionTitle.sectionTitle-cards.padded-left::before {
-  background: var(--rl-akzent);
+  background: var(--rl-accent);
   border-radius: 0 14px 14px 0;
   content: "";
   display: inline-block;
@@ -572,7 +571,7 @@ meter {
 }
 
 .sectionTitleContainer-cards > .sectionTitleButton:not(.sectionTitleTextButton) {
-  color: var(--rl-akzent-zweit) !important;
+  color: var(--rl-accent-secondary) !important;
   font-family: var(--rl-font-mono);
   font-size: 0.72rem;
   font-variant-numeric: tabular-nums;
@@ -582,14 +581,14 @@ meter {
 }
 
 .headerTabs {
-  color: var(--rl-text-gedaempft);
+  color: var(--rl-text-muted);
   font-size: 0.94rem;
 }
 
 /*
- * Kopfzeile: .skinHeader ist laut Referenz bereits fixed; Headroom liefert nur
- * die Pin-/Unpin-Transformation. Transparent im Grundzustand, flach warm und fest
- * beim gepinnten Zustand. Auf TV bleibt Jellyfins relative Kopfzeile unangetastet.
+ * Header: .skinHeader is already fixed according to the reference; Headroom only
+ * provides the pin/unpin transform. Transparent at rest, flat warm and solid
+ * when pinned. On TV Jellyfin's relative header stays untouched.
  */
 .skinHeader.headroom {
   background: transparent;
@@ -601,13 +600,13 @@ meter {
 
 .skinHeader.headroom::before {
   background: linear-gradient(90deg,
-    var(--rl-akzent) 0 48%,
+    var(--rl-accent) 0 48%,
     transparent 48% 48.5%,
-    var(--rl-blau-familie) 48.5% 58%,
+    var(--rl-blue-family) 48.5% 58%,
     transparent 58% 58.5%,
-    var(--rl-lavendel-familie) 58.5% 67%,
+    var(--rl-lavender-family) 58.5% 67%,
     transparent 67% 67.5%,
-    var(--rl-grau) 67.5% 100%);
+    var(--rl-gray) 67.5% 100%);
   bottom: -8px;
   content: "";
   height: 8px;
@@ -618,7 +617,7 @@ meter {
 }
 
 .skinHeader.headroom::after {
-  background: var(--rl-akzent);
+  background: var(--rl-accent);
   border-radius: 0 0 28px 0;
   bottom: -28px;
   content: "";
@@ -631,7 +630,7 @@ meter {
 
 .skinHeader.headroom--pinned {
   background-color: rgb(36 28 23 / 94%);
-  border-bottom-color: var(--rl-akzent);
+  border-bottom-color: var(--rl-accent);
   box-shadow: 0 8px 22px rgb(0 0 0 / 34%);
 }
 
@@ -641,38 +640,38 @@ meter {
 }
 
 .mainDrawer {
-  background-color: var(--rl-flaeche-1);
-  border-inline-end: 5px solid var(--rl-akzent);
+  background-color: var(--rl-surface-1);
+  border-inline-end: 5px solid var(--rl-accent);
   color: var(--rl-text);
 }
 
-.mainDrawerButton { color: var(--rl-akzent); }
+.mainDrawerButton { color: var(--rl-accent); }
 
-/* Detailansicht bleibt kinohaft, ohne Backdrop oder Poster zu veraendern. */
+/* The detail view stays cinema-like without changing backdrop or poster. */
 .detailRibbon {
   background: rgb(48 37 30 / 96%);
-  border-top: 4px solid var(--rl-akzent);
+  border-top: 4px solid var(--rl-accent);
   color: var(--rl-text);
 }
 
 .detailPageContent { color: var(--rl-text); }
 
 .itemName {
-  color: var(--rl-text-stark);
+  color: var(--rl-text-strong);
   font-weight: 700;
   text-transform: none;
 }
 
 .itemMiscInfo {
-  color: var(--rl-text-gedaempft);
+  color: var(--rl-text-muted);
   font-family: var(--rl-font-mono);
   font-variant-numeric: tabular-nums;
 }
 
-/* Fortschritt und Zustand: semantische Vollfarben, keine dauernden Leuchteffekte. */
+/* Progress and state: semantic solid colours, no permanent glow effects. */
 progress,
 progress::-webkit-progress-bar {
-  background: var(--rl-flaeche-3) !important;
+  background: var(--rl-surface-3) !important;
   border: 0;
   border-radius: 0 10px 10px 0;
   box-shadow: none;
@@ -681,7 +680,7 @@ progress::-webkit-progress-bar {
 progress::-moz-progress-bar,
 progress::-webkit-progress-value,
 progress[aria-valuenow]::before {
-  background: var(--rl-akzent) !important;
+  background: var(--rl-accent) !important;
   border-radius: 0 10px 10px 0;
   box-shadow: none;
 }
@@ -692,9 +691,9 @@ progress[aria-valuenow]::before {
   min-height: 6px;
 }
 
-/* Kartenfortschritt: Spur dunkel, Wiedergabestand als flache Erfolgsfarbe. */
+/* Card progress: dark track, playback position as a flat success colour. */
 .itemProgressBar {
-  background-color: var(--rl-flaeche-3) !important;
+  background-color: var(--rl-surface-3) !important;
   background-image: none !important;
   border-radius: 0;
   box-shadow: none !important;
@@ -703,7 +702,7 @@ progress[aria-valuenow]::before {
 }
 
 .itemProgressBar .itemProgressBarForeground {
-  background-color: var(--rl-status-erfolg) !important;
+  background-color: var(--rl-status-success) !important;
   background-image: none !important;
   border-radius: 0;
   box-shadow: none !important;
@@ -712,21 +711,21 @@ progress[aria-valuenow]::before {
 }
 
 .backgroundProgress > div {
-  background: var(--rl-flaeche-3) !important;
+  background: var(--rl-surface-3) !important;
 }
 
 .playbackProgress > div {
-  background: var(--rl-status-erfolg) !important;
+  background: var(--rl-status-success) !important;
 }
 
 .transcodingProgress > div {
-  background: var(--rl-status-warnung) !important;
+  background: var(--rl-status-warning) !important;
 }
 
 .recordingProgressBar::-moz-progress-bar,
 .recordingProgressBar::-webkit-progress-value,
 .recordingProgressBar[aria-valuenow]::before {
-  background: var(--rl-status-fehler) !important;
+  background: var(--rl-status-error) !important;
 }
 
 .mediaSourceIndicator,
@@ -739,19 +738,19 @@ progress[aria-valuenow]::before {
 }
 
 .timerIndicator {
-  background: var(--rl-status-warnung) !important;
+  background: var(--rl-status-warning) !important;
   border-radius: 0 10px 10px 0;
-  color: var(--rl-handlung-text) !important;
+  color: var(--rl-action-text) !important;
 }
 
 /*
- * Der Abspieler bleibt absichtlich ruhig: Glow und Druckblitz sind oben auf
- * Kopfzeile, Drawer, Dialoge, Details und Formulare begrenzt. Ohne bestaetigten
- * Player-Wrapper gibt es keine geratenen Playerselektoren und keine LCARS-Deko
- * an Wiedergabeschaltflaechen.
+ * The player stays calm on purpose: glow and press flash are limited to the
+ * header, drawer, dialogs, details and forms above. Without a confirmed player
+ * wrapper there are no guessed player selectors and no LCARS decoration on
+ * playback buttons.
  */
 
-/* Mobil: kein Hover; Titel bleiben sichtbar und Karten skalieren nicht. */
+/* Mobile: no hover; titles stay visible and cards do not scale. */
 .layout-mobile .sectionTitleContainer-cards::after {
   content: "// " counter(rl-media-section, decimal-leading-zero);
 }
@@ -772,10 +771,10 @@ progress[aria-valuenow]::before {
 
 .layout-mobile .card > .cardBox { transform: none !important; }
 
-/* TV: Fernbedienungsfokus ersetzt Hover; Ziele und Fokusrahmen bleiben gross. */
+/* TV: remote focus replaces hover; targets and focus rings stay large. */
 .layout-tv .skinHeader.headroom {
-  background-color: var(--rl-flaeche-1);
-  border-bottom-color: var(--rl-akzent);
+  background-color: var(--rl-surface-1);
+  border-bottom-color: var(--rl-accent);
   position: relative;
   transform: none;
 }
@@ -805,7 +804,7 @@ progress[aria-valuenow]::before {
 }
 
 .layout-tv .card.show-focus:focus > .cardBox {
-  box-shadow: 0 0 0 4px var(--rl-fokus), 0 18px 38px rgb(0 0 0 / 72%);
+  box-shadow: 0 0 0 4px var(--rl-focus), 0 18px 38px rgb(0 0 0 / 72%);
   transform: scale(1.075);
 }
 
@@ -824,10 +823,10 @@ progress[aria-valuenow]::before {
 }
 
 /*
- * Anmeldung auf Stufe A. Die aktive Standalone-Seite traegt Foto und
- * Abdunklung als getrennte Ebenen. Ihre bisherigen Viewport-Leisten werden
- * dort vollstaendig ersetzt; die LCARS-Schiene sitzt stattdessen innerhalb
- * der Formularkarte und kann deshalb nicht am Bildrand abgeschnitten werden.
+ * Login at level A. The active standalone page carries the background and the
+ * dimming as separate layers. Its former viewport bars are replaced there
+ * completely; the LCARS rail sits inside the form card instead and therefore
+ * cannot be cut off at the edge of the screen.
  */
 .standalonePage:has(:is(.manualLoginForm, .visualLoginForm)) {
   background: transparent !important;
@@ -855,7 +854,7 @@ progress[aria-valuenow]::before {
 
 .standalonePage:has(:is(.manualLoginForm, .visualLoginForm))::before {
   animation: rl-jellyfin-background-approach 90s ease-in-out infinite alternate;
-  background-color: var(--rl-grund);
+  background-color: var(--rl-ground);
   background-image: var(--rl-background-image);
   background-position: center;
   background-repeat: no-repeat;
@@ -904,20 +903,20 @@ progress[aria-valuenow]::before {
 }
 
 .standalonePage :is(.manualLoginForm, .visualLoginForm)::before {
-  --rl-jellyfin-rail-lavendel-glow: transparent;
-  --rl-jellyfin-rail-blau-glow: transparent;
-  --rl-jellyfin-rail-grau-glow: transparent;
-  animation: rl-jellyfin-rail-lavendel 9.73s ease-in-out -2.11s infinite,
-             rl-jellyfin-rail-blau 11.89s ease-in-out -6.37s infinite,
-             rl-jellyfin-rail-grau 13.03s ease-in-out -9.17s infinite;
-  background-color: var(--rl-akzent);
+  --rl-jellyfin-rail-lavender-glow: transparent;
+  --rl-jellyfin-rail-blue-glow: transparent;
+  --rl-jellyfin-rail-gray-glow: transparent;
+  animation: rl-jellyfin-rail-lavender 9.73s ease-in-out -2.11s infinite,
+             rl-jellyfin-rail-blue 11.89s ease-in-out -6.37s infinite,
+             rl-jellyfin-rail-gray 13.03s ease-in-out -9.17s infinite;
+  background-color: var(--rl-accent);
   background-image:
-    linear-gradient(var(--rl-jellyfin-rail-lavendel-glow), var(--rl-jellyfin-rail-lavendel-glow)),
-    linear-gradient(var(--rl-jellyfin-rail-blau-glow), var(--rl-jellyfin-rail-blau-glow)),
-    linear-gradient(var(--rl-jellyfin-rail-grau-glow), var(--rl-jellyfin-rail-grau-glow)),
-    linear-gradient(var(--rl-lavendel-familie), var(--rl-lavendel-familie)),
-    linear-gradient(var(--rl-blau-familie), var(--rl-blau-familie)),
-    linear-gradient(var(--rl-grau), var(--rl-grau));
+    linear-gradient(var(--rl-jellyfin-rail-lavender-glow), var(--rl-jellyfin-rail-lavender-glow)),
+    linear-gradient(var(--rl-jellyfin-rail-blue-glow), var(--rl-jellyfin-rail-blue-glow)),
+    linear-gradient(var(--rl-jellyfin-rail-gray-glow), var(--rl-jellyfin-rail-gray-glow)),
+    linear-gradient(var(--rl-lavender-family), var(--rl-lavender-family)),
+    linear-gradient(var(--rl-blue-family), var(--rl-blue-family)),
+    linear-gradient(var(--rl-gray), var(--rl-gray));
   background-position: 0 30%, 0 49%, 0 68%, 0 30%, 0 49%, 0 68%;
   background-repeat: no-repeat;
   background-size: 100% 15%;
@@ -939,7 +938,7 @@ progress[aria-valuenow]::before {
   animation: rl-jellyfin-sequence-primary 6.73s ease-in-out -1.31s infinite,
              rl-jellyfin-sequence-secondary 8.41s ease-in-out -5.27s infinite,
              rl-jellyfin-sequence-scan 11.17s cubic-bezier(.45, 0, .55, 1) -3.73s infinite;
-  background-color: var(--rl-akzent);
+  background-color: var(--rl-accent);
   background-image:
     linear-gradient(90deg,
       transparent 0,
@@ -956,8 +955,8 @@ progress[aria-valuenow]::before {
       rgb(157 141 168 / 24%) 50%,
       transparent 100%),
     repeating-linear-gradient(90deg,
-      var(--rl-akzent) 0,
-      var(--rl-akzent) calc(14.285714% - 4px),
+      var(--rl-accent) 0,
+      var(--rl-accent) calc(14.285714% - 4px),
       rgb(0 0 0 / 32%) calc(14.285714% - 4px),
       rgb(0 0 0 / 32%) 14.285714%);
   background-position:
@@ -982,19 +981,19 @@ progress[aria-valuenow]::before {
   z-index: 1;
 }
 
-@property --rl-jellyfin-rail-lavendel-glow {
+@property --rl-jellyfin-rail-lavender-glow {
   syntax: "<color>";
   inherits: false;
   initial-value: transparent;
 }
 
-@property --rl-jellyfin-rail-blau-glow {
+@property --rl-jellyfin-rail-blue-glow {
   syntax: "<color>";
   inherits: false;
   initial-value: transparent;
 }
 
-@property --rl-jellyfin-rail-grau-glow {
+@property --rl-jellyfin-rail-gray-glow {
   syntax: "<color>";
   inherits: false;
   initial-value: transparent;
@@ -1018,22 +1017,22 @@ progress[aria-valuenow]::before {
   initial-value: -8%;
 }
 
-@keyframes rl-jellyfin-rail-lavendel {
-  0%, 62%, 100% { --rl-jellyfin-rail-lavendel-glow: transparent; }
-  76% { --rl-jellyfin-rail-lavendel-glow: rgb(255 250 241 / 30%); }
-  88% { --rl-jellyfin-rail-lavendel-glow: rgb(255 250 241 / 12%); }
+@keyframes rl-jellyfin-rail-lavender {
+  0%, 62%, 100% { --rl-jellyfin-rail-lavender-glow: transparent; }
+  76% { --rl-jellyfin-rail-lavender-glow: rgb(255 250 241 / 30%); }
+  88% { --rl-jellyfin-rail-lavender-glow: rgb(255 250 241 / 12%); }
 }
 
-@keyframes rl-jellyfin-rail-blau {
-  0%, 62%, 100% { --rl-jellyfin-rail-blau-glow: transparent; }
-  76% { --rl-jellyfin-rail-blau-glow: rgb(255 250 241 / 30%); }
-  88% { --rl-jellyfin-rail-blau-glow: rgb(255 250 241 / 12%); }
+@keyframes rl-jellyfin-rail-blue {
+  0%, 62%, 100% { --rl-jellyfin-rail-blue-glow: transparent; }
+  76% { --rl-jellyfin-rail-blue-glow: rgb(255 250 241 / 30%); }
+  88% { --rl-jellyfin-rail-blue-glow: rgb(255 250 241 / 12%); }
 }
 
-@keyframes rl-jellyfin-rail-grau {
-  0%, 62%, 100% { --rl-jellyfin-rail-grau-glow: transparent; }
-  76% { --rl-jellyfin-rail-grau-glow: rgb(255 250 241 / 24%); }
-  88% { --rl-jellyfin-rail-grau-glow: rgb(255 250 241 / 10%); }
+@keyframes rl-jellyfin-rail-gray {
+  0%, 62%, 100% { --rl-jellyfin-rail-gray-glow: transparent; }
+  76% { --rl-jellyfin-rail-gray-glow: rgb(255 250 241 / 24%); }
+  88% { --rl-jellyfin-rail-gray-glow: rgb(255 250 241 / 10%); }
 }
 
 @keyframes rl-jellyfin-sequence-primary {
@@ -1051,11 +1050,11 @@ progress[aria-valuenow]::before {
   78%, 100% { --rl-jellyfin-sequence-scan-position: 108%; }
 }
 
-/* Das wechselnde Jellyfin-Banner in der Kopfzeile wird unabhaengig vom Hash
-   eigenschaftsbasiert ueberschrieben. Die schmale Emblemform ersetzt dabei die
-   bisherige breite Bannerflaeche. */
+/* The changing Jellyfin banner in the header is overridden by property,
+   independent of its hash. The narrow emblem shape replaces the former wide
+   banner area. */
 .pageTitleWithLogo.pageTitleWithDefaultLogo {
-  background-image: url("https://brand.example.com/v1.11.0/assets/emblem--jellyfin.svg") !important;
+  background-image: url("https://brand.example.com/lcars-homelab/assets/emblem--jellyfin.svg") !important;
   background-position: center !important;
   background-repeat: no-repeat !important;
   background-size: 48px auto !important;
@@ -1071,29 +1070,29 @@ progress[aria-valuenow]::before {
 }
 
 .standalonePage :is(.manualLoginForm, .visualLoginForm) :is(.inputLabel-float, .inputLabelFocused) {
-  color: var(--rl-akzent) !important;
+  color: var(--rl-accent) !important;
 }
 
 .standalonePage :is(.manualLoginForm, .visualLoginForm) .emby-input {
-  background: var(--rl-flaeche-2) !important;
-  border: 1px solid var(--rl-linie-stark) !important;
-  border-left: 5px solid var(--rl-blau-familie) !important;
+  background: var(--rl-surface-2) !important;
+  border: 1px solid var(--rl-border-strong) !important;
+  border-left: 5px solid var(--rl-blue-family) !important;
   border-radius: 0 4px 4px 0 !important;
-  color: var(--rl-text-stark) !important;
+  color: var(--rl-text-strong) !important;
 }
 
 .standalonePage :is(.manualLoginForm, .visualLoginForm) .emby-input:hover:not(:disabled) {
-  box-shadow: 0 0 0 1px var(--rl-blau-familie), 0 0 8px var(--rl-blau-familie);
+  box-shadow: 0 0 0 1px var(--rl-blue-family), 0 0 8px var(--rl-blue-family);
   filter: brightness(1.08);
 }
 
 .standalonePage :is(.manualLoginForm, .visualLoginForm) .emby-input:focus {
-  border-left-color: var(--rl-akzent) !important;
-  box-shadow: 0 0 0 1px var(--rl-akzent), 0 0 12px rgb(240 173 85 / 60%);
+  border-left-color: var(--rl-accent) !important;
+  box-shadow: 0 0 0 1px var(--rl-accent), 0 0 12px rgb(240 173 85 / 60%);
   filter: brightness(1.1);
 }
 
-/* Sekundaeraktionen bleiben dunkel; die eine Primaeraktion ist eindeutig Gold. */
+/* Secondary actions stay dark; the one primary action is clearly gold. */
 .standalonePage :is(.manualLoginForm, .visualLoginForm) :is(
   .emby-button,
   .raised,
@@ -1102,11 +1101,11 @@ progress[aria-valuenow]::before {
   .btnManual,
   .btnCancel
 ) {
-  background: var(--rl-flaeche-3) !important;
-  border: 2px solid var(--rl-akzent-zweit) !important;
+  background: var(--rl-surface-3) !important;
+  border: 2px solid var(--rl-accent-secondary) !important;
   border-radius: 0 16px 16px 0 !important;
   box-shadow: none !important;
-  color: var(--rl-text-stark) !important;
+  color: var(--rl-text-strong) !important;
   font-weight: 700;
   letter-spacing: 1px;
   text-transform: uppercase;
@@ -1115,24 +1114,24 @@ progress[aria-valuenow]::before {
 .standalonePage :is(.manualLoginForm, .visualLoginForm) .emby-button.raised.button-submit,
 .standalonePage :is(.manualLoginForm, .visualLoginForm) .raised.button-submit,
 .standalonePage :is(.manualLoginForm, .visualLoginForm) .button-submit {
-  background: var(--rl-akzent) !important;
+  background: var(--rl-accent) !important;
   border-color: transparent !important;
-  color: var(--rl-handlung-text) !important;
+  color: var(--rl-action-text) !important;
 }
 
 /*
- * Quick Connect und Kennwort-Hilfe liegen im Jellyfin-DOM ausserhalb der Karte.
- * Als gleich breite, eigenstaendige Zeilen direkt darunter schliessen sie optisch
- * an, ohne per JavaScript oder DOM-Umbau in das Formular verschoben zu werden.
+ * Quick Connect and password help sit outside the card in Jellyfin's DOM. As
+ * rows of the same width directly below they join visually, without being moved
+ * into the form by JavaScript or DOM changes.
  */
 .standalonePage :is(.btnQuick, .btnForgotPassword) {
   align-items: center;
-  background: var(--rl-flaeche-3) !important;
-  border: 2px solid var(--rl-akzent-zweit) !important;
+  background: var(--rl-surface-3) !important;
+  border: 2px solid var(--rl-accent-secondary) !important;
   border-radius: 0 16px 16px 0 !important;
   box-shadow: none !important;
   box-sizing: border-box;
-  color: var(--rl-text-stark) !important;
+  color: var(--rl-text-strong) !important;
   display: flex !important;
   font-weight: 700;
   justify-content: center;
@@ -1148,7 +1147,7 @@ progress[aria-valuenow]::before {
 
 .layout-desktop .standalonePage :is(.btnQuick, .btnForgotPassword):hover:not(:disabled),
 .standalonePage :is(.btnQuick, .btnForgotPassword):focus-visible:not(:disabled) {
-  box-shadow: 0 0 0 1px var(--rl-akzent), 0 0 10px var(--rl-akzent) !important;
+  box-shadow: 0 0 0 1px var(--rl-accent), 0 0 10px var(--rl-accent) !important;
   filter: brightness(1.18);
 }
 
@@ -1157,9 +1156,9 @@ progress[aria-valuenow]::before {
 }
 
 .standalonePage :is(.btnQuick, .btnForgotPassword):disabled {
-  background: var(--rl-deaktiviert) !important;
+  background: var(--rl-disabled) !important;
   border-color: transparent !important;
-  color: var(--rl-grund) !important;
+  color: var(--rl-ground) !important;
   filter: none;
   opacity: .65;
 }
@@ -1172,7 +1171,7 @@ progress[aria-valuenow]::before {
   .btnManual,
   .btnCancel
 ):hover:not(:disabled) {
-  box-shadow: 0 0 0 1px var(--rl-akzent), 0 0 10px var(--rl-akzent) !important;
+  box-shadow: 0 0 0 1px var(--rl-accent), 0 0 10px var(--rl-accent) !important;
   filter: brightness(1.18);
 }
 
@@ -1184,7 +1183,7 @@ progress[aria-valuenow]::before {
   .btnManual,
   .btnCancel
 ):focus-visible:not(:disabled) {
-  box-shadow: 0 0 0 1px var(--rl-akzent), 0 0 12px var(--rl-akzent) !important;
+  box-shadow: 0 0 0 1px var(--rl-accent), 0 0 12px var(--rl-accent) !important;
   filter: brightness(1.18);
 }
 
@@ -1200,28 +1199,28 @@ progress[aria-valuenow]::before {
 }
 
 .standalonePage :is(.manualLoginForm, .visualLoginForm) :is(.emby-button, .raised):disabled {
-  background: var(--rl-deaktiviert) !important;
+  background: var(--rl-disabled) !important;
   border-color: transparent !important;
-  color: var(--rl-grund) !important;
+  color: var(--rl-ground) !important;
   filter: none;
   opacity: .65;
 }
 
 .standalonePage :is(.manualLoginForm, .visualLoginForm) :is(.emby-checkbox, .chkRememberLogin) {
-  accent-color: var(--rl-akzent);
+  accent-color: var(--rl-accent);
 }
 
 .standalonePage :is(.manualLoginForm, .visualLoginForm) .checkboxOutline {
-  background: var(--rl-flaeche-3) !important;
-  border-color: var(--rl-akzent-zweit) !important;
-  color: var(--rl-text-stark) !important;
+  background: var(--rl-surface-3) !important;
+  border-color: var(--rl-accent-secondary) !important;
+  color: var(--rl-text-strong) !important;
 }
 
 .standalonePage :is(.manualLoginForm, .visualLoginForm) .emby-checkbox.chkRememberLogin:checked + span + .checkboxOutline,
 .standalonePage :is(.manualLoginForm, .visualLoginForm) .emby-checkbox:checked + span + .checkboxOutline {
-  background: var(--rl-akzent) !important;
-  border-color: var(--rl-akzent) !important;
-  color: var(--rl-handlung-text) !important;
+  background: var(--rl-accent) !important;
+  border-color: var(--rl-accent) !important;
+  color: var(--rl-action-text) !important;
 }
 
 .standalonePage :is(.manualLoginForm, .visualLoginForm) :is(
@@ -1234,12 +1233,12 @@ progress[aria-valuenow]::before {
 }
 
 .standalonePage :is(.manualLoginForm, .visualLoginForm) .emby-checkbox-label:hover .checkboxOutline {
-  border-color: var(--rl-akzent) !important;
+  border-color: var(--rl-accent) !important;
   box-shadow: 0 0 8px rgb(240 173 85 / 55%);
 }
 
 .standalonePage :is(.manualLoginForm, .visualLoginForm) .emby-checkbox:focus-visible + span + .checkboxOutline {
-  outline: 3px double var(--rl-fokus) !important;
+  outline: 3px double var(--rl-focus) !important;
   outline-offset: 3px;
 }
 
@@ -1249,7 +1248,7 @@ progress[aria-valuenow]::before {
   .mdl-spinner__layer-3,
   .mdl-spinner__layer-4
 ) {
-  border-color: var(--rl-akzent) !important;
+  border-color: var(--rl-accent) !important;
 }
 
 @media (min-aspect-ratio: 2/1) {
@@ -1339,16 +1338,16 @@ progress[aria-valuenow]::before {
   }
 
   .standalonePage :is(.manualLoginForm, .visualLoginForm)::before {
-    --rl-jellyfin-rail-lavendel-glow: transparent;
-    --rl-jellyfin-rail-blau-glow: transparent;
-    --rl-jellyfin-rail-grau-glow: transparent;
+    --rl-jellyfin-rail-lavender-glow: transparent;
+    --rl-jellyfin-rail-blue-glow: transparent;
+    --rl-jellyfin-rail-gray-glow: transparent;
   }
 
   .standalonePage :is(.manualLoginForm, .visualLoginForm)::after {
-    background-color: var(--rl-akzent);
+    background-color: var(--rl-accent);
     background-image: repeating-linear-gradient(90deg,
-      var(--rl-akzent) 0,
-      var(--rl-akzent) calc(14.285714% - 4px),
+      var(--rl-accent) 0,
+      var(--rl-accent) calc(14.285714% - 4px),
       rgb(0 0 0 / 32%) calc(14.285714% - 4px),
       rgb(0 0 0 / 32%) 14.285714%);
   }

@@ -1,11 +1,11 @@
-# Betriebssystem- und Editor-Metadaten
+# Operating system and editor metadata
 .DS_Store
 Thumbs.db
 Desktop.ini
 .idea/
 .vscode/
 
-# Lokale Abhaengigkeiten, Ausgaben und Protokolle
+# Local dependencies, output and logs
 node_modules/
 *.log
 *.tmp

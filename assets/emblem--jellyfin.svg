@@ -1,7 +1,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 116" width="100%" height="100%">
-  <!-- Neutrales LCARS-Emblem, Fassung jellyfin: Goldrand, blaues Feld, LCARS-Balken bzw.
-       App-Symbol. Flach, keine Verlaeufe. Gleiches Koordinatensystem wie alle
-       Integrationen (100 x 116). -->
+  <!-- Neutral LCARS emblem, jellyfin version: gold border, blue field, LCARS bars or an
+       app symbol. Flat, no gradients. Same coordinate system as all
+       integrations (100 x 116). -->
   <defs><clipPath id="em-clip-jellyfin"><rect x="15" y="23" width="70" height="70" rx="10"/></clipPath></defs>
   <rect x="10" y="18" width="80" height="80" rx="14" fill="#eaa549"/>
   <rect x="15" y="23" width="70" height="70" rx="10" fill="#1740bc"/>

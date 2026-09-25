@@ -1,4 +1,4 @@
-# Zeilenenden immer LF - die Dateien landen auf Linux-Servern
+# Always LF line endings - the files end up on Linux servers
 * text=auto eol=lf
 *.woff2 binary
 *.png binary

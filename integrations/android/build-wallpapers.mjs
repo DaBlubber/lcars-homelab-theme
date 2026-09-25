@@ -62,9 +62,9 @@ function lock(width, height) {
 
 const sizes = [[1080, 2400], [1440, 3200], [1080, 1920]];
 for (const [width, height] of sizes) {
-  for (const [name, render] of [["startbildschirm", home], ["sperrbildschirm", lock]]) {
+  for (const [name, render] of [["homescreen", home], ["lockscreen", lock]]) {
     const filename = `${name}-${width}x${height}.png`;
     await writeFile(join(outputDir, filename), render(width, height).png());
-    console.log(`Erzeugt: ${filename}`);
+    console.log(`Written: ${filename}`);
   }
 }

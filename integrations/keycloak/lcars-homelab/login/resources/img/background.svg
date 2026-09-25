@@ -1,7 +1,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 900"
      width="1440" height="900" preserveAspectRatio="none">
   <title>Ruhiger LCARS-Hintergrund</title>
-  <desc>Dunkle freie Mitte mit segmentierten LCARS-Leisten an den Raendern und einem langsamen Abtastlicht.</desc>
+  <desc>A dark, empty centre with segmented LCARS bars at the edges and a slow scanning light.</desc>
   <style>
     .rl-scan {
       opacity: 0;
@@ -14,15 +14,15 @@
     }
   </style>
 
-  <!-- preserveAspectRatio="none" haelt alle Randmotive auch auf sehr breiten
-       und hochkantigen Flaechen sichtbar; die Geometrie ist prozentual angelegt. -->
+  <!-- preserveAspectRatio="none" keeps all edge motifs visible on very wide and
+       portrait surfaces as well; the geometry is laid out in percent. -->
   <rect width="1440" height="900" fill="#070a12"/>
 
-  <!-- Flaechige, verlaufsfreie Beruhigung hinter der mittigen Login-Konsole. -->
+  <!-- A flat, gradient-free calm area behind the centred login console. -->
   <rect x="246" y="132" width="948" height="636" rx="32" ry="32"
         fill="#03050a" opacity=".72"/>
 
-  <!-- Sparsame Sterne, bewusst ausserhalb der Formularmitte. -->
+  <!-- A few stars, deliberately outside the centre of the form. -->
   <g fill="#dfe4f2" opacity=".46">
     <circle cx="163" cy="154" r="1.4"/>
     <circle cx="232" cy="726" r="1"/>
@@ -37,20 +37,20 @@
     <circle cx="1184" cy="812" r="1.3"/>
   </g>
 
-  <!-- Linke Elbow-Schiene wie im Rahmen-Wallpaper, aber schmaler und ruhiger. -->
+  <!-- Left elbow rail as in the frame wallpaper, but narrower and calmer. -->
   <path d="M42 112a38 38 0 0 1 38-38h250a34 34 0 0 1 0 68H96v546a27 27 0 0 1-54 0z"
         fill="#eaa549"/>
   <rect x="42" y="710" width="54" height="20" fill="#1740bc"/>
   <rect x="42" y="738" width="54" height="42" fill="#9a8ec9"/>
 
-  <!-- Obere Blockleiste; der breite Mittelteil bleibt oberhalb der Karte. -->
+  <!-- Top block bar; the wide middle part stays above the card. -->
   <rect x="374" y="74" width="170" height="68" rx="34" ry="34" fill="#9a8ec9"/>
   <rect x="556" y="74" width="116" height="68" rx="34" ry="34" fill="#1740bc"/>
   <rect x="684" y="74" width="278" height="68" rx="34" ry="34" fill="#5a7fe0"/>
   <rect x="974" y="74" width="132" height="68" rx="34" ry="34" fill="#eaa549"/>
   <rect x="1118" y="74" width="160" height="68" rx="34" ry="34" fill="#1740bc"/>
 
-  <!-- Rechte Signal-Schiene setzt das Gegenueber, ohne die Mitte einzurahmen. -->
+  <!-- The right signal rail sets the counterpart without framing the centre. -->
   <rect x="1344" y="174" width="54" height="502" rx="27" ry="27" fill="#1740bc"/>
   <rect x="1344" y="136" width="54" height="26" fill="#eaa549"/>
   <rect x="1344" y="688" width="54" height="42" fill="#9a8ec9"/>

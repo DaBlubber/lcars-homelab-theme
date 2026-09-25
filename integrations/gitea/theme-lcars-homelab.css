@@ -15,21 +15,21 @@
 
 /* LCARS-Homelab source roles (v1.7.0). */
   --rl-gold: #eaa549;
-  --rl-koenigsblau: #1740bc;
-  --rl-lavendel: #9a8ec9;
-  --rl-blau: #5a7fe0;
-  --rl-grau: #3c4257;
-  --rl-grund: #000000;
-  --rl-flaeche-1: #0b0d14;
-  --rl-flaeche-2: #10131a;
-  --rl-flaeche-3: #1b1f2b;
-  --rl-linie: #2a2e38;
+  --rl-royal-blue: #1740bc;
+  --rl-lavender: #9a8ec9;
+  --rl-blue: #5a7fe0;
+  --rl-gray: #3c4257;
+  --rl-ground: #000000;
+  --rl-surface-1: #0b0d14;
+  --rl-surface-2: #10131a;
+  --rl-surface-3: #1b1f2b;
+  --rl-border: #2a2e38;
   --rl-text: #dfe4f2;
-  --rl-text-stark: #f3f5fa;
-  --rl-text-gedaempft: #8b90a0;
-  --rl-erfolg: #7fb069;
-  --rl-warnung: #eaa549;
-  --rl-fehler: #cc6666;
+  --rl-text-strong: #f3f5fa;
+  --rl-text-muted: #8b90a0;
+  --rl-success: #7fb069;
+  --rl-warning: #eaa549;
+  --rl-error: #cc6666;
   --rl-info: #5a7fe0;
 
   /*
@@ -292,7 +292,7 @@
   --color-editor-line-highlight: var(--color-secondary-alpha-40);
   --color-editor-selection: var(--color-primary-alpha-50);
   --color-project-column-bg: var(--color-secondary-light-2);
-  --color-caret: var(--rl-text-stark);
+  --color-caret: var(--rl-text-strong);
   --color-reaction-bg: #9a8ec912;
   --color-reaction-hover-bg: #9a8ec929;
   --color-reaction-active-bg: #9a8ec94d;

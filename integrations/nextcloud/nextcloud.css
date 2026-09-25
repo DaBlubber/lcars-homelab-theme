@@ -1,16 +1,16 @@
 /*
- * LCARS-Homelab fuer Nextcloud 34.0.3
- * Warme Familienvariante, Paketversion 1.14.0
+ * LCARS-Homelab for Nextcloud 34.0.3
+ * Warm family variant
  *
- * Variablen tragen den Arbeitsbereich. Selektoren bleiben auf die gemessenen
- * Vue-Bedienelemente und die Gast-/Anmeldeseiten begrenzt. Nextclouds aktuelle
- * Hell-/Dunkelwerte fuer Grundflaeche und Haupttext werden nicht ersetzt.
+ * Variables carry the work area. Selectors are limited to the measured Vue
+ * controls and the guest/login pages. Nextcloud's current light/dark values for
+ * the main surface and main text are not replaced.
  */
 
 @font-face {
   font-family: "Exo 2";
-  src: url("https://brand.example.com/v1.14.0/fonts/Exo2-Variable.woff2") format("woff2-variations"),
-       url("https://brand.example.com/v1.14.0/fonts/Exo2-Variable.woff2") format("woff2");
+  src: url("https://brand.example.com/lcars-homelab/fonts/Exo2-Variable.woff2") format("woff2-variations"),
+       url("https://brand.example.com/lcars-homelab/fonts/Exo2-Variable.woff2") format("woff2");
   font-display: swap;
   font-style: normal;
   font-weight: 400 800;
@@ -18,8 +18,8 @@
 
 @font-face {
   font-family: "JetBrains Mono";
-  src: url("https://brand.example.com/v1.14.0/fonts/JetBrainsMono-Variable.woff2") format("woff2-variations"),
-       url("https://brand.example.com/v1.14.0/fonts/JetBrainsMono-Variable.woff2") format("woff2");
+  src: url("https://brand.example.com/lcars-homelab/fonts/JetBrainsMono-Variable.woff2") format("woff2-variations"),
+       url("https://brand.example.com/lcars-homelab/fonts/JetBrainsMono-Variable.woff2") format("woff2");
   font-display: swap;
   font-style: normal;
   font-weight: 400 700;
@@ -38,7 +38,7 @@ body[data-themes] {
   --rl-nextcloud-success: #2f7747;
   --rl-nextcloud-info: #356ab7;
   --rl-nextcloud-motion: cubic-bezier(.2, .75, .25, 1);
-  /* Marke und Handlung: Gold bleibt in beiden Modi dieselbe klare Aktion. */
+  /* Brand and action: gold stays the same clear action in both modes. */
   --color-primary: var(--rl-nextcloud-gold);
   --color-primary-rgb: 240, 173, 85;
   --color-primary-hover: var(--rl-nextcloud-gold-hover);
@@ -48,8 +48,8 @@ body[data-themes] {
   --color-primary-element-text: var(--rl-nextcloud-gold-text);
 
   /*
-   * Modusrelative Nebenflaechen: beide Mischungen beginnen bei Nextclouds
-   * derzeit aktiver Grundflaeche. So bleibt hell hell und dunkel dunkel.
+   * Mode-relative secondary surfaces: both mixes start at Nextcloud's currently
+   * active main surface. That way light stays light and dark stays dark.
    */
   --color-background-hover: color-mix(in srgb, var(--color-main-background) 94%, var(--rl-nextcloud-gold) 6%);
   --color-border: color-mix(in srgb, var(--color-main-background) 86%, var(--color-main-text) 14%);
@@ -58,9 +58,9 @@ body[data-themes] {
   --color-text-selection: color-mix(in srgb, var(--color-main-background) 55%, var(--rl-nextcloud-gold) 45%);
 
   /*
-   * Vier getrennte Statushues. Die Vollfarben tragen weissen Text mit
-   * mindestens 5,33:1; die Textrollen mischen sich modusrelativ zu 7,97:1
-   * oder besser auf Hell und 5,97:1 oder besser auf Dunkel.
+   * Four separate status hues. The solid colours carry white text at 5.33:1 or
+   * better; the text roles mix mode-relatively to 7.97:1 or better on light and
+   * 5.97:1 or better on dark.
    */
   --color-error: var(--rl-nextcloud-error);
   --color-error-rgb: 194, 56, 68;
@@ -83,7 +83,7 @@ body[data-themes] {
   --color-info-light: color-mix(in srgb, var(--color-main-background) 88%, var(--rl-nextcloud-info) 12%);
   --color-info-text: color-mix(in srgb, var(--color-main-text) 35%, var(--rl-nextcloud-info) 65%);
 
-  /* Warme Familienmasse: groesser, luftiger, aber vertraute Nextcloud-Struktur. */
+  /* Warm family sizes: larger and airier, but the familiar Nextcloud structure. */
   --font-face: "Exo 2", "Segoe UI", system-ui, sans-serif;
   --font-face-monospace: "JetBrains Mono", "Cascadia Mono", Consolas, monospace;
   --default-font-size: 16px;
@@ -126,7 +126,7 @@ samp {
   font-variant-numeric: tabular-nums;
 }
 
-/* Gemessene Vue-Schaltflaechen: Reaktionssprache aus LCARS-Homelab 1.3.0. */
+/* Measured Vue buttons: the shared LCARS-Homelab reaction states. */
 .button-vue {
   --rl-nextcloud-control: var(--color-primary-element);
   border-radius: var(--border-radius-element);
@@ -189,7 +189,7 @@ samp {
   }
 }
 
-/* Checkboxen behalten Form und Beschriftung; nur Zielgroesse und Fokus wachsen. */
+/* Checkboxes keep their shape and label; only target size and focus grow. */
 .checkbox-radio-switch,
 .checkbox-content {
   font-family: var(--font-face);
@@ -210,10 +210,9 @@ samp {
 }
 
 /*
- * Gast- und Anmeldeseiten duerfen Stufe A naeher kommen. Foto und Logo werden
- * ausschliesslich von der Theming-App geliefert. Das CSS verwendet deren
- * --image-background einmal; Dateiansichten und eingeloggte Apps bleiben frei
- * von Bild, Elbows und Bewegung.
+ * Guest and login pages may come closer to level A. Background and logo come
+ * only from the theming app. The CSS uses its --image-background once; file
+ * views and logged-in apps stay free of images, elbows and motion.
  */
 .guest-content {
   background-color: #241c17 !important;

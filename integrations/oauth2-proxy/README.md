@@ -1,7 +1,34 @@
-# LCARS-Homelab für oauth2-proxy 7.7.0
+# oauth2-proxy: LCARS-Homelab sign-in and error pages
 
-Diese Integration gibt der Anmelde- und der Fehlerseite von oauth2-proxy im externen Rechenzentrum die LCARS-Homelab-Handschrift. Die beiden Go-html/template-Dateien übernehmen die von oauth2-proxy 7.7.0 erwarteten Variablen, Bedingungen und Formulare, übersetzen die sichtbaren Texte ins Deutsche und ersetzen das Standardlogo durch das eingebettete Emblem. Grundlage sind die lokal gemessenen Originalvorlagen `oauth2-proxy-referenz/original-sign_in.txt` und `oauth2-proxy-referenz/original-templates.txt` sowie das Keycloak-Stylesheet `integrations/keycloak/lcars-homelab/login/resources/css/styles.css`; die Umsetzung ist damit an den tatsächlich eingesetzten Stand gebunden und nicht aus einer vermuteten Vorlagenstruktur abgeleitet.
+Templates for **oauth2-proxy 7.7** that give its sign-in and error pages the
+LCARS-Homelab look. They keep exactly the variables, conditions and forms of the
+original 7.7 templates and replace the default logo with the inline emblem.
 
-Für den Einbau wird dieses Verzeichnis auf dem Zielsystem bereitgestellt und oauth2-proxy mit `--custom-templates-dir=/pfad/zu/templates` gestartet beziehungsweise die entsprechende Konfigurationsoption `custom_templates_dir` auf diesen Ordner gesetzt. Die Dateinamen `sign_in.html` und `error.html` sind dabei Teil der Schnittstelle: oauth2-proxy lädt die Dateien über `ParseGlob` und leitet den Vorlagennamen aus dem Dateinamen ab. Deshalb enthalten die Dateien bewusst keinen eigenen `define`-Rahmen. Nach dem Austausch sollte der Dienst mit seiner üblichen Konfigurationsprüfung und anschließend die Anmeldung samt Weiterleitung, lokalem Anmeldeformular und Fehlerseite geprüft werden.
+![Sign-in page](../../docs/images/oauth2-sign-in.png)
 
-Beide Seiten sind vollständig autark, weil ein Klient im Störungsfall oder aus dem externen Netz den Markendienst nicht zuverlässig erreichen muss. `brand.example.com` wurde öffentlich mit `172.16.1.5` gemessen, während `consulext.example.com` auf die Tailscale-Adresse `172.16.100.2` zeigt; die Erreichbarkeit der geschützten Oberfläche garantiert daher nicht die Erreichbarkeit externer Markenressourcen. Aus diesem Grund liegen CSS, Emblem und das als Data-URI eingebettete Hintergrundfoto direkt in jeder Vorlage. Es werden weder Stylesheets, Webfonts noch Bilder nachgeladen; nur der unveränderte Projektverweis von OAuth2 Proxy in der Standardfußzeile führt nach außen.
+Both pages are **completely self-contained**: CSS and emblem are inline, no fonts,
+stylesheets or images are loaded from anywhere - they have to work when the user is
+not signed in yet and your theme host may not be reachable. Only the standard
+"Secured with OAuth2 Proxy" footer links out.
+
+## Install
+
+Put the `templates/` folder where oauth2-proxy can read it and start it with
+
+```text
+--custom-templates-dir=/path/to/templates
+```
+
+or `custom_templates_dir = "/path/to/templates"` in the config file. The file names
+`sign_in.html` and `error.html` are part of the interface: oauth2-proxy loads them
+with `ParseGlob` and derives the template names from the file names, which is why
+the files have no `define` block of their own.
+
+Then test: sign-in with redirect, the local login form (if you use
+`--htpasswd-file`), and an error page (e.g. `/oauth2/sign_in` with an invalid
+state).
+
+## Uninstall
+
+Remove the option and restart oauth2-proxy; it falls back to its built-in
+templates.

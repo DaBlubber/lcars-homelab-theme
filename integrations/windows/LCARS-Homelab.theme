@@ -1,8 +1,8 @@
 ; ============================================================================
-; VORLAGE - NICHT DIREKT ANWENDEN
-; Diese Datei enthaelt absichtlich den ungueltigen Platzhalter
-; __ZIELVERZEICHNIS__. Erst installieren.ps1 kopiert die Ressourcen, ersetzt den
-; Platzhalter durch einen absoluten Pfad und oeffnet die fertige Theme-Datei.
+; TEMPLATE - DO NOT APPLY DIRECTLY
+; This file deliberately contains the invalid placeholder __TARGET_DIR__.
+; install.ps1 copies the resources, replaces the placeholder with an absolute
+; path and opens the finished theme file.
 ; ============================================================================
 
 [Theme]
@@ -29,7 +29,7 @@ DefaultValue=Windows Default
 DefaultValue.MUI=@main.cpl,-1020
 
 [Control Panel\Desktop]
-Wallpaper=__ZIELVERZEICHNIS__\wallpapers\rahmen-1920x1080.png
+Wallpaper=__TARGET_DIR__\wallpapers\frame-1920x1080.png
 TileWallpaper=0
 WallpaperStyle=10
 Pattern=
@@ -50,28 +50,28 @@ SCRNSAVE.EXE=
 MTSM=RJSPBS
 
 [Sounds]
-; Der Installer registriert diesen Namen nicht direkt. Siehe README zum
-; ungeprueften Importverhalten und zum belegbaren manuellen Weg.
+; The installer does not register this name directly. See the README on the
+; untested import behaviour and the manual way that is known to work.
 SchemeName=LCARS-Homelab
 
 [AppEvents\Schemes\Apps\.Default\.Default\.Current]
-DefaultValue=__ZIELVERZEICHNIS__\sounds\standard.wav
+DefaultValue=__TARGET_DIR__\sounds\default.wav
 
 [AppEvents\Schemes\Apps\.Default\SystemHand\.Current]
-DefaultValue=__ZIELVERZEICHNIS__\sounds\fehler.wav
+DefaultValue=__TARGET_DIR__\sounds\critical-stop.wav
 
 [AppEvents\Schemes\Apps\.Default\Notification.Default\.Current]
-DefaultValue=__ZIELVERZEICHNIS__\sounds\benachrichtigung.wav
+DefaultValue=__TARGET_DIR__\sounds\notification.wav
 
 [AppEvents\Schemes\Apps\.Default\DeviceConnect\.Current]
-DefaultValue=__ZIELVERZEICHNIS__\sounds\geraet-verbunden.wav
+DefaultValue=__TARGET_DIR__\sounds\device-connect.wav
 
 [AppEvents\Schemes\Apps\.Default\DeviceDisconnect\.Current]
-DefaultValue=__ZIELVERZEICHNIS__\sounds\geraet-getrennt.wav
+DefaultValue=__TARGET_DIR__\sounds\device-disconnect.wav
 
 [Slideshow]
 Interval=1800000
 Shuffle=0
-ImagesRootPath=__ZIELVERZEICHNIS__\wallpapers
-Item0Path=__ZIELVERZEICHNIS__\wallpapers\rahmen-1920x1080.png
-Item1Path=__ZIELVERZEICHNIS__\wallpapers\signal-1920x1080.png
+ImagesRootPath=__TARGET_DIR__\wallpapers
+Item0Path=__TARGET_DIR__\wallpapers\frame-1920x1080.png
+Item1Path=__TARGET_DIR__\wallpapers\signal-1920x1080.png

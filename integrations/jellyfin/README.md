@@ -1,175 +1,78 @@
-# Jellyfin: Homelab LCARS Familie
+# Jellyfin: Homelab LCARS family overlay
 
-Paketversion **1.11.0**. `jellyfin.css` gestaltet ausschließlich den Jellyfin-
-**Webclient** in der warmen Familienvariante. Native TV-Clients und native Handy-/
-Tablet-Apps laden Jellyfins `CustomCss` nicht und werden dadurch nicht verändert.
-Ein Client, der lediglich den gehosteten Webclient in einer WebView anzeigt, kann
-die Regeln dagegen erben.
+`jellyfin.css` styles the Jellyfin **web client** in the warm family variant. Native
+TV and phone/tablet apps do not load Jellyfin's custom CSS and stay unchanged; a
+client that only shows the hosted web client in a web view may inherit the rules.
 
-Die Übersicht verbindet eine Netflix-artige Struktur mit klarer Star-Trek-
-Handschrift: große, dichte Medienkacheln und bildgetragene Reihen werden von
-Kopfzeile, Abschnittsregistern, Endkappen und einseitigen Kartenecken gefasst. Die
-früher angeschnittenen Viewport-Schienen sind entfernt; sie nahmen den Postern zwar
-keine Fläche, wirkten am Bildrand aber wie Darstellungsfehler. Exo 2, JetBrains
-Mono, Homelab-Palette und Emblem bilden den Markenanker.
+The overview combines a streaming-service structure with an LCARS signature: large,
+dense media tiles and image-led rows, framed by the header, section registers, end
+caps and one-sided card corners. Posters, thumbnails and backdrops keep their
+colours - no `filter`, no changed opacity, no blend mode; only behind visible card
+titles sits a neutral dark gradient at the bottom edge.
 
-Poster, Vorschaubilder und Backdrops behalten ihre Farben. Das Stylesheet setzt
-weder `filter` noch eine geänderte Bilddeckkraft oder einen Mischmodus. Nur hinter
-eingeblendeten Kartentiteln liegt am unteren Bildrand ein neutraler dunkler Verlauf
-für die Lesbarkeit.
+## What it does
 
-## Was reines CSS leistet — und was nicht
+- a level A sign-in page: dimmed background, a slow 90-second zoom, an LCARS rail
+  fully inside the form card with three uneven pulse rhythms, the Jellyfin emblem,
+  gold as the primary action and Homelab states for all fields, buttons and the
+  checkbox; Quick Connect and password help as full-width rows below the card;
+- larger overflow cards with less spacing, while normal library grids keep
+  Jellyfin's responsive breakpoints;
+- a header with a segmented block bar and end cap;
+- section titles as spaced capitals with a colour block; clickable ones carry a
+  mono register `REGISTER // 01`;
+- card titles and the dark gradient only on pointer or keyboard focus on desktop,
+  always visible on mobile;
+- enlarging only via `transform: scale(1.075)` - neighbours are overlapped, not
+  pushed, and the grid never re-flows;
+- the same highlighted state for remote focus on TV layouts, with at least
+  58 × 58 px targets;
+- semantic progress colours: green for playback progress, gold for general progress
+  and transcoding, red for recordings/errors, blue for information;
+- everything switched off with `prefers-reduced-motion: reduce`.
 
-Auf Basis der gemessenen Klassen setzt das Stylesheet Folgendes um:
+The player stays calm on purpose: no glow or press animation while a film is
+running; the normal focus ring stays for usability. A real hero banner would need
+DOM changes, and Jellyfin's branding only accepts CSS - so there is none.
 
-- eine Stufe-A-Anmeldung mit dem gemeinsamen, flächig abgedunkelten Weltraumfoto,
-  90-Sekunden-Zoom von 100 auf 102,5 Prozent, vollständig innerhalb der Karte
-  liegender LCARS-Schiene, drei ungleichen Pulstakten und dreiteiliger Sequenz;
-- das Homelab-Jellyfin-Emblem statt des gehashten Jellyfin-Banners sowie Gold als
-  Primäraktion und Homelab-Zustände für sämtliche Login-Schaltflächen, Checkbox,
-  Eingabefelder, Feldbeschriftungen und Ladeanzeige;
-- Quick Connect und Kennworthilfe als eigene dunkle, kontraststarke Zeilen in
-  Kartenbreite unter dem Formular, weil Jellyfin sie außerhalb der Karte ausgibt;
-- größere Überlaufkarten und kleinere Zwischenräume, ohne Jellyfins responsive
-  Rasterlogik für normale Bibliothekskarten zu ersetzen;
-- auf knapp 0,75 rem reduzierte Seitenränder an den bestätigten
-  `.padded-left`-/`.padded-right`-Trägern;
-- eine Kopfzeile mit segmentierter Blockleiste und Endkappe, jedoch keine
-  abgeschnittenen festen Farbstreifen mehr an `.mainAnimatedPage`;
-- anklickbare und statische Abschnittstitel identisch als gesperrte Versalien mit
-  vorangestelltem Farbblock; nur die anklickbare Variante trägt das per CSS-Zähler
-  erzeugte Mono-Register `REGISTER // 01`, weil es dort eine Aktion kennzeichnet;
-- Titel und dunklen unteren Verlauf erst bei Zeiger- oder Tastaturfokus auf dem
-  Desktop; auf Mobilgeräten bleiben die Titel immer sichtbar;
-- Vergrößerung ausschließlich per `transform: scale(1.075)`: Nachbarkarten werden
-  überlagert, aber nicht verschoben und das Raster bricht nicht um;
-- denselben hervorgehobenen Zustand über `.show-focus:focus` auf `.layout-tv`,
-  außerdem mindestens 58 × 58 px große TV-Schaltflächen;
-- eine transparente beziehungsweise flach warm hinterlegte `.skinHeader` mit den
-  vorhandenen `.headroom--pinned`-/`.headroom--unpinned`-Zuständen;
-- einseitige LCARS-Kartenecken sowie die Homelab-Zustände Hover-Leuchtkante,
-  Druckblitz und Fokusrahmen;
-- flächige Statusfarben: Grün für Wiedergabefortschritt, Gold für allgemeinen
-  Fortschritt und Transcoding, Rot für Aufnahmen/Fehler und Blau für Information;
-  Karten verwenden dabei `.itemProgressBar` als dunkle Spur und ausschließlich
-  deren `.innerProgressBar` als grüne Füllung;
-- Abschaltung aller Animationen und Übergänge einschließlich Kartenvergrößerung,
-  Hintergrundfahrt, Schienenpulsen und Sequenz bei `prefers-reduced-motion: reduce`.
+## Install
 
-Ein echter Netflix-Heldbanner mit großem aktuellem Titelbild und Abspielknopf
-erfordert andere DOM-Struktur und Logik. `branding.xml` nimmt nur CSS auf; deshalb
-gibt es bewusst weder JavaScript noch DOM-Umbau oder einen vorgetäuschten Banner.
+In the Jellyfin dashboard go to **Dashboard → General → Custom CSS** (stored in
+`config/branding.xml` as `CustomCss`) and replace the content with a single import
+from your theme host:
 
-Der Abspieler ist bewusst zurückhaltender als Übersicht und Detailseite. Während
-eines Films sollen weder LCARS-Leuchtkanten noch Druckanimationen vom Bild
-ablenken. Interaktionsglühen ist deshalb auf Kopfzeile, Drawer, Dialoge, Details
-und Formulare begrenzt. Der normale Fokusrahmen bleibt aus Gründen der
-Bedienbarkeit erhalten.
-
-Für sichtbare Rahmen ist das Familienbraun auf `#98765a` angehoben. Es erreicht auf
-den verwendeten Panel-/Eingabeflächen mindestens 3,21:1 und bleibt damit auch auf
-großen Bildschirmen belastbarer als die feinere allgemeine Tokenlinie `#765c47`.
-Auf der Anmeldung erreicht selbst die Glasfläche über einem zuvor zu 58 Prozent
-abgedunkelten weißen Bildpunkt 13,08:1 für normalen und 8,88:1 für gedämpften Text.
-Der Goldknopf mit dunkler Schrift erreicht 9,06:1, sekundäre Knöpfe 10,71:1; ihre
-helle Goldkante und die Checkbox-Kante heben sich mit 6,35:1 von der Fläche ab.
-
-## Einbindung
-
-Im gemessenen Jellyfin liegt die Einstellung in:
-
-```text
-/srv/jellyfin/config/branding.xml
+```css
+@import url('https://theme.example.org/lcars-homelab/integrations/jellyfin/jellyfin.css');
 ```
 
-Den bisherigen Inhalt des `CustomCss`-Elements vollständig ersetzen. Die alte
-Zeile mit `cdn.jsdelivr.net` wird **nicht** zusätzlich behalten:
+Use the base URL you built with `tools/build-dist.mjs`; fonts, emblem and background
+are loaded from the same place. Relative paths would not work, because imported
+CSS resolves against the Jellyfin host.
 
-```xml
-<CustomCss>@import url('https://cdn.jsdelivr.net/gh/CTalvio/Ultrachromic/presets/monochromic_preset.css');</CustomCss>
-```
+Save, then reload the web client with an empty cache. The browser's developer tools
+should show `jellyfin.css` and both WOFF2 files loading without errors.
 
-Sie wird ersetzt durch:
+## After updating Jellyfin, check
 
-```xml
-<CustomCss>@import url('https://brand.example.com/v1.11.0/integrations/jellyfin/jellyfin.css');</CustomCss>
-```
+The rules are based on the classes of the 10.11 web client, among them
+`.backgroundContainer`, `.standalonePage`, `.manualLoginForm`, `.cardBox`,
+`.cardImageContainer`, `.cardOverlayContainer`, `.cardFooter`, `.itemsContainer`,
+`.emby-scroller`, `.sectionTitle-cards`, `.sectionTitleTextButton`, `.skinHeader`
+with the `headroom--*` states, `.layout-desktop`, `.layout-mobile`, `.layout-tv` and
+`.show-focus`. After an update look at:
 
-Damit entfällt Ultrachromic und zugleich die fremde CDN-Laufzeitabhängigkeit. Das
-Stylesheet selbst enthält kein `@import`; Exo 2, JetBrains Mono, Hintergrundfoto
-und Jellyfin-Emblem kommen über absolute Adressen aus demselben unveränderlichen
-`v1.11.0`-Pfad. Relative Bildpfade sind ausdrücklich ausgeschlossen, weil das per
-`branding.xml` importierte CSS sonst gegen den Jellyfin-Host auflösen würde.
+1. film, series, episode and collection rows - `.cardFooter` inside `.cardBox`;
+2. the header when scrolling down and up;
+3. enlarged first/last cards - not clipped by the scroller;
+4. TV remote focus, scaling and 58 px targets;
+5. mobile cards - titles do not cover badges or progress bars;
+6. both section title variants with long titles;
+7. sign-in at ~390, 1366, 1920 and 3840 px, with manual login, Quick Connect,
+   wrong credentials and the spinner;
+8. progress bars for playback, transcoding and recording;
+9. the network panel for CORS, CSP or 404 errors on CSS and fonts.
 
-Nach der Änderung Jellyfin neu starten und den Webclient mit geleertem Cache neu
-laden. In den Browser-Entwicklerwerkzeugen müssen `jellyfin.css` und beide WOFF2-
-Dateien erfolgreich von `brand.example.com` geladen werden.
+## Uninstall
 
-## Gemessene Grundlage
-
-Die Regeln wurden gegen die lokal bereitgestellten `main.css`, `vendor.css`, die
-Liste mit 2575 echten Klassennamen und `anmeldeseite-klassen.md` aus dem laufenden
-Browser abgeglichen. Sicher bestätigt sind unter anderem `.backgroundContainer`,
-`.standalonePage`, `.manualLoginForm`, `.visualLoginForm`, `.pageTitleWithLogo`,
-`.button-submit`, die Quick-/Kennwort-/Abbruchaktionen, Checkbox- und Feldklassen,
-`.mainAnimatedPage`, Karten und Kartentypen, `.cardBox`, `.cardImageContainer`,
-`.cardOverlayContainer`, `.cardText`, `.cardFooter`, `.itemsContainer`,
-`.emby-scroller`, die Abschnittstitel, `.skinHeader`, alle drei Headroom-Zustände,
-Navigation, Details, Schaltflächen, Fortschritts- und Zustandsklassen sowie
-`.layout-desktop`, `.layout-mobile`, `.layout-tv` und `.show-focus`.
-
-Die Überschreibungen folgen den vorhandenen Mechanismen: Jellyfin skaliert den
-`.cardBox` bereits beim Fokus, blendet Overlays über `.card-hoverable` ein, setzt
-`.skinHeader` auf Desktop/Mobil bereits `position: fixed` und bewegt Headroom per
-`transform`. Das Homelab-CSS ersetzt diese Logik nicht, sondern kalibriert sie.
-
-## ZU PRÜFEN am laufenden Webclient
-
-1. An einer Film-, Serien-, Episoden- und Sammlungsreihe prüfen, ob `.cardFooter`
-   überall innerhalb von `.cardBox` liegt und der absolute Footer am unteren
-   Bildrand landet. Bei einer abweichenden Variante bitte deren `outerHTML`
-   erfassen.
-2. Anfangszustand und Scrollfolge der Kopfzeile protokollieren: Klassen auf
-   `.skinHeader` oben, beim Abwärtsscrollen und beim Aufwärtsscrollen. Zu klären ist
-   vor allem, ob `headroom--pinned` bereits ganz oben gesetzt wird oder erst nach
-   dem ersten Scrollen.
-3. Auf einem echten Desktop kontrollieren, ob skalierte erste/letzte Karten an
-   `.hiddenScrollX` oder einem unbekannten Elterncontainer abgeschnitten werden.
-   Falls ja: Klasse und berechnetes `overflow` dieses Elternteils notieren.
-4. Auf dem TV den tatsächlichen Fokus-Knoten einer Karte erfassen: erwartet ist
-   `.card.show-focus:focus`. Fokusrahmen, 1,075-fache Skalierung, Scrollen zur
-   Auswahl und 58-px-Bedienziele mit der Fernbedienung prüfen.
-5. Auf Mobilgeräten kontrollieren, ob alle relevanten Karten einen `.cardFooter`
-   besitzen und die stets sichtbaren Titel nicht Statusabzeichen oder
-   Fortschrittsleisten überdecken.
-6. Beide Abschnittsvarianten bei langen Titeln prüfen: `.sectionTitle-cards` und
-   `.sectionTitleTextButton` müssen denselben Farbblock, dieselben Versalien und
-   dieselbe Grundlinie tragen. Nur anklickbare Container zeigen den fortlaufenden
-   CSS-Zähler; eine echte Medienanzahl kann CSS nicht aus dem DOM berechnen.
-7. Anmeldung bei etwa 390, 1366, 1920 und 3840 px sowie mit manueller Anmeldung,
-   Quick Connect, falschen Zugangsdaten und laufendem Spinner prüfen: Foto und
-   Abdunklung müssen flächig, Emblem und Goldzustände sichtbar und die gesamte
-   Schiene innerhalb der Karte unbeschnitten sein; Quick Connect und Kennworthilfe
-   müssen als kartenbreite Zeilen darunter sitzen. Außerdem kontrollieren, ob die
-   aktive Jellyfin-Fassung `:has()` in allen eingesetzten WebViews unterstützt.
-8. Startseite, Bibliothek, Suche und Detailseite bei etwa 390, 1366, 1920 und
-   3840 px Breite prüfen: Zahl der Karten pro Reihe, Lesbarkeit der Titel und
-   Überlagerung durch Scrollschaltflächen festhalten.
-9. Fortschrittsanzeigen für Wiedergabe, Transcoding und Aufnahme sowie
-    `.mediaSourceIndicator`, `.programAttributeIndicator` und `.timerIndicator`
-    gegen ihre tatsächliche Semantik prüfen; unter den Karten muss
-    `.innerProgressBar` flächig grün und `.itemProgressBar` dunkel bleiben.
-10. Per Computed Styles an Poster, Backdrop und Vorschau bestätigen, dass aus
-    `jellyfin.css` weder `filter`, Bild-`opacity`, `mix-blend-mode` noch eine farbige
-    Medienlage stammt. Der schwarze Titelverlauf am unteren Rand ist beabsichtigt.
-11. Netzwerkliste und Konsole auf CORS-, CSP-, 404- und Cachefehler der CSS- und
-    Schriftdateien prüfen. Diese lokale Dateiarbeit konnte keinen laufenden Client
-    und keine Ressourcen über das Netz aufrufen.
-
-## Rückweg
-
-Das `CustomCss`-Element leeren beziehungsweise auf `<CustomCss />` setzen und
-Jellyfin neu starten. Danach den Webclient-Cache leeren. Jellyfin verwendet wieder
-seine eingebauten Webclient-Stile; es müssen keine Installationsdateien repariert
-werden. Die frühere jsDelivr-Zeile ist im Versionsverlauf dokumentiert, wird beim
-normalen Rückbau aber bewusst nicht wieder als externe Abhängigkeit aktiviert.
+Empty the Custom CSS field (or set `<CustomCss />`), save and clear the web client
+cache. Jellyfin goes back to its built-in styles.

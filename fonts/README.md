@@ -1,26 +1,31 @@
-# Lokale Webfonts
+# Fonts
 
-Zwei Dateien, keine externen Aufrufe:
+Two files, no external requests:
 
-| Datei | Familie | Schnitte | Groesse |
+| File | Family | Weights | Size |
 |---|---|---|---|
-| `Exo2-Variable.woff2` | Exo 2 | 400-800 (variabel) | 40 KB |
-| `JetBrainsMono-Variable.woff2` | JetBrains Mono | 400-700 (variabel) | 31 KB |
+| `Exo2-Variable.woff2` | Exo 2 | 400-800 (variable) | 40 KB |
+| `JetBrainsMono-Variable.woff2` | JetBrains Mono | 400-700 (variable) | 31 KB |
 
-**Warum nur zwei Dateien:** Beide Familien werden als **variable Schrift** ausgeliefert.
-Laedt man die Schnitte 400 bis 800 einzeln herunter, erhaelt man fuenfmal dieselbe Datei
-(nachgeprueft: identische MD5-Summe). Eine Datei je Familie mit
-`font-weight: 400 800` deckt alle Schnitte ab und spart rund 210 KB.
+**Why only two files:** both families are variable fonts. Downloading the weights
+400 to 800 one by one gives the same file five times. One file per family with
+`font-weight: 400 800` covers all weights and saves about 210 KB.
 
-Zeichenumfang: **latin** (U+0000-00FF und Satzzeichen), also inklusive Umlauten und
-Eszett. Fuer weitere Schriftsysteme muessten die entsprechenden Subsets ergaenzt und
-die `unicode-range` in `../css/tokens.css` erweitert werden.
+Character set: **latin** (U+0000-00FF plus punctuation), including German umlauts
+and ß. For other scripts add the matching subsets and extend the `unicode-range` in
+`../css/tokens.css`.
 
-**Lizenz:** beide unter der SIL Open Font License 1.1 — Selbsthosten ist ausdruecklich
-erlaubt. Die Lizenztexte gehoeren vor einer Veroeffentlichung als `OFL-Exo2.txt` und
-`OFL-JetBrainsMono.txt` hierher.
+The `@font-face` rules are in `../css/tokens.css` and use `font-display: swap`.
+Without the files every page stays readable through full system font fallbacks.
+When serving: MIME type `font/woff2`, CORS for the hosts that embed them, long
+immutable caching.
 
-Die `@font-face`-Regeln stehen in `../css/tokens.css` und verwenden `font-display: swap`.
-Ohne die Dateien bleibt jede Seite durch vollstaendige System-Fallbacks lesbar.
-Beim Ausliefern beachten: MIME-Typ `font/woff2`, CORS fuer die einbindenden Hosts,
-langes Immutable-Caching.
+## License
+
+Both fonts are licensed under the **SIL Open Font License 1.1**, which allows
+self-hosting and redistribution together with the license:
+
+- Exo 2 - Copyright 2013 The Exo 2 Project Authors (https://github.com/NDISCOVER/Exo-2.0),
+  license text: `OFL-Exo2.txt`
+- JetBrains Mono - Copyright 2020 The JetBrains Mono Project Authors
+  (https://github.com/JetBrains/JetBrainsMono), license text: `OFL-JetBrainsMono.txt`

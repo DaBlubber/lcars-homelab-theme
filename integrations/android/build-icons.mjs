@@ -17,15 +17,6 @@ function base(accent, secondary) {
   return canvas;
 }
 
-function hestia(canvas, color) {
-  canvas.polygon([[256, 156], [334, 220], [318, 340], [194, 340], [178, 220]], color);
-  canvas.polygon([[256, 194], [292, 250], [272, 310], [240, 310], [220, 260]], COLORS.surface1);
-}
-
-function tempest(canvas, color) {
-  canvas.polygon([[278, 148], [194, 270], [252, 270], [224, 358], [330, 232], [270, 232]], color);
-}
-
 function gitea(canvas, color) {
   canvas.line(202, 198, 302, 256, 18, color);
   canvas.line(202, 198, 202, 326, 18, color);
@@ -43,7 +34,7 @@ function jenkins(canvas, color) {
 }
 
 function nextcloud(canvas, color) {
-  // Eigenstaendige Wolke mit Abwaertspfeil statt eines weiteren Strichstapels.
+  // A cloud with a down arrow of its own instead of yet another stack of lines.
   canvas.ellipse(210, 270, 42, 42, color);
   canvas.ellipse(262, 226, 62, 62, color);
   canvas.ellipse(322, 270, 44, 44, color);
@@ -95,8 +86,6 @@ function grafana(canvas, color) {
 }
 
 const icons = [
-  ["hestia", COLORS.gold, COLORS.lavender, hestia],
-  ["tempest", COLORS.blue, COLORS.gold, tempest],
   ["gitea", COLORS.lavender, COLORS.blue, gitea],
   ["jenkins", COLORS.gray, COLORS.gold, jenkins],
   ["nextcloud", COLORS.royalBlue, COLORS.lavender, nextcloud],
@@ -111,5 +100,5 @@ for (const [name, accent, secondary, draw] of icons) {
   const canvas = base(accent, secondary);
   draw(canvas, secondary);
   await writeFile(join(outputDir, `${name}-512x512.png`), canvas.png());
-  console.log(`Erzeugt: ${name}-512x512.png`);
+  console.log(`Written: ${name}-512x512.png`);
 }

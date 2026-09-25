@@ -1,9 +1,9 @@
 <!doctype html>
-<html lang="de">
+<html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>404 — Seite nicht gefunden</title>
+  <title>404 — Page not found</title>
   <style>
     :root { color-scheme:dark; --gold:#eaa549; --lav:#9a8ec9; --blue:#5a7fe0; --gray:#3c4257; --text:#dfe4f2; --muted:#a0a6b5; --focus:#f6c77f; --motion-fast:140ms; --motion-base:180ms; --ease:ease-out; }
     * { box-sizing:border-box; }
@@ -20,12 +20,12 @@
     .foot { background:var(--gold); border-radius:0 0 0 22px; height:30px; }
     .content { display:flex; flex-direction:column; min-width:0; padding:24px 32px 32px; }
     .top { align-items:center; border-bottom:2px solid var(--gold); display:flex; gap:16px; justify-content:space-between; padding-bottom:10px; }
-    /* Exakte Gross-Ausgabe von .rl-marke aus css/components.css v1.7.0. */
-    .rl-marke { --rl-marke-symbol:48px; --rl-marke-gap:16px; align-items:center; color:#f3f5fa; display:inline-flex; flex:0 0 auto; gap:var(--rl-marke-gap); line-height:1; min-width:0; text-align:left; }
-    .rl-marke__symbol { display:block; flex:0 0 var(--rl-marke-symbol); height:var(--rl-marke-symbol); width:var(--rl-marke-symbol); }
-    .rl-marke__text { display:flex; flex-direction:column; gap:3px; min-width:0; }
-    .rl-marke__name { color:#f3f5fa; font-size:1.125rem; font-weight:800; letter-spacing:4px; line-height:1; text-transform:uppercase; white-space:nowrap; }
-    .rl-marke__kontext { color:#8b90a0; font-size:.75rem; font-weight:600; letter-spacing:2.5px; line-height:1.2; text-transform:uppercase; white-space:nowrap; }
+    /* Exact large size of .rl-brand from css/components.css. */
+    .rl-brand { --rl-brand-symbol:48px; --rl-brand-gap:16px; align-items:center; color:#f3f5fa; display:inline-flex; flex:0 0 auto; gap:var(--rl-brand-gap); line-height:1; min-width:0; text-align:left; }
+    .rl-brand__symbol { display:block; flex:0 0 var(--rl-brand-symbol); height:var(--rl-brand-symbol); width:var(--rl-brand-symbol); }
+    .rl-brand__text { display:flex; flex-direction:column; gap:3px; min-width:0; }
+    .rl-brand__name { color:#f3f5fa; font-size:1.125rem; font-weight:800; letter-spacing:4px; line-height:1; text-transform:uppercase; white-space:nowrap; }
+    .rl-brand__context { color:#8b90a0; font-size:.75rem; font-weight:600; letter-spacing:2.5px; line-height:1.2; text-transform:uppercase; white-space:nowrap; }
     .register { color:var(--lav); font-family:"Cascadia Mono","Segoe UI Mono",Consolas,"Liberation Mono",monospace; font-size:.6875rem; letter-spacing:1px; }
     .main { align-items:flex-start; display:flex; flex:1; flex-direction:column; justify-content:center; max-width:760px; padding:48px 0; }
     .code { color:var(--gold); font-family:"Cascadia Mono","Segoe UI Mono",Consolas,"Liberation Mono",monospace; font-size:clamp(4rem,16vw,10rem); font-weight:500; letter-spacing:-.06em; line-height:.8; margin:0 0 24px; }
@@ -60,9 +60,9 @@
     </div>
     <div class="content">
       <header class="top">
-    <!-- Inline-Abbild von .rl-marke--gross aus css/components.css v1.7.0; wegen der autarken Traefik-Auslieferung absichtlich ohne externe Ressource. -->
-        <div class="rl-marke rl-marke--gross">
-          <svg class="rl-marke__symbol" viewBox="0 0 100 116" preserveAspectRatio="xMidYMid meet" aria-hidden="true" focusable="false">
+    <!-- Inline copy of .rl-brand--large from css/components.css; no external resource on purpose, so the page works while everything else is down. -->
+        <div class="rl-brand rl-brand--large">
+          <svg class="rl-brand__symbol" viewBox="0 0 100 116" preserveAspectRatio="xMidYMid meet" aria-hidden="true" focusable="false">
   <defs><clipPath id="em-clip-404"><rect x="15" y="23" width="70" height="70" rx="10"/></clipPath></defs>
   <rect x="10" y="18" width="80" height="80" rx="14" fill="#eaa549"/>
   <rect x="15" y="23" width="70" height="70" rx="10" fill="#1740bc"/>
@@ -72,18 +72,18 @@
       <rect x="22" y="68" width="28" height="10" rx="5" fill="#eaa549"/>
   </g>
 </svg>
-          <span class="rl-marke__text"><span class="rl-marke__name">Homelab</span><span class="rl-marke__kontext">Fehlerseite</span></span>
+          <span class="rl-brand__text"><span class="rl-brand__name">Homelab</span><span class="rl-brand__context">Error page</span></span>
         </div>
         <span class="register">HTTP / 404</span>
       </header>
       <section class="main">
         <div class="code" aria-hidden="true">404</div>
-        <h1>Seite nicht gefunden</h1>
-        <p>Die angeforderte Adresse ist nicht vorhanden. Prüfen Sie die Eingabe oder kehren Sie zur Startseite zurück.</p>
-        <!-- href="/" ist absichtlich hostrelativ: Traefik liefert die Seite unter dem ausgefallenen Host aus; der Link versucht genau dessen Startseite erneut. -->
-        <a class="action" href="/">Zur Startseite</a>
+        <h1>Page not found</h1>
+        <p>The requested address does not exist. Check the address or go back to the start page.</p>
+        <!-- href="/" is host-relative on purpose: the proxy serves this page under the failing host; the link retries exactly its start page. -->
+        <a class="action" href="/">Back to the start page</a>
       </section>
-      <footer class="footer">Fehlercode 404 · Ressource nicht gefunden</footer>
+      <footer class="footer">Error code 404 · resource not found</footer>
     </div>
   </main>
 </body>

@@ -10,8 +10,8 @@
 
 @font-face {
   font-family: "Exo 2";
-  src: url("https://brand.example.com/v1.11.0/fonts/Exo2-Variable.woff2") format("woff2-variations"),
-       url("https://brand.example.com/v1.11.0/fonts/Exo2-Variable.woff2") format("woff2");
+  src: url("https://brand.example.com/lcars-homelab/fonts/Exo2-Variable.woff2") format("woff2-variations"),
+       url("https://brand.example.com/lcars-homelab/fonts/Exo2-Variable.woff2") format("woff2");
   font-style: normal;
   font-weight: 400 800;
   font-display: swap;
@@ -19,8 +19,8 @@
 
 @font-face {
   font-family: "JetBrains Mono";
-  src: url("https://brand.example.com/v1.11.0/fonts/JetBrainsMono-Variable.woff2") format("woff2-variations"),
-       url("https://brand.example.com/v1.11.0/fonts/JetBrainsMono-Variable.woff2") format("woff2");
+  src: url("https://brand.example.com/lcars-homelab/fonts/JetBrainsMono-Variable.woff2") format("woff2-variations"),
+       url("https://brand.example.com/lcars-homelab/fonts/JetBrainsMono-Variable.woff2") format("woff2");
   font-style: normal;
   font-weight: 400 700;
   font-display: swap;
@@ -33,21 +33,21 @@
 
   /* Homelab source roles used by the few verified selector rules below. */
   --rl-gold: #eaa549;
-  --rl-koenigsblau: #1740bc;
-  --rl-lavendel: #9a8ec9;
-  --rl-blau: #5a7fe0;
-  --rl-grau: #3c4257;
-  --rl-grund: #000000;
-  --rl-flaeche-1: #0b0d14;
-  --rl-flaeche-2: #10131a;
-  --rl-flaeche-3: #1b1f2b;
-  --rl-linie: #59627a;
+  --rl-royal-blue: #1740bc;
+  --rl-lavender: #9a8ec9;
+  --rl-blue: #5a7fe0;
+  --rl-gray: #3c4257;
+  --rl-ground: #000000;
+  --rl-surface-1: #0b0d14;
+  --rl-surface-2: #10131a;
+  --rl-surface-3: #1b1f2b;
+  --rl-border: #59627a;
   --rl-text: #dfe4f2;
-  --rl-text-stark: #f3f5fa;
-  --rl-text-gedaempft: #a8adbb;
-  --rl-status-erfolg: #7fb069;
-  --rl-status-fehler: #cc6666;
-  --rl-fokus: #f6c77f;
+  --rl-text-strong: #f3f5fa;
+  --rl-text-muted: #a8adbb;
+  --rl-status-success: #7fb069;
+  --rl-status-error: #cc6666;
+  --rl-focus: #f6c77f;
 
   /* Typography and motion consumed directly by Jenkins core. */
   --font-family-sans: "Exo 2", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
@@ -57,46 +57,46 @@
   --elastic-transition: 180ms ease-out;
 
   /* Core canvas, header and text. */
-  --background: var(--rl-grund);
-  --header-background: var(--rl-flaeche-1);
-  --header-border: var(--rl-linie);
-  --header-color: var(--rl-text-stark);
+  --background: var(--rl-ground);
+  --header-background: var(--rl-surface-1);
+  --header-border: var(--rl-border);
+  --header-color: var(--rl-text-strong);
   --text-color: var(--rl-text);
-  --text-color-secondary: var(--rl-text-gedaempft);
-  --secondary: var(--rl-text-gedaempft);
-  --white: var(--rl-text-stark);
-  --black: var(--rl-grund);
-  --very-light-grey: var(--rl-flaeche-3);
-  --light-grey: var(--rl-flaeche-2);
-  --medium-grey: var(--rl-grau);
-  --dark-grey: var(--rl-flaeche-1);
+  --text-color-secondary: var(--rl-text-muted);
+  --secondary: var(--rl-text-muted);
+  --white: var(--rl-text-strong);
+  --black: var(--rl-ground);
+  --very-light-grey: var(--rl-surface-3);
+  --light-grey: var(--rl-surface-2);
+  --medium-grey: var(--rl-gray);
+  --dark-grey: var(--rl-surface-1);
   --selection-color: rgb(234 165 73 / 28%);
 
   /* Brand and semantic colors already exposed by Jenkins. */
   --accent-color: var(--rl-gold);
   --primary: var(--rl-gold);
-  --primary-hover: var(--rl-fokus);
+  --primary-hover: var(--rl-focus);
   --primary-active: #d99030;
-  --blue: var(--rl-blau);
+  --blue: var(--rl-blue);
   --light-blue: #8da8f1;
-  --dark-blue: var(--rl-koenigsblau);
-  --indigo: var(--rl-lavendel);
+  --dark-blue: var(--rl-royal-blue);
+  --indigo: var(--rl-lavender);
   --light-indigo: #b9b0db;
   --dark-indigo: #655b91;
-  --purple: var(--rl-lavendel);
+  --purple: var(--rl-lavender);
   --light-purple: #c2b9df;
   --dark-purple: #655b91;
   --orange: var(--rl-gold);
-  --light-orange: var(--rl-fokus);
+  --light-orange: var(--rl-focus);
   --dark-orange: #a96818;
-  --green: var(--rl-status-erfolg);
+  --green: var(--rl-status-success);
   --light-green: #a9cb99;
   --dark-green: #4f7c3d;
-  --red: var(--rl-status-fehler);
+  --red: var(--rl-status-error);
   --light-red: #e28a8a;
   --dark-red: #963f3f;
   --yellow: var(--rl-gold);
-  --light-yellow: var(--rl-fokus);
+  --light-yellow: var(--rl-focus);
   --dark-yellow: #a96818;
   --cyan: #70b7c4;
   --light-cyan: #9fd0d8;
@@ -111,110 +111,110 @@
   --light-brown: #c8a986;
   --dark-brown: #66472f;
 
-  --success: var(--rl-status-erfolg);
-  --success-color: var(--rl-status-erfolg);
+  --success: var(--rl-status-success);
+  --success-color: var(--rl-status-success);
   --warning: var(--rl-gold);
   --warning-color: var(--rl-gold);
-  --danger: var(--rl-status-fehler);
-  --danger-color: var(--rl-status-fehler);
-  --error-color: var(--rl-status-fehler);
-  --destructive-color: var(--rl-status-fehler);
-  --info-color: var(--rl-blau);
-  --build-color: var(--rl-status-erfolg);
+  --danger: var(--rl-status-error);
+  --danger-color: var(--rl-status-error);
+  --error-color: var(--rl-status-error);
+  --destructive-color: var(--rl-status-error);
+  --info-color: var(--rl-blue);
+  --build-color: var(--rl-status-success);
   --unstable-build-icon-color: var(--rl-gold);
-  --skipped-color: var(--rl-text-gedaempft);
+  --skipped-color: var(--rl-text-muted);
   --weather-icon-color: var(--rl-gold);
 
   /* Links. Royal blue remains structural, never small text on black. */
   --link-color: var(--rl-gold);
-  --link-visited-color: var(--rl-lavendel);
-  --link-color--hover: var(--rl-fokus);
+  --link-visited-color: var(--rl-lavender);
+  --link-color--hover: var(--rl-focus);
   --link-color--active: #ffd9a3;
-  --link-dark-color: var(--rl-text-stark);
-  --link-dark-visited-color: var(--rl-lavendel);
-  --link-dark-color--hover: var(--rl-fokus);
+  --link-dark-color: var(--rl-text-strong);
+  --link-dark-visited-color: var(--rl-lavender);
+  --link-dark-color--hover: var(--rl-focus);
   --link-dark-color--active: #ffd9a3;
 
   /* Borders and surfaces. */
   --jenkins-border-width: 1.5px;
-  --jenkins-border-color: var(--rl-linie);
+  --jenkins-border-color: var(--rl-border);
   --jenkins-border-color--subtle: rgb(168 173 187 / 22%);
   --jenkins-border-color--inherit-subtle: rgb(168 173 187 / 28%);
   --jenkins-border: var(--jenkins-border-width) solid var(--jenkins-border-color);
   --jenkins-border--subtle: var(--jenkins-border-width) solid var(--jenkins-border-color--subtle);
   --jenkins-border--inherit-subtle: var(--jenkins-border-width) solid var(--jenkins-border-color--inherit-subtle);
   --jenkins-border--subtle-shadow: 0 0 0 var(--jenkins-border-width) var(--jenkins-border-color--subtle);
-  --card-background: var(--rl-flaeche-2);
-  --card-background--hover: var(--rl-flaeche-3);
-  --card-background--active: var(--rl-flaeche-1);
-  --card-border-color: var(--rl-linie);
-  --card-border-color--hover: var(--rl-blau);
+  --card-background: var(--rl-surface-2);
+  --card-background--hover: var(--rl-surface-3);
+  --card-background--active: var(--rl-surface-1);
+  --card-border-color: var(--rl-border);
+  --card-border-color--hover: var(--rl-blue);
   --card-border-color--active: var(--rl-gold);
-  --pane-header-bg: var(--rl-flaeche-3);
-  --pane-header-border-color: var(--rl-linie);
-  --pane-header-text-color: var(--rl-text-stark);
-  --pane-border-color: var(--rl-linie);
+  --pane-header-bg: var(--rl-surface-3);
+  --pane-header-border-color: var(--rl-border);
+  --pane-header-text-color: var(--rl-text-strong);
+  --pane-border-color: var(--rl-border);
   --pane-text-color: var(--rl-text);
   --pane-link-color: var(--rl-gold);
-  --pane-link-color--visited: var(--rl-lavendel);
-  --panel-header-bg-color: var(--rl-flaeche-3);
-  --panel-border-color: var(--rl-linie);
-  --tabs-item-foreground: var(--rl-text-gedaempft);
-  --tabs-item-background--selected: var(--rl-flaeche-3);
-  --dark-theme-bg-medium: var(--rl-flaeche-3);
-  --plugin-manager-bg-color-already-upgraded: var(--rl-flaeche-3);
+  --pane-link-color--visited: var(--rl-lavender);
+  --panel-header-bg-color: var(--rl-surface-3);
+  --panel-border-color: var(--rl-border);
+  --tabs-item-foreground: var(--rl-text-muted);
+  --tabs-item-background--selected: var(--rl-surface-3);
+  --dark-theme-bg-medium: var(--rl-surface-3);
+  --plugin-manager-bg-color-already-upgraded: var(--rl-surface-3);
 
   /* Tables. */
-  --table-background: var(--rl-flaeche-2);
-  --table-header-foreground: var(--rl-text-stark);
-  --table-body-background: var(--rl-grund);
+  --table-background: var(--rl-surface-2);
+  --table-header-foreground: var(--rl-text-strong);
+  --table-body-background: var(--rl-ground);
   --table-body-foreground: var(--rl-text);
   --table-border-radius: 6px;
   --table-row-border-radius: 4px;
-  --even-row-color: var(--rl-flaeche-1);
-  --bigtable-header-bg: var(--rl-grau);
-  --bigtable-header-text-color: var(--rl-text-stark);
-  --bigtable-row-border-color: var(--rl-linie);
-  --table-parameters-bg--hover: var(--rl-flaeche-3);
-  --table-striped-bg--hover: var(--rl-flaeche-3);
+  --even-row-color: var(--rl-surface-1);
+  --bigtable-header-bg: var(--rl-gray);
+  --bigtable-header-text-color: var(--rl-text-strong);
+  --bigtable-row-border-color: var(--rl-border);
+  --table-parameters-bg--hover: var(--rl-surface-3);
+  --table-striped-bg--hover: var(--rl-surface-3);
 
   /* Inputs and keyboard focus. */
-  --input-color: var(--rl-flaeche-2);
+  --input-color: var(--rl-surface-2);
   --input-border: #5d6680;
-  --input-border-hover: var(--rl-blau);
-  --focus-input-border: var(--rl-fokus);
+  --input-border-hover: var(--rl-blue);
+  --focus-input-border: var(--rl-focus);
   --focus-input-glow: rgb(234 165 73 / 28%);
   --form-input-border-radius: 4px;
   --form-input-glow: 0 0 0 0.5rem transparent;
   --form-input-glow--focus: 0 0 0 1px var(--rl-gold), 0 0 12px rgb(234 165 73 / 58%);
-  --pre-background: var(--rl-flaeche-1);
-  --pre-color: var(--rl-text-stark);
+  --pre-background: var(--rl-surface-1);
+  --pre-color: var(--rl-text-strong);
 
   /* Buttons and generic interactive items. */
-  --button-background: var(--rl-flaeche-3);
+  --button-background: var(--rl-surface-3);
   --button-background--hover: #262c3c;
-  --button-background--active: var(--rl-grau);
+  --button-background--active: var(--rl-gray);
   --button-box-shadow--focus: rgb(90 127 224 / 45%);
-  --button-color--primary: var(--rl-grund);
+  --button-color--primary: var(--rl-ground);
   --item-background--hover: #262c3c;
-  --item-background--active: var(--rl-grau);
+  --item-background--active: var(--rl-gray);
   --item-box-shadow--focus: rgb(90 127 224 / 45%);
   --btn-primary-bg: var(--rl-gold);
 
   /* Alerts, dialogs, dropdowns and overlays. */
   --alert-success-text-color: #a9cb99;
   --alert-success-bg-color: rgb(127 176 105 / 12%);
-  --alert-success-border-color: var(--rl-status-erfolg);
+  --alert-success-border-color: var(--rl-status-success);
   --alert-info-text-color: #8da8f1;
   --alert-info-bg-color: rgb(90 127 224 / 12%);
-  --alert-warning-text-color: var(--rl-fokus);
+  --alert-warning-text-color: var(--rl-focus);
   --alert-warning-bg-color: rgb(234 165 73 / 12%);
   --alert-danger-text-color: #e28a8a;
   --alert-danger-bg-color: rgb(204 102 102 / 12%);
-  --tooltip-color: var(--rl-text-stark);
+  --tooltip-color: var(--rl-text-strong);
   --tooltip-box-shadow: var(--jenkins-border--subtle-shadow), 0 10px 24px rgb(0 0 0 / 55%);
   --dropdown-box-shadow: var(--jenkins-border--subtle-shadow), 0 10px 24px rgb(0 0 0 / 55%);
-  --dialog-background: var(--rl-flaeche-2);
+  --dialog-background: var(--rl-surface-2);
   --dialog-box-shadow: var(--jenkins-border--subtle-shadow), 0 14px 32px rgb(0 0 0 / 65%);
   --dialog-backdrop-background: rgb(0 0 0 / 76%);
 }
@@ -232,7 +232,7 @@ h3,
 h4,
 h5,
 h6 {
-  color: var(--rl-text-stark);
+  color: var(--rl-text-strong);
   font-family: var(--font-family-sans);
   font-weight: 700;
   letter-spacing: 0.1em;
@@ -276,11 +276,11 @@ tt {
   background: linear-gradient(90deg,
     var(--rl-gold) 0 48%,
     transparent 48% 48.6%,
-    var(--rl-lavendel) 48.6% 64%,
+    var(--rl-lavender) 48.6% 64%,
     transparent 64% 64.6%,
-    var(--rl-blau) 64.6% 79%,
+    var(--rl-blue) 64.6% 79%,
     transparent 79% 79.6%,
-    var(--rl-grau) 79.6% 100%);
+    var(--rl-gray) 79.6% 100%);
   bottom: -8px;
   content: "";
   height: 8px;
@@ -327,14 +327,14 @@ tt {
 
 /* The hash-changing Jenkins image is replaced by the versioned gear crest. */
 .app-jenkins-logo {
-  background: var(--rl-flaeche-2);
-  border: 1px solid var(--rl-linie);
+  background: var(--rl-surface-2);
+  border: 1px solid var(--rl-border);
   border-radius: 0 18px 18px 0;
   padding: 0.25rem 0.65rem;
 }
 
 #jenkins-head-icon {
-  content: url("https://brand.example.com/v1.11.0/assets/emblem--jenkins.svg") !important;
+  content: url("https://brand.example.com/lcars-homelab/assets/emblem--jenkins.svg") !important;
   filter: none !important;
   height: 42px !important;
   object-fit: contain;
@@ -343,7 +343,7 @@ tt {
 }
 
 .jenkins-search__input {
-  border-inline-start: 5px solid var(--rl-blau);
+  border-inline-start: 5px solid var(--rl-blue);
   border-radius: 0 10px 10px 0;
 }
 
@@ -369,11 +369,11 @@ tt {
   background: linear-gradient(90deg,
     var(--rl-gold) 0 54%,
     transparent 54% 55%,
-    var(--rl-lavendel) 55% 72%,
+    var(--rl-lavender) 55% 72%,
     transparent 72% 73%,
-    var(--rl-blau) 73% 88%,
+    var(--rl-blue) 73% 88%,
     transparent 88% 89%,
-    var(--rl-grau) 89% 100%);
+    var(--rl-gray) 89% 100%);
   border-radius: 0 18px 0 0;
   content: "";
   height: 8px;
@@ -407,11 +407,11 @@ tt {
 .task-link:hover,
 .task-link:focus-visible {
   background: var(--item-background--hover);
-  border-inline-start-color: var(--rl-lavendel);
+  border-inline-start-color: var(--rl-lavender);
 }
 
 .task-link:focus-visible {
-  outline: 3px double var(--rl-fokus);
+  outline: 3px double var(--rl-focus);
   outline-offset: 2px;
 }
 
@@ -442,7 +442,7 @@ tt {
 
 /* Jenkins already builds buttons from ::before and ::after; fills stay variable-driven. */
 .jenkins-button {
-  --rl-control-glow: var(--rl-blau);
+  --rl-control-glow: var(--rl-blue);
   border-radius: 0 999px 999px 0;
   font-family: var(--font-family-sans);
   font-weight: 700;
@@ -456,7 +456,7 @@ tt {
 }
 
 .jenkins-button--tertiary {
-  --rl-control-glow: var(--rl-lavendel);
+  --rl-control-glow: var(--rl-lavender);
 }
 
 .jenkins-button:not(:disabled):hover::after {
@@ -464,7 +464,7 @@ tt {
 }
 
 .jenkins-button:not(:disabled):focus-visible {
-  outline: 3px double var(--rl-fokus);
+  outline: 3px double var(--rl-focus);
   outline-offset: 3px;
 }
 
@@ -478,9 +478,9 @@ tt {
 
 /* Measured tabs get an LCARS cut while Jenkins keeps ownership of selection. */
 .tabBarFrame {
-  background: var(--rl-flaeche-1);
-  border: 1px solid var(--rl-linie);
-  border-inline-start: 10px solid var(--rl-lavendel);
+  background: var(--rl-surface-1);
+  border: 1px solid var(--rl-border);
+  border-inline-start: 10px solid var(--rl-lavender);
   border-radius: 0 18px 0 0;
   box-shadow: none;
   overflow: hidden;
@@ -504,17 +504,17 @@ tt {
 
 .tab:focus-visible,
 .addTab:focus-visible {
-  outline: 3px double var(--rl-fokus);
+  outline: 3px double var(--rl-focus);
   outline-offset: -1px;
 }
 
 .tabBarBaseline {
   background: linear-gradient(90deg,
-    var(--rl-lavendel) 0 42%,
+    var(--rl-lavender) 0 42%,
     transparent 42% 43%,
     var(--rl-gold) 43% 72%,
     transparent 72% 73%,
-    var(--rl-blau) 73% 100%);
+    var(--rl-blue) 73% 100%);
   height: 6px;
 }
 
@@ -546,34 +546,34 @@ tt {
     filter: brightness(1.1);
   }
   42% {
-    box-shadow: 0 0 0 2px var(--rl-text-stark), 0 0 18px var(--rl-control-glow);
+    box-shadow: 0 0 0 2px var(--rl-text-strong), 0 0 18px var(--rl-control-glow);
     filter: brightness(1.48);
   }
 }
 
 /* Jenkins' measured input component gets the same double keyboard focus. */
 .jenkins-input:not(:disabled):hover {
-  box-shadow: 0 0 0 1px var(--rl-blau), 0 0 8px rgb(90 127 224 / 48%);
+  box-shadow: 0 0 0 1px var(--rl-blue), 0 0 8px rgb(90 127 224 / 48%);
 }
 
 .jenkins-input:not(:disabled):focus-visible {
-  outline: 3px double var(--rl-fokus);
+  outline: 3px double var(--rl-focus);
   outline-offset: 2px;
 }
 
 /* The anonymous 2.568.3 sign-in page exposes a real, stable branding column. */
 .app-sign-in-register__branding {
-  background: var(--rl-flaeche-1);
-  border-right: 1px solid var(--rl-linie);
+  background: var(--rl-surface-1);
+  border-right: 1px solid var(--rl-border);
 }
 
 .app-sign-in-register__branding::before {
   aspect-ratio: auto;
   background: linear-gradient(to bottom,
     var(--rl-gold) 0 26%, transparent 26% 27%,
-    var(--rl-lavendel) 27% 49%, transparent 49% 50%,
-    var(--rl-blau) 50% 74%, transparent 74% 75%,
-    var(--rl-grau) 75% 100%);
+    var(--rl-lavender) 27% 49%, transparent 49% 50%,
+    var(--rl-blue) 50% 74%, transparent 74% 75%,
+    var(--rl-gray) 75% 100%);
   border-radius: 18px 0 0 18px;
   inset: 32px auto 32px 32px;
   min-height: 0;
@@ -589,9 +589,9 @@ tt {
   backdrop-filter: none;
   background: linear-gradient(to right,
     var(--rl-gold) 0 44%, transparent 44% 45%,
-    var(--rl-lavendel) 45% 65%, transparent 65% 66%,
-    var(--rl-blau) 66% 84%, transparent 84% 85%,
-    var(--rl-grau) 85% 100%);
+    var(--rl-lavender) 45% 65%, transparent 65% 66%,
+    var(--rl-blue) 66% 84%, transparent 84% 85%,
+    var(--rl-gray) 85% 100%);
   border-radius: 0 18px 18px 0;
   height: 18px;
   min-height: 0;
@@ -624,18 +624,18 @@ tt {
 }
 
 .app-sign-in-register__form-label {
-  color: var(--rl-lavendel);
+  color: var(--rl-lavender);
   letter-spacing: 0.04em;
 }
 
 .app-sign-in-register__error,
 .jenkins-input--error {
-  --focus-input-border: var(--rl-status-fehler);
+  --focus-input-border: var(--rl-status-error);
   --focus-input-glow: rgb(204 102 102 / 28%);
 }
 
 .simple-page .safe-restarting {
-  border-left: 6px solid var(--rl-status-erfolg);
+  border-left: 6px solid var(--rl-status-success);
 }
 
 .jenkins-spinner {
@@ -643,12 +643,13 @@ tt {
 }
 
 /*
- * ZU PRÜFEN NACH LOKALER EINBINDUNG:
- * - Header-Endkappe, Pane-Elbows und Tab-Zuschnitt bei schmaler und breiter Ansicht.
- * - Vollständige Tastaturfolge, Forced Colors sowie Hover-/Aktiv-/Deaktiviert-Zustände.
- * - Build-Historie, laufende Builds, Pipeline-Plugins und Console Output; ihre
- *   Strukturklassen wurden nicht gemessen und bleiben deshalb variablengetrieben.
- * - Welche weiteren Zeit-/Dauerknoten Jenkins ohne time/data oder Detailklasse ausgibt.
+ * TO CHECK AFTER INSTALLING:
+ * - Header end cap, pane elbows and tab shapes in narrow and wide views.
+ * - Full keyboard order, forced colours and hover/active/disabled states.
+ * - Build history, running builds, pipeline plugins and console output; their
+ *   structure classes were not measured and therefore stay variable-driven.
+ * - Which other time/duration nodes Jenkins renders without time/data or a
+ *   detail class.
  */
 
 @media (prefers-reduced-motion: reduce) {

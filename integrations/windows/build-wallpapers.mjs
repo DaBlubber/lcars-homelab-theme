@@ -15,7 +15,7 @@ function pill(canvas, x, y, width, height, color) {
   canvas.roundedRect(x, y, width, height, height / 2, color);
 }
 
-function motifRahmen(width, height) {
+function motifFrame(width, height) {
   const canvas = new Canvas(width, height, COLORS.surface1);
   const s = scaleFor(width, height);
   const X = (value) => value * s.x;
@@ -70,11 +70,11 @@ function motifSignal(width, height) {
 }
 
 const sizes = [[1920, 1080], [2560, 1440], [3840, 2160]];
-const motifs = [["rahmen", motifRahmen], ["signal", motifSignal]];
+const motifs = [["frame", motifFrame], ["signal", motifSignal]];
 for (const [width, height] of sizes) {
   for (const [name, render] of motifs) {
     const filename = `${name}-${width}x${height}.png`;
     await writeFile(join(outputDir, filename), render(width, height).png());
-    console.log(`Erzeugt: ${filename}`);
+    console.log(`Written: ${filename}`);
   }
 }

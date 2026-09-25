@@ -10,7 +10,7 @@ const outputPath = process.argv[2]
   : join(imageDirectory, "favicon.ico");
 const source = await readFile(join(imageDirectory, "emblem.svg"), "utf8");
 if (!source.includes('viewBox="0 0 100 116"') || !source.includes("em-clip-keycloak")) {
-  throw new Error("emblem.svg besitzt nicht die erwartete Keycloak-Fassung.");
+  throw new Error("emblem.svg is not the expected Keycloak version.");
 }
 
 const sizes = [16, 32, 48];

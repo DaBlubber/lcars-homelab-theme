@@ -218,7 +218,7 @@ function inRoundedSquare(x, y, left, top, size, radius) {
   return (x - cx) ** 2 + (y - cy) ** 2 <= radius ** 2;
 }
 
-/* Neutrales Emblem im Quadrat 0..100: Goldrand, blaues Feld, drei LCARS-Balken. */
+/* Neutral emblem in the square 0..100: gold border, blue field, three LCARS bars. */
 function shieldSample(x, y) {
   const ex = x * 1.16 - 8;
   const ey = y * 1.16;
